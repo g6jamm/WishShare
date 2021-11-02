@@ -1,5 +1,6 @@
 package com.group6.wishshare.domain.model;
 
+import com.group6.wishshare.domain.model.type.Gender;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

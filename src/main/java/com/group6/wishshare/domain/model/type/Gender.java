@@ -1,4 +1,4 @@
-package com.group6.wishshare.domain.model;
+package com.group6.wishshare.domain.model.type;
 
 public enum Gender {
   MALE,

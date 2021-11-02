@@ -1,5 +1,7 @@
 package com.group6.wishshare.domain.model;
 
+import com.group6.wishshare.domain.model.type.Gender;
+
 import java.time.LocalDate;
 
 /**
