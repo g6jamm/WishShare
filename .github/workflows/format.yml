@@ -1,0 +1,34 @@
+name: Google Java Format
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  formatting:
+    runs-on: ubuntu-latest
+    steps:
+      - if: github.event_name != 'pull_request'
+        uses: actions/checkout@v2
+      - if: github.event_name == 'pull_request'
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+      - uses: axel-op/googlejavaformat-action@v3
+        with:
+          skipCommit: true
+          args: "--skip-sorting-imports --replace"
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit
+        run: |
+          if [ -n "$(git status --porcelain)" ]; then
+            git gc
+            git config user.name "GitHub Actions"
+            git config user.email ""
+            git commit -m "Google Java Format" --author="${GITHUB_ACTOR} <${GITHUB_ACTOR}@users.noreply.github.com>" -a
+            git push
+          fi
