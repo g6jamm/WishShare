@@ -58,7 +58,7 @@ public class User {
 
     public UserBuilder() {}
 
-    public UserBuilder firstname(String firstName) {
+    public UserBuilder firstName(String firstName) {
       if (firstName.length() > 255) {
         throw new IllegalArgumentException();
       }

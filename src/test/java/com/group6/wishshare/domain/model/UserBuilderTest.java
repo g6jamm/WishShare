@@ -14,7 +14,7 @@ class UserBuilderTest {
   void testFirstName() {
     User user =
         new User.UserBuilder()
-            .firstname("Maggy")
+            .firstName("Maggy")
             .lastName("Briggs")
             .email("lorem.fringilla.ornare@arcu.edu")
             .birthdate(date)
@@ -28,7 +28,7 @@ class UserBuilderTest {
   void testLastName() {
     User user =
         new User.UserBuilder()
-            .firstname("Maggy")
+            .firstName("Maggy")
             .lastName("Briggs")
             .email("lorem.fringilla.ornare@arcu.edu")
             .birthdate(date)
@@ -42,7 +42,7 @@ class UserBuilderTest {
   void testEmail() {
     User user =
         new User.UserBuilder()
-            .firstname("Maggy")
+            .firstName("Maggy")
             .lastName("Briggs")
             .email("lorem.fringilla.ornare@arcu.edu")
             .birthdate(date)
@@ -56,7 +56,7 @@ class UserBuilderTest {
   void testBirthdate() {
     User user =
         new User.UserBuilder()
-            .firstname("Maggy")
+            .firstName("Maggy")
             .lastName("Briggs")
             .email("lorem.fringilla.ornare@arcu.edu")
             .birthdate(date)
@@ -70,7 +70,7 @@ class UserBuilderTest {
   void testGender() {
     User user =
         new User.UserBuilder()
-            .firstname("Maggy")
+            .firstName("Maggy")
             .lastName("Briggs")
             .email("lorem.fringilla.ornare@arcu.edu")
             .birthdate(date)
@@ -84,7 +84,7 @@ class UserBuilderTest {
   void testBuild() {
     User user =
         new User.UserBuilder()
-            .firstname("Maggy")
+            .firstName("Maggy")
             .lastName("Briggs")
             .email("lorem.fringilla.ornare@arcu.edu")
             .birthdate(date)
@@ -100,7 +100,7 @@ class UserBuilderTest {
         IllegalArgumentException.class,
         () ->
             new User.UserBuilder()
-                .firstname("Maggy")
+                .firstName("Maggy")
                 .email("lorem.fringilla.ornare@arcu.edu")
                 .birthdate(date)
                 .gender(Gender.FEMALE)
