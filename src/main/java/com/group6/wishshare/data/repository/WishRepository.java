@@ -13,7 +13,6 @@ import java.util.List;
 /** @author Jackie, Mohamad */
 public class WishRepository {
 
-
   public List<Wish> getWishes(int wishlistId) {
     List<Wish> result = new ArrayList<>();
     String sqlQuery = "SELECT * FROM wish WHERE wishlist_id = " + wishlistId;
