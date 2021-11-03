@@ -10,36 +10,37 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Jackie, Mohamad
- */
-
+/** @author Jackie, Mohamad */
 public class WishRepository {
 
-  public List<Wish> getWishList(int wishlistId){
+  public List<Wish> getWishList(int wishlistId) {
     List<Wish> result = new ArrayList<>();
     String sqlQuery = "SELECT * FROM wish WHERE wishlist_id = " + wishlistId;
     ResultSet resultSet = resultSet(sqlQuery);
 
-    try{
-      while (resultSet.next()){
-        Wish wish = new Wish.WishBuilder().id(resultSet.getInt("wish_id")).
-            name(resultSet.getString("name")).
-            link(resultSet.getString("link")).
-            price(resultSet.getString("price")).
-            wishlistId(resultSet.getInt("wishlist_id")).
-            reserved(resultSet.getBoolean("reserved")).build();
+    try {
+      while (resultSet.next()) {
+        Wish wish =
+            new Wish.WishBuilder()
+                .id(resultSet.getInt("wish_id"))
+                .name(resultSet.getString("name"))
+                .link(resultSet.getString("link"))
+                .price(resultSet.getString("price"))
+                .wishlistId(resultSet.getInt("wishlist_id"))
+                .reserved(resultSet.getBoolean("reserved"))
+                .build();
         result.add(wish);
       }
-    }catch (SQLException sqlException){
+    } catch (SQLException sqlException) {
       System.out.println(sqlException.getMessage());
     }
     return result;
   }
 
-  public void addWishToWishList(Wish wish){
+  public void addWishToWishList(Wish wish) {
 
-    String sqlQuery = "INSERT INTO wish(name, link, price, wishlist_id, reserved) VALUES(?,?,?,?,?)";
+    String sqlQuery =
+        "INSERT INTO wish(name, link, price, wishlist_id, reserved) VALUES(?,?,?,?,?)";
 
     PreparedStatement preparedStatement;
 
@@ -51,12 +52,10 @@ public class WishRepository {
       preparedStatement.setInt(4, wish.getWishListId());
       preparedStatement.setBoolean(5, wish.isReserved());
       preparedStatement.executeUpdate();
-    }catch (SQLException sqlException){
+    } catch (SQLException sqlException) {
       System.out.println(sqlException.getMessage());
     }
-
   }
-
 
   public ResultSet resultSet(String sql) {
 
@@ -73,5 +72,4 @@ public class WishRepository {
     }
     return resultSet;
   }
-
 }
