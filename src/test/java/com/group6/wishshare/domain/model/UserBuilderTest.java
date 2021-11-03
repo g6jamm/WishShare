@@ -84,19 +84,4 @@ class UserBuilderTest {
 
     Assertions.assertEquals(Gender.FEMALE, user.getGender());
   }
-
-  @Test
-  void testBuild() {
-    User user =
-        new User.UserBuilder()
-            .id(1)
-            .firstName("Maggy")
-            .lastName("Briggs")
-            .email("lorem.fringilla.ornare@arcu.edu")
-            .birthdate(date)
-            .gender(Gender.FEMALE)
-            .build();
-
-    Assertions.assertEquals("Briggs", user.getLastName());
-  }
 }
