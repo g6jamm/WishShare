@@ -47,7 +47,7 @@ mysql -h 127.0.0.1 -P 3306 -u <username> -p < ./src/main/resources/data/install.
 cat >> ./src/main/resources/application.properties <<EOL
 user=<username>
 password=<password>
-url=jdbc:mysql://localhost:3306/<dbname>
+url=jdbc:mysql://localhost:3306/wishshare
 EOL
 ```
 
