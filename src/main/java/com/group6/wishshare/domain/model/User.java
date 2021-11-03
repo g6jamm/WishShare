@@ -10,6 +10,7 @@ import java.time.LocalDate;
  * @auther Mathias
  */
 public class User {
+  private final int ID;
   private final String FIRST_NAME;
   private final String LAST_NAME;
   private final String EMAIL;
@@ -17,11 +18,16 @@ public class User {
   private final Gender GENDER;
 
   private User(UserBuilder builder) {
+    this.ID = builder.id;
     this.FIRST_NAME = builder.firstName;
     this.LAST_NAME = builder.lastName;
     this.EMAIL = builder.email;
     this.BIRTHDATE = builder.birthdate;
     this.GENDER = builder.gender;
+  }
+
+  public int getId() {
+    return ID;
   }
 
   public String getFirstName() {
@@ -50,6 +56,7 @@ public class User {
    * @auther Mathias
    */
   public static class UserBuilder {
+    private int id;
     private String firstName;
     private String lastName;
     private String email;
@@ -58,28 +65,25 @@ public class User {
 
     public UserBuilder() {}
 
+    public UserBuilder id(int id) {
+      this.id = id;
+
+      return this;
+    }
+
     public UserBuilder firstName(String firstName) {
-      if (firstName.length() > 255) {
-        throw new IllegalArgumentException();
-      }
       this.firstName = firstName;
 
       return this;
     }
 
     public UserBuilder lastName(String lastName) {
-      if (lastName.length() > 255) {
-        throw new IllegalArgumentException();
-      }
       this.lastName = lastName;
 
       return this;
     }
 
     public UserBuilder email(String email) {
-      if (email.length() > 255) {
-        throw new IllegalArgumentException();
-      }
       this.email = email;
 
       return this;
@@ -98,25 +102,7 @@ public class User {
     }
 
     public User build() {
-      User user = new User(this);
-      validateUserObject();
-
-      return user;
-    }
-
-    /**
-     * Make suse that all values has been set.
-     *
-     * @auther Mathias
-     */
-    private void validateUserObject() {
-      if (null == firstName
-          || null == lastName
-          || null == email
-          || null == birthdate
-          || null == gender) {
-        throw new IllegalArgumentException("Missing parameter");
-      }
+      return new User(this);
     }
   }
 }

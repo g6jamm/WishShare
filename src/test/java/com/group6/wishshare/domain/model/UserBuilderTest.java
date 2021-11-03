@@ -14,6 +14,7 @@ class UserBuilderTest {
   void testFirstName() {
     User user =
         new User.UserBuilder()
+            .id(1)
             .firstName("Maggy")
             .lastName("Briggs")
             .email("lorem.fringilla.ornare@arcu.edu")
@@ -28,6 +29,7 @@ class UserBuilderTest {
   void testLastName() {
     User user =
         new User.UserBuilder()
+            .id(1)
             .firstName("Maggy")
             .lastName("Briggs")
             .email("lorem.fringilla.ornare@arcu.edu")
@@ -42,6 +44,7 @@ class UserBuilderTest {
   void testEmail() {
     User user =
         new User.UserBuilder()
+            .id(1)
             .firstName("Maggy")
             .lastName("Briggs")
             .email("lorem.fringilla.ornare@arcu.edu")
@@ -56,6 +59,7 @@ class UserBuilderTest {
   void testBirthdate() {
     User user =
         new User.UserBuilder()
+            .id(1)
             .firstName("Maggy")
             .lastName("Briggs")
             .email("lorem.fringilla.ornare@arcu.edu")
@@ -70,6 +74,7 @@ class UserBuilderTest {
   void testGender() {
     User user =
         new User.UserBuilder()
+            .id(1)
             .firstName("Maggy")
             .lastName("Briggs")
             .email("lorem.fringilla.ornare@arcu.edu")
@@ -84,6 +89,7 @@ class UserBuilderTest {
   void testBuild() {
     User user =
         new User.UserBuilder()
+            .id(1)
             .firstName("Maggy")
             .lastName("Briggs")
             .email("lorem.fringilla.ornare@arcu.edu")
@@ -92,18 +98,5 @@ class UserBuilderTest {
             .build();
 
     Assertions.assertEquals("Briggs", user.getLastName());
-  }
-
-  @Test
-  void testBuildMissingArgument() {
-    Assertions.assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            new User.UserBuilder()
-                .firstName("Maggy")
-                .email("lorem.fringilla.ornare@arcu.edu")
-                .birthdate(date)
-                .gender(Gender.FEMALE)
-                .build());
   }
 }
