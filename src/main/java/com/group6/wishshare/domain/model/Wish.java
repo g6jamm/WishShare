@@ -91,6 +91,9 @@ public class Wish {
       return this;
     }
 
+    public Wish build(){
+      return new Wish(this);
+    }
   }
 
 }
