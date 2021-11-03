@@ -23,23 +23,23 @@ public class Wish {
     return ID;
   }
 
-  public String getNAME() {
+  public String getName() {
     return NAME;
   }
 
-  public String getLINK() {
+  public String getLink() {
     return LINK;
   }
 
-  public String getPRICE() {
+  public String getPrice() {
     return PRICE;
   }
 
-  public int getWISHLIST_ID() {
+  public int getWishListId() {
     return WISHLIST_ID;
   }
 
-  public boolean isRESERVED() {
+  public boolean isReserved() {
     return RESERVED;
   }
 

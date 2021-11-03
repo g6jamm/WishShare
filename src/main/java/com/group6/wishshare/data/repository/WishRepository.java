@@ -45,11 +45,11 @@ public class WishRepository {
 
     try {
       preparedStatement = DbManager.getInstance().getConnection().prepareStatement(sqlQuery);
-      preparedStatement.setString(1, wish.getNAME());
-      preparedStatement.setString(2, wish.getLINK());
-      preparedStatement.setString(3, wish.getPRICE());
-      preparedStatement.setInt(4, wish.getWISHLIST_ID());
-      preparedStatement.setBoolean(5, wish.isRESERVED());
+      preparedStatement.setString(1, wish.getName());
+      preparedStatement.setString(2, wish.getLink());
+      preparedStatement.setString(3, wish.getPrice());
+      preparedStatement.setInt(4, wish.getWishListId());
+      preparedStatement.setBoolean(5, wish.isReserved());
       preparedStatement.executeUpdate();
     }catch (SQLException sqlException){
       System.out.println(sqlException.getMessage());
