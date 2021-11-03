@@ -12,17 +12,11 @@ public class WishListRepository {
 
   Connection connection = DbManager.getInstance().getConnection();
 
-
-
-
   /**
-   * Method to add a wishlist to database.
-   *
-   * @Returns true if successful, false if not.
+   * Method to add a wishlist to database. @Returns true if successful, false if not.
    *
    * @auther Andreas
    */
-
   public boolean addWishList(String name, int userid) {
     String stm = "INSERT INTO wishlist (name, user_id) VALUES (? , ?)";
     PreparedStatement prep;
@@ -42,13 +36,11 @@ public class WishListRepository {
   }
 
   /**
-   * Method to retrieve a wishlist object from database using wishlist index.
-   *
-   * @Returns wishlist object or null - i dont like this tho...
+   * Method to retrieve a wishlist object from database using wishlist index. @Returns wishlist
+   * object or null - i dont like this tho...
    *
    * @auther Andreas
    */
-
   public Wishlist getWishlist(int id) {
     String stm = "SELECT * FROM wishlist WHERE wishlist_id = ?";
     PreparedStatement prep;
@@ -69,7 +61,7 @@ public class WishListRepository {
       }
 
     } catch (SQLException e) {
-      //do something
+      // do something
     }
     return null;
   }
