@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS user (
     last_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     birthdate DATE NOT NULL,
-    gender VARCHAR(10) NOT NULL
+    gender VARCHAR(10) NOT NULL,
+    password VARCHAR(129) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS wishlist (
