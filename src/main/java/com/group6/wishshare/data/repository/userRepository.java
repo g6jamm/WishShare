@@ -12,8 +12,8 @@ public class userRepository {
     try {
       Connection connection = DbManager.getInstance().getConnection();
       String SQL =
-          "INSERT INTO User (email, password, first_name, last_name, gender, birthdate) VALUES (?,"
-              + " ?, ?, ?, ?, ?)";
+          "INSERT INTO user (email, password, first_name, last_name, gender, birthdate) VALUES "
+              + "(?, ?, ?, ?, ?, ?)";
       PreparedStatement ps = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
       ps.setString(1, user.getEmail());
       ps.setString(2, user.getPassword());
