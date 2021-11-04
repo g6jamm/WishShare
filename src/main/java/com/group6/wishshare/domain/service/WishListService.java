@@ -18,7 +18,7 @@ public class WishListService {
     return wishListRepository.getWishlist(id);
   }
 
-  public List<Wishlist> lookupWishListsPrUser(User user){
+  public List<Wishlist> lookupWishListsPrUser(User user) {
     WishListRepository wishListRepository = new WishListRepository();
     return wishListRepository.getWishLists(user.getId());
   }
