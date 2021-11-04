@@ -13,19 +13,19 @@ public class WishService {
     this.wishRepository = wishRepository;
   }
 
+
   public void createWish(String name, String link, String price, int wishlistId) {
     Wish wish = new Wish.WishBuilder().
-        name(name).
-        link(link).
-        price(price).
-        wishlistId(wishlistId).build();
+      name(name).
+      link(link).
+      price(price).
+      wishlistId(wishlistId).build();
 
     wishRepository.addWishToWishList(wish);
   }
 
-  public List<Wish> getWishes(int wishlistId){
+  public List<Wish> getWishes(int wishlistId) {
     List<Wish> result = wishRepository.getWishes(wishlistId);
     return result;
   }
-
 }
