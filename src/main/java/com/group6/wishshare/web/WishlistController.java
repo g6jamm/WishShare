@@ -39,15 +39,13 @@ public class WishlistController {
   }
 
   @GetMapping("/wishlist/{id}")
-  public String wishlist(WebRequest webRequest, @PathVariable int id){
-    if (validateUser(webRequest)){
+  public String wishlist(WebRequest webRequest, @PathVariable int id) {
+    if (validateUser(webRequest)) {
       System.out.println(id);
-      //TODO Move to other controller - Wishpage goes here :)
+      // TODO Move to other controller - Wishpage goes here :)
     }
     return "redirect:/dashboard";
   }
-
-
 
   private boolean validateUser(WebRequest request) {
     User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
