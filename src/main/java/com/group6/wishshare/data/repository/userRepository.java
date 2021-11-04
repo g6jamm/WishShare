@@ -3,7 +3,7 @@ package com.group6.wishshare.data.repository;
 import com.group6.wishshare.data.Util.DbManager;
 import com.group6.wishshare.domain.model.User;
 import com.group6.wishshare.domain.service.LoginException;
-
+import java.sql.Date;
 import java.sql.*;
 
 public class userRepository {
@@ -15,12 +15,13 @@ public class userRepository {
           "INSERT INTO user (email, password, first_name, last_name, gender, birthdate) VALUES "
               + "(?, ?, ?, ?, ?, ?)";
       PreparedStatement ps = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+
       ps.setString(1, user.getEmail());
       ps.setString(2, user.getPassword());
       ps.setString(3, user.getFirstName());
       ps.setString(4, user.getLastName());
       ps.setString(5, user.getGender().name());
-      ps.setString(6, String.valueOf(user.getBirthdate()));
+      ps.setString(6, String.valueOf(Date.valueOf(user.getBirthdate())));
       ps.executeUpdate();
       ResultSet ids = ps.getGeneratedKeys();
       ids.next();
