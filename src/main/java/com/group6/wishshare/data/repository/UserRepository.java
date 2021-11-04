@@ -6,7 +6,7 @@ import com.group6.wishshare.domain.service.LoginException;
 import java.sql.Date;
 import java.sql.*;
 
-public class userRepository {
+public class UserRepository {
 
   public void createUser(User user) throws LoginException {
     try {
