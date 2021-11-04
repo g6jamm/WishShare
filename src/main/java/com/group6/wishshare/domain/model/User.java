@@ -16,6 +16,7 @@ public class User {
   private final String EMAIL;
   private final LocalDate BIRTHDATE;
   private final Gender GENDER;
+  private final String PASSWORD;
 
   private User(UserBuilder builder) {
     this.ID = builder.id;
@@ -24,6 +25,7 @@ public class User {
     this.EMAIL = builder.email;
     this.BIRTHDATE = builder.birthdate;
     this.GENDER = builder.gender;
+    this.PASSWORD = builder.password;
   }
 
   public int getId() {
@@ -50,6 +52,10 @@ public class User {
     return GENDER;
   }
 
+  public String getPassword() {
+    return PASSWORD;
+  }
+
   /**
    * Build User object.
    *
@@ -62,6 +68,7 @@ public class User {
     private String email;
     private LocalDate birthdate;
     private Gender gender;
+    private String password;
 
     public UserBuilder() {}
 
@@ -101,7 +108,14 @@ public class User {
       return this;
     }
 
+    public UserBuilder password(String password) {
+      this.password = password;
+
+      return this;
+    }
+
     public User build() {
+      // Todo add reset? Add interface for reset and build.
       return new User(this);
     }
   }
