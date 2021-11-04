@@ -69,7 +69,7 @@ public class WishListRepository {
     return null;
   }
 
-  public List<Wishlist> getWishLists(int user_id){
+  public List<Wishlist> getWishLists(int user_id) {
     String stm = "SELECT * FROM wishlist WHERE user_id = ?";
     PreparedStatement prep;
     List<Wishlist> wishlists = new ArrayList<>();
@@ -84,13 +84,11 @@ public class WishListRepository {
                 .id(resultSet.getInt(1))
                 .name(resultSet.getString(2))
                 .userid(resultSet.getInt(3))
-                .build()
-        );
+                .build());
       }
     } catch (SQLException e) {
       // do something
     }
     return wishlists;
   }
-
 }

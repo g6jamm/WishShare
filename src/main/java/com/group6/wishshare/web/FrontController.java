@@ -34,7 +34,6 @@ public class FrontController {
     return "signup";
   }
 
-
   private boolean validateUser(WebRequest request) {
     User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
 
