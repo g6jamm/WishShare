@@ -37,7 +37,7 @@ public class WishRepository {
     return result;
   }
 
-  public void addWishToWishList(Wish wish) {
+  public boolean addWishToWishList(Wish wish) {
 
     String sqlQuery =
         "INSERT INTO wish(name, link, price, wishlist_id, reserved) VALUES(?,?,?,?,?)";
@@ -51,9 +51,13 @@ public class WishRepository {
       preparedStatement.setString(3, wish.getPrice());
       preparedStatement.setInt(4, wish.getWishListId());
       preparedStatement.setBoolean(5, wish.isReserved());
-      preparedStatement.executeUpdate();
+
+      boolean result = preparedStatement.execute();
+      return result;
+
     } catch (SQLException sqlException) {
       System.out.println(sqlException.getMessage());
+      return false;
     }
   }
 
