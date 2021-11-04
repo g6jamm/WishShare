@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WishListRepository {
 
@@ -65,4 +67,29 @@ public class WishListRepository {
     }
     return null;
   }
+
+  public List<Wishlist> getWishLists(int user_id){
+    String stm = "SELECT * FROM wishlist WHERE user_id = ?";
+    PreparedStatement prep;
+    List<Wishlist> wishlists = new ArrayList<>();
+
+    try {
+      prep = connection.prepareStatement(stm);
+      prep.setInt(1, user_id);
+      ResultSet resultSet = prep.executeQuery();
+      while (resultSet.next()) {
+        wishlists.add(
+            new Wishlist.WishListBuilder()
+                .id(resultSet.getInt(1))
+                .name(resultSet.getString(2))
+                .userid(resultSet.getInt(3))
+                .build()
+        );
+      }
+    } catch (SQLException e) {
+      // do something
+    }
+    return wishlists;
+  }
+
 }
