@@ -37,6 +37,23 @@ public class WishRepository {
     return result;
   }
 
+  public boolean reserveWish(boolean isReserved, int wishId) {
+    String sqlQuery = "UPDATE wish SET reserved = ? WHERE wish_id = ?";
+
+    PreparedStatement preparedStatement;
+    try {
+      preparedStatement = DbManager.getInstance().getConnection().prepareStatement(sqlQuery);
+      preparedStatement.setBoolean(1, isReserved);
+      preparedStatement.setInt(2, wishId);
+
+      return preparedStatement.execute();
+
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+      return false;
+    }
+  }
+
   public boolean addWishToWishList(Wish wish) {
 
     String sqlQuery =

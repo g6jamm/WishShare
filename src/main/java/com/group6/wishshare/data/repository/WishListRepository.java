@@ -35,6 +35,29 @@ public class WishListRepository {
     return 0;
   }
 
+  /** @auther Jackie og Mohamad */
+  public boolean isListOwnedByUser(int wishlistId, int userId) {
+    boolean result = false;
+
+    String sqlQuery = "SELECT * FROM wishlist WHERE wishlist_id = ? AND user_id = ?;";
+    PreparedStatement preparedStatement;
+    ResultSet resultSet;
+
+    try {
+      preparedStatement = DbManager.getInstance().getConnection().prepareStatement(sqlQuery);
+      preparedStatement.setInt(1, wishlistId);
+      preparedStatement.setInt(2, userId);
+
+      resultSet = preparedStatement.executeQuery();
+      result = resultSet.next();
+
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+    }
+
+    return result;
+  }
+
   /**
    * Method to retrieve a wishlist object from database using wishlist index. @Returns wishlist
    * object or null - i dont like this tho...

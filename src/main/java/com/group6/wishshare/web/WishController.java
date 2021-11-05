@@ -3,6 +3,7 @@ package com.group6.wishshare.web;
 import com.group6.wishshare.data.repository.WishRepository;
 import com.group6.wishshare.domain.model.User;
 import com.group6.wishshare.domain.model.Wish;
+import com.group6.wishshare.domain.service.WishListService;
 import com.group6.wishshare.domain.service.WishService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import java.util.List;
 public class WishController {
 
   WishService wishService = new WishService(new WishRepository());
+  WishListService wishListService = new WishListService();
 
   @GetMapping("/create-wish")
   public String createwish(Model model) {
@@ -38,13 +40,27 @@ public class WishController {
 
   @GetMapping("/wishlist/{id}")
   public String wishlist(WebRequest webRequest, @PathVariable int id, Model model) {
-    if (validateUser(webRequest)) {
-      List<Wish> wishes = wishService.getWishes(id); // // TODO spørg tine omkring det
-      model.addAttribute("wishes", wishes);
-      model.addAttribute("wishlist_id", id);
+    List<Wish> wishes = wishService.getWishes(id); // // TODO spørg tine omkring det
+    model.addAttribute("wishes", wishes);
+    model.addAttribute("wishlist_id", id);
+    if (validateUser(webRequest)
+        && wishListService.isListOwner(
+            id, ((User) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION)).getId())) {
       return "createwish";
     }
-    return "redirect:/dashboard";
+    return "sharedwish";
+  }
+
+  @PostMapping("/wishlist/{wishlist_id}/reserve/{wish_id}")
+  public String reserve(@PathVariable int wishlist_id, @PathVariable int wish_id) {
+    wishService.reserveWish(true, wish_id);
+    return "redirect:/wishlist/" + wishlist_id;
+  }
+
+  @PostMapping("/wishlist/{wishlist_id}/unreserve/{wish_id}")
+  public String unreserve(@PathVariable int wishlist_id, @PathVariable int wish_id) {
+    wishService.reserveWish(false, wish_id);
+    return "redirect:/wishlist/" + wishlist_id;
   }
 
   private boolean validateUser(WebRequest request) {

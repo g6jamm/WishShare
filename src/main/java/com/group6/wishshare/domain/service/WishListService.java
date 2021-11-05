@@ -23,6 +23,11 @@ public class WishListService {
     return wishListRepository.getWishLists(user.getId());
   }
 
+  public boolean isListOwner(int wishlistId, int userId) {
+    WishListRepository wishListRepository = new WishListRepository();
+    return wishListRepository.isListOwnedByUser(wishlistId, userId);
+  }
+
   public void updateWishListName(int wishlistId, String newName) {
     WishListRepository wishListRepository = new WishListRepository();
     wishListRepository.updateName(wishlistId, newName);

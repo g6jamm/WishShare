@@ -24,4 +24,8 @@ public class WishService {
     List<Wish> result = wishRepository.getWishes(wishlistId);
     return result;
   }
+
+  public boolean reserveWish(boolean isReserved, int wishId) {
+    return wishRepository.reserveWish(isReserved, wishId);
+  }
 }
