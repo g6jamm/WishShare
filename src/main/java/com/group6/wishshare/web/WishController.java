@@ -39,7 +39,7 @@ public class WishController {
   @GetMapping("/wishlist/{id}")
   public String wishlist(WebRequest webRequest, @PathVariable int id, Model model) {
     if (validateUser(webRequest)) {
-      List<Wish> wishes = wishService.getWishes(id); //// TODO spørg tine omkring det
+      List<Wish> wishes = wishService.getWishes(id); // // TODO spørg tine omkring det
       model.addAttribute("wishes", wishes);
       model.addAttribute("wishlist_id", id);
       return "createwish";
