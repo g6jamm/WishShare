@@ -22,4 +22,10 @@ public class WishListService {
     WishListRepository wishListRepository = new WishListRepository();
     return wishListRepository.getWishLists(user.getId());
   }
+
+  public boolean isListOwner(int wishlistId, int userId) {
+    WishListRepository wishListRepository = new WishListRepository();
+    return wishListRepository.isListOwnedByUser(wishlistId, userId);
+  }
+
 }
