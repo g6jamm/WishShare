@@ -20,15 +20,14 @@ public class WishListRepository {
    * @auther Andreas
    */
   public boolean addWishList(String name, int userid) {
-    String stm = "INSERT INTO wishlist (name, user_id) VALUES (? , ?)";
-    PreparedStatement prep;
 
     try {
-      prep = connection.prepareStatement(stm);
-      prep.setString(1, name);
-      prep.setInt(2, userid);
+      String stm = "INSERT INTO wishlist (name, user_id) VALUES (? , ?)";
+      PreparedStatement ps = connection.prepareStatement(stm);
+      ps.setString(1, name);
+      ps.setInt(2, userid);
 
-      boolean result = prep.execute();
+      boolean result = ps.execute();
 
       return result;
 
@@ -45,14 +44,13 @@ public class WishListRepository {
    * @auther Andreas
    */
   public Wishlist getWishlist(int id) {
-    String stm = "SELECT * FROM wishlist WHERE wishlist_id = ?";
-    PreparedStatement prep;
-    Wishlist wishlist;
 
     try {
-      prep = connection.prepareStatement(stm);
-      prep.setInt(1, id);
-      ResultSet resultSet = prep.executeQuery();
+      String stm = "SELECT * FROM wishlist WHERE wishlist_id = ?";
+      PreparedStatement ps = connection.prepareStatement(stm);
+      Wishlist wishlist;
+      ps.setInt(1, id);
+      ResultSet resultSet = ps.executeQuery();
       if (resultSet.next()) {
         wishlist =
             new Wishlist.WishListBuilder()
@@ -70,14 +68,13 @@ public class WishListRepository {
   }
 
   public List<Wishlist> getWishLists(int user_id) {
-    String stm = "SELECT * FROM wishlist WHERE user_id = ?";
-    PreparedStatement prep;
     List<Wishlist> wishlists = new ArrayList<>();
 
     try {
-      prep = connection.prepareStatement(stm);
-      prep.setInt(1, user_id);
-      ResultSet resultSet = prep.executeQuery();
+      String stm = "SELECT * FROM wishlist WHERE user_id = ?";
+      PreparedStatement ps = connection.prepareStatement(stm);
+      ps.setInt(1, user_id);
+      ResultSet resultSet = ps.executeQuery();
       while (resultSet.next()) {
         wishlists.add(
             new Wishlist.WishListBuilder()
