@@ -37,11 +37,7 @@ public class WishListRepository {
     }
   }
 
-  /**
-   *
-   *
-   * @auther Jackie og Mohamad
-   */
+  /** @auther Jackie og Mohamad */
   public boolean isListOwnedByUser(int wishlistId, int userId) {
     boolean result = false;
 
@@ -49,15 +45,15 @@ public class WishListRepository {
     PreparedStatement preparedStatement;
     ResultSet resultSet;
 
-    try{
+    try {
       preparedStatement = DbManager.getInstance().getConnection().prepareStatement(sqlQuery);
-      preparedStatement.setInt(1,wishlistId);
-      preparedStatement.setInt(2,userId);
+      preparedStatement.setInt(1, wishlistId);
+      preparedStatement.setInt(2, userId);
 
       resultSet = preparedStatement.executeQuery();
       result = resultSet.next();
 
-    }catch (SQLException e) {
+    } catch (SQLException e) {
       System.out.println(e.getMessage());
     }
 

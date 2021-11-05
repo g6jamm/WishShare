@@ -28,5 +28,4 @@ public class WishService {
   public boolean reserveWish(boolean isReserved, int wishId) {
     return wishRepository.reserveWish(isReserved, wishId);
   }
-
 }

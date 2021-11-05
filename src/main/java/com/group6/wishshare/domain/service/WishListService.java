@@ -27,5 +27,4 @@ public class WishListService {
     WishListRepository wishListRepository = new WishListRepository();
     return wishListRepository.isListOwnedByUser(wishlistId, userId);
   }
-
 }

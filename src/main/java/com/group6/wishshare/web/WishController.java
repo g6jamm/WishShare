@@ -43,7 +43,9 @@ public class WishController {
     List<Wish> wishes = wishService.getWishes(id); // // TODO spørg tine omkring det
     model.addAttribute("wishes", wishes);
     model.addAttribute("wishlist_id", id);
-    if (validateUser(webRequest) && wishListService.isListOwner(id, ((User) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION)).getId())) {
+    if (validateUser(webRequest)
+        && wishListService.isListOwner(
+            id, ((User) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION)).getId())) {
       return "createwish";
     }
     return "sharedwish";
