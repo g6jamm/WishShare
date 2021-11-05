@@ -24,9 +24,8 @@ public class WishListService {
     return wishListRepository.getWishLists(user.getId());
   }
 
-
-  public void updateWishListName(int wishlistId, String newName ){
+  public void updateWishListName(int wishlistId, String newName) {
     WishListRepository wishListRepository = new WishListRepository();
-    wishListRepository.updateName(wishlistId,newName);
+    wishListRepository.updateName(wishlistId, newName);
   }
 }
