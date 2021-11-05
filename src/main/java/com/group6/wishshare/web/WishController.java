@@ -18,7 +18,7 @@ public class WishController {
 
   @GetMapping("/create-wish")
   public String createwish(Model model) {
-    List<Wish> wishes = wishService.getWishes(1);
+    List<Wish> wishes = wishService.getWishes(1); //TODO spørg tine omkring det
     model.addAttribute("wishes", wishes);
     return "createwish";
   }
