@@ -40,17 +40,13 @@ public class WishController {
 
   @GetMapping("/wishlist/{id}")
   public String wishlist(WebRequest webRequest, @PathVariable int id, Model model) {
+    List<Wish> wishes = wishService.getWishes(id); // // TODO spørg tine omkring det
+    model.addAttribute("wishes", wishes);
+    model.addAttribute("wishlist_id", id);
     if (validateUser(webRequest) && wishListService.isListOwner(id, ((User) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION)).getId())) {
-      List<Wish> wishes = wishService.getWishes(id); // // TODO spørg tine omkring det
-      model.addAttribute("wishes", wishes);
-      model.addAttribute("wishlist_id", id);
       return "createwish";
-    } else {
-      List<Wish> wishes = wishService.getWishes(id); // // TODO spørg tine omkring det
-      model.addAttribute("wishes", wishes);
-      model.addAttribute("wishlist_id", id);
-      return "sharedwish";
     }
+    return "sharedwish";
   }
 
   private boolean validateUser(WebRequest request) {
