@@ -5,14 +5,14 @@ import com.group6.wishshare.domain.service.DataFacadeInterface;
 import com.group6.wishshare.domain.service.LoginException;
 
 public class DataFacade implements DataFacadeInterface {
-  private final UserRepository userRepository = new UserRepository();
+  private final UserRepository USER_REPOSITORY = new UserRepository();
 
   public User login(String email, String password) throws LoginException {
-    return userRepository.login(email, password);
+    return USER_REPOSITORY.login(email, password);
   }
 
   public User createUser(User user) throws LoginException {
-    userRepository.createUser(user);
+    USER_REPOSITORY.createUser(user);
 
     return user;
   }
