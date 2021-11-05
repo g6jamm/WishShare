@@ -30,23 +30,27 @@ public class WishlistController {
   public String createNewWishList(WebRequest webRequest) {
     if (validateUser(webRequest)) {
       WishListService wishListService = new WishListService();
-      wishListService.addWishList(
-          (User) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION),
-          webRequest.getParameter("wishlistname"));
+      int id =
+          wishListService.addWishList(
+              (User) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION),
+              webRequest.getParameter("wishlistname"));
+      if (id != 0) {
+        return "redirect:/wishlist/" + id;
+      }
       return "redirect:/dashboard";
     }
     return "redirect:/login";
   }
 
   @PostMapping("/update-wishlist/{id}")
-  public String updateWishlistName(WebRequest webRequest, @PathVariable int id){
-   //add owner check
-    if(validateUser(webRequest)){
+  public String updateWishlistName(WebRequest webRequest, @PathVariable int id) {
+    // add owner check
+    if (validateUser(webRequest)) {
       String newName = webRequest.getParameter("newName");
       WishListService wishListService = new WishListService();
       wishListService.updateWishListName(id, newName);
     }
-    return "redirect:/dashboard"; //swap to wishpage maybe?
+    return "redirect:/dashboard"; // swap to wishpage maybe?
   }
 
   private boolean validateUser(WebRequest request) {
