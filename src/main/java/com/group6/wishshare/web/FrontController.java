@@ -34,15 +34,6 @@ public class FrontController {
     return "signup";
   }
 
-  @GetMapping("/dashboard")
-  public String getDashboard(WebRequest request) {
-    if (validateUser(request)) {
-      return "dashboard";
-    }
-
-    return "redirect:/";
-  }
-
   private boolean validateUser(WebRequest request) {
     User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
 

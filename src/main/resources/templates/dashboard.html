@@ -21,6 +21,55 @@
             </div>
         </div>
     </section>
+    <section>
+        <div class="card-body px-0 pt-0 pb-2">
+            <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                    <thead>
+                    <tr>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-12">Name</th>
+                        <th class="text-secondary opacity-7"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="wishlist: ${wishlists}">
+                        <td>
+                            <div class="d-flex px-2 py-1">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="mb-0 text-sm" th:text="${wishlist.getName()}"></h6>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="align-middle">
+                            <div class="text-end">
+                                <button class="btn bg-gradient-warning mb-0" value="edit" th:href="@{/wishlist/{id} (id = ${wishlist.getId()})}">
+                                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>&nbsp;&nbsp;Edit
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <form action="/create-new-wish-list" method="POST" name="newWishList" role="form">
+                            <td>
+                                <div class="input-group">
+                                    <input type="text" name="wishlistname" class="form-control"
+                                           placeholder="Type name here...">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-end">
+                                    <button class="btn bg-gradient-primary mb-0" type="submit" value="submit">
+                                        <i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Add WishList
+                                    </button>
+                                </div>
+                            </td>
+                        </form>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
 </main>
 
 <div th:replace="fragments/footer"></div>
