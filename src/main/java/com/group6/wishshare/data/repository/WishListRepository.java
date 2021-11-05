@@ -3,10 +3,7 @@ package com.group6.wishshare.data.repository;
 import com.group6.wishshare.data.Util.DbManager;
 import com.group6.wishshare.domain.model.Wishlist;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,5 +84,30 @@ public class WishListRepository {
       // do something
     }
     return wishlists;
+  }
+
+  public Wishlist updateName(int id, String name){
+    try{
+      String stm = "UPDATE wishlist SET name = ? WHERE wishlist_id = ?";
+      PreparedStatement ps = connection.prepareStatement(stm, Statement.RETURN_GENERATED_KEYS);
+      ps.setString(1,name);
+      ps.setInt(2,id);
+      ResultSet rs = ps.executeQuery();
+      Wishlist wishlist;
+      if(rs.next()){
+          wishlist =
+                  new Wishlist.WishListBuilder()
+                          .id(rs.getInt(1))
+                          .name(rs.getString(2))
+                          .userid(rs.getInt(3))
+                          .build();
+          return wishlist;
+      }
+
+
+    }catch (SQLException e){
+      //do something
+    }
+    return null;
   }
 }

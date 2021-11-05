@@ -2,6 +2,7 @@ package com.group6.wishshare.domain.service;
 
 import com.group6.wishshare.data.repository.WishListRepository;
 import com.group6.wishshare.domain.model.User;
+import com.group6.wishshare.domain.model.Wish;
 import com.group6.wishshare.domain.model.Wishlist;
 
 import java.util.List;
@@ -21,5 +22,11 @@ public class WishListService {
   public List<Wishlist> lookupWishListsPrUser(User user) {
     WishListRepository wishListRepository = new WishListRepository();
     return wishListRepository.getWishLists(user.getId());
+  }
+
+
+  public void updateWishListName(int wishlistId, String newName ){
+    WishListRepository wishListRepository = new WishListRepository();
+    wishListRepository.updateName(wishlistId,newName);
   }
 }

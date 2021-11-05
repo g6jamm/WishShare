@@ -5,6 +5,7 @@ import com.group6.wishshare.domain.service.WishListService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
@@ -35,6 +36,17 @@ public class WishlistController {
       return "redirect:/dashboard";
     }
     return "redirect:/login";
+  }
+
+  @PostMapping("/update-wishlist/{id}")
+  public String updateWishlistName(WebRequest webRequest, @PathVariable int id){
+   //add owner check
+    if(validateUser(webRequest)){
+      String newName = webRequest.getParameter("newName");
+      WishListService wishListService = new WishListService();
+      wishListService.updateWishListName(id, newName);
+    }
+    return "redirect:/dashboard"; //swap to wishpage maybe?
   }
 
   private boolean validateUser(WebRequest request) {
