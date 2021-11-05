@@ -49,6 +49,12 @@ public class WishController {
     return "sharedwish";
   }
 
+  @PostMapping("/wishlist/{wishlist_id}/reserve/{wish_id}")
+  public String reserved(@PathVariable int wishlist_id, @PathVariable int wish_id) {
+    wishService.reserveWish(wish_id);
+    return "redirect:/wishlist/" + wishlist_id;
+  }
+
   private boolean validateUser(WebRequest request) {
     User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
 

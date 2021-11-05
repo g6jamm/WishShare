@@ -19,7 +19,13 @@
                 </thead>
                 <tbody>
                 <tr th:each="wish: ${wishes}">
+                    <form th:action="@{/wishlist/{wishlist_id}/reserve/{wish_id} (wishlist_id = ${wishlist_id}, wish_id = ${wish.getID()})}" method="POST" name="reserveform" role="form">
                     <td>
+                        <div class="d-flex px-2 py-1">
+                            <div class="d-flex flex-column justify-content-center">
+                                <h6 class="mb-0 text-sm" th:text="${wishlist_id}"></h6>
+                            </div>
+                        </div>
                         <div class="d-flex px-2 py-1">
                             <div class="d-flex flex-column justify-content-center">
                                 <h6 class="mb-0 text-sm" th:text="${wish.name}"></h6>
@@ -39,11 +45,12 @@
 
                     <td class="align-middle">
                         <div class="text-end">
-                            <button class="btn bg-gradient-info mb-0" value="Reserve">
+                            <button class="btn bg-gradient-info mb-0" value="submit" type="submit">
                                 <i class="fas fa-pencil-alt" aria-hidden="true"></i>&nbsp;&nbsp;Reserve
                             </button>
                         </div>
                     </td>
+                    </form>
                 </tr>
                 </tbody>
             </table>
