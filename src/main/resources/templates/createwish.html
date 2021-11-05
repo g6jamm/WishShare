@@ -46,7 +46,7 @@
                     </td>
                 </tr>
                 <tr class="card">
-                    <form action="/new-wish" method="POST" name="wishform" role="form">
+                    <form th:action="@{/wishlist/{id}/new-wish (id = ${wishlist_id})}" method="POST" name="wishform" role="form">
                         <td>
                             <div class="input-group">
                                 <input type="text" name="wish" class="form-control form-controle-wish"
