@@ -50,8 +50,14 @@ public class WishController {
   }
 
   @PostMapping("/wishlist/{wishlist_id}/reserve/{wish_id}")
-  public String reserved(@PathVariable int wishlist_id, @PathVariable int wish_id) {
-    wishService.reserveWish(wish_id);
+  public String reserve(@PathVariable int wishlist_id, @PathVariable int wish_id) {
+    wishService.reserveWish(true, wish_id);
+    return "redirect:/wishlist/" + wishlist_id;
+  }
+
+  @PostMapping("/wishlist/{wishlist_id}/unreserve/{wish_id}")
+  public String unreserve(@PathVariable int wishlist_id, @PathVariable int wish_id) {
+    wishService.reserveWish(false, wish_id);
     return "redirect:/wishlist/" + wishlist_id;
   }
 
