@@ -12,9 +12,8 @@ public class WishListRepository {
   Connection connection = DbManager.getInstance().getConnection();
 
   /**
-   * Method to add a wishlist to database.
-   *
-   * @Returns if succedful return Index position of generated entry else returns 0.
+   * Method to add a wishlist to database. @Returns if succedful return Index position of generated
+   * entry else returns 0.
    *
    * @auther Andreas
    */
