@@ -8,7 +8,7 @@ import java.util.List;
 
 public class WishListService {
 
-  public boolean addWishList(User user, String name) {
+  public int addWishList(User user, String name) {
     WishListRepository wishListRepository = new WishListRepository();
     return wishListRepository.addWishList(name, user.getId());
   }
@@ -26,5 +26,10 @@ public class WishListService {
   public boolean isListOwner(int wishlistId, int userId) {
     WishListRepository wishListRepository = new WishListRepository();
     return wishListRepository.isListOwnedByUser(wishlistId, userId);
+  }
+
+  public void updateWishListName(int wishlistId, String newName) {
+    WishListRepository wishListRepository = new WishListRepository();
+    wishListRepository.updateName(wishlistId, newName);
   }
 }
