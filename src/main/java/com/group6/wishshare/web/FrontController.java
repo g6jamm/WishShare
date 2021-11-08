@@ -84,7 +84,7 @@ public class FrontController {
   }
 
   private void setSessionInfo(WebRequest request, User user) {
-    request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
+    request.setAttribute("user", user.getId(), WebRequest.SCOPE_SESSION);
   }
 
   @ExceptionHandler(Exception.class)

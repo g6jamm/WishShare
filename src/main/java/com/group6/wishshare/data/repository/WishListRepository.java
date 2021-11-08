@@ -1,6 +1,7 @@
 package com.group6.wishshare.data.repository;
 
 import com.group6.wishshare.data.Util.DbManager;
+import com.group6.wishshare.domain.model.Wish;
 import com.group6.wishshare.domain.model.Wishlist;
 
 import java.sql.*;
@@ -10,29 +11,33 @@ import java.util.List;
 public class WishListRepository {
 
   Connection connection = DbManager.getInstance().getConnection();
+  WishRepository wishRepository = new WishRepository();
 
   /**
-   * Method to add a wishlist to database. @Returns if succedful return Index position of generated
-   * entry else returns 0.
+   * Method to add a wishlist to database. @Returns if succedful return a new wishlist else null.
    *
    * @auther Andreas
    */
-  public int addWishList(String name, int userid) {
-
+  public Wishlist addWishList(String name, int userid) {
     try {
       String stm = "INSERT INTO wishlist (name, user_id) VALUES (? , ?)";
       PreparedStatement ps = connection.prepareStatement(stm, Statement.RETURN_GENERATED_KEYS);
       ps.setString(1, name);
       ps.setInt(2, userid);
       ps.executeUpdate();
-      ResultSet result = ps.getGeneratedKeys();
-      if (result.next()) {
-        return result.getInt(1);
+      ResultSet gk = ps.getGeneratedKeys();
+      if (gk.next()) {
+        return new Wishlist.WishListBuilder()
+            .wishList(new ArrayList<Wish>())
+            .name(name)
+            .id(gk.getInt(1))
+            .userid(userid)
+            .build();
       }
     } catch (SQLException e) {
       System.out.println(e.getMessage());
     }
-    return 0;
+    return null;
   }
 
   /** @auther Jackie og Mohamad */
@@ -78,6 +83,7 @@ public class WishListRepository {
                 .id(resultSet.getInt(1))
                 .name(resultSet.getString(2))
                 .userid(resultSet.getInt(3))
+                .wishList(wishRepository.getWishes(id))
                 .build();
         return wishlist;
       }
@@ -113,7 +119,7 @@ public class WishListRepository {
   public Wishlist updateName(int id, String name) {
     try {
       String stm = "UPDATE wishlist SET name = ? WHERE wishlist_id = ?";
-      PreparedStatement ps = connection.prepareStatement(stm, Statement.RETURN_GENERATED_KEYS);
+      PreparedStatement ps = connection.prepareStatement(stm);
       ps.setString(1, name);
       ps.setInt(2, id);
       ResultSet rs = ps.executeQuery();
@@ -124,6 +130,7 @@ public class WishListRepository {
                 .id(rs.getInt(1))
                 .name(rs.getString(2))
                 .userid(rs.getInt(3))
+                .wishList(wishRepository.getWishes(id))
                 .build();
         return wishlist;
       }

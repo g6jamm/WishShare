@@ -61,4 +61,21 @@ public class UserRepository {
       throw new LoginException(e.getMessage());
     }
   }
+
+  public boolean userExist(int user_id) {
+    try {
+      Connection con = DbManager.getInstance().getConnection();
+      String SQL = "SELECT * FROM user WHERE user_id = ?";
+      PreparedStatement ps = con.prepareStatement(SQL);
+      ps.setInt(1, user_id);
+      ResultSet rs = ps.executeQuery();
+      if (rs.next()) {
+        return true;
+      }
+      return false;
+    } catch (SQLException e) {
+      // do something
+    }
+    return false;
+  }
 }

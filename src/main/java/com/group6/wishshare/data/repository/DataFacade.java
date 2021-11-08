@@ -28,4 +28,9 @@ public class DataFacade implements DataFacadeInterface {
         .gender(user.getGender())
         .build();
   }
+
+  @Override
+  public boolean userExist(int user_id) {
+    return USER_REPOSITORY.userExist(user_id);
+  }
 }
