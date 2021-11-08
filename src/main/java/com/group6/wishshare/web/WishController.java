@@ -21,7 +21,7 @@ public class WishController {
   WishListService wishListService = new WishListService();
 
   @GetMapping("/create-wish")
-  public String createwish(Model model) {
+  public String createWish(Model model) {
     List<Wish> wishes = wishService.getWishes(1); // TODO spørg tine omkring det
     model.addAttribute("wishes", wishes);
     return "createwish";
@@ -52,14 +52,42 @@ public class WishController {
   }
 
   @PostMapping("/wishlist/{wishlist_id}/reserve/{wish_id}")
-  public String reserve(@PathVariable int wishlist_id, @PathVariable int wish_id) {
-    wishService.reserveWish(true, wish_id);
-    return "redirect:/wishlist/" + wishlist_id;
+  public String reserve(@PathVariable int wishlist_id, @PathVariable int wish_id, Model model) {
+    Wish wish = wishService.getWish(wish_id);
+    if (wish.isReserved()) {
+      wishService.reserveWish(false, wish_id);
+      model.addAttribute("wish", wish);
+      return "redirect:/wishlist/" + wishlist_id;
+    } else {
+      wishService.reserveWish(true, wish_id);
+      model.addAttribute("wish", wish);
+      return "redirect:/wishlist/" + wishlist_id;
+    }
   }
 
   @PostMapping("/wishlist/{wishlist_id}/unreserve/{wish_id}")
   public String unreserve(@PathVariable int wishlist_id, @PathVariable int wish_id) {
+
     wishService.reserveWish(false, wish_id);
+    return "redirect:/wishlist/" + wishlist_id;
+  }
+
+  @PostMapping("/wishlist/{wishlist_id}/edit/{wish_id}")
+  public String editWish(@PathVariable int wish_id, @PathVariable int wishlist_id, Model model) {
+    Wish wish = wishService.getWish(wish_id);
+    model.addAttribute("wishlist_id", wishlist_id);
+    model.addAttribute("wish", wish);
+    return "editwish";
+  }
+
+  @PostMapping("/wishlist/{wishlist_id}/save/{wish_id}")
+  public String saveChanges(
+      WebRequest webRequest, @PathVariable int wishlist_id, @PathVariable int wish_id) {
+    String name = webRequest.getParameter("name");
+    String link = webRequest.getParameter("link");
+    String price = webRequest.getParameter("price");
+    wishService.editWish(name, link, price, wish_id);
+
     return "redirect:/wishlist/" + wishlist_id;
   }
 

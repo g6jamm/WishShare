@@ -37,6 +37,29 @@ public class WishRepository {
     return result;
   }
 
+  public Wish getWish(int wishId) {
+    String sqlQuery = "SELECT * FROM wish WHERE wish_id = " + wishId;
+    ResultSet resultSet = resultSet(sqlQuery);
+    Wish wish = null;
+
+    try {
+      while (resultSet.next()) {
+        wish =
+            new Wish.WishBuilder()
+                .id(resultSet.getInt("wish_id"))
+                .name(resultSet.getString("name"))
+                .link(resultSet.getString("link"))
+                .price(resultSet.getString("price"))
+                .wishlistId(resultSet.getInt("wishlist_id"))
+                .reserved(resultSet.getBoolean("reserved"))
+                .build();
+      }
+    } catch (SQLException sqlException) {
+      System.out.println(sqlException.getMessage());
+    }
+    return wish;
+  }
+
   public boolean reserveWish(boolean isReserved, int wishId) {
     String sqlQuery = "UPDATE wish SET reserved = ? WHERE wish_id = ?";
 
@@ -50,6 +73,26 @@ public class WishRepository {
 
     } catch (SQLException e) {
       System.out.println(e.getMessage());
+      return false;
+    }
+  }
+
+  public boolean editWish(String name, String link, String price, int id) {
+
+    String sqlQuery = "UPDATE wish SET name = ?, link = ?, price = ? WHERE wish_id = ?;";
+
+    PreparedStatement preparedStatement;
+    try {
+      preparedStatement = DbManager.getInstance().getConnection().prepareStatement(sqlQuery);
+      preparedStatement.setString(1, name);
+      preparedStatement.setString(2, link);
+      preparedStatement.setString(3, price);
+      preparedStatement.setInt(4, id);
+      preparedStatement.executeUpdate();
+      return true;
+
+    } catch (SQLException sqlException) {
+      System.out.println(sqlException.getMessage());
       return false;
     }
   }

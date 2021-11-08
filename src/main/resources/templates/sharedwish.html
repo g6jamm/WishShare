@@ -40,8 +40,11 @@
 
                     <td class="align-middle">
                         <div class="text-end">
-                            <button class="btn bg-gradient-info mb-0" value="submit" type="submit">
-                                <i class="fas fa-pencil-alt" aria-hidden="true"></i>&nbsp;&nbsp;Reserve
+                            <button th:if="${wish.isReserved() == true}" class="btn bg-gradient-secondary mb-0" value="submit" type="submit">
+                                <i class="fas fa-pencil-alt" aria-hidden="true"></i>&nbsp;&nbsp;unreserve
+                            </button>
+                            <button th:unless="${wish.isReserved() == true}" class="btn bg-gradient-info mb-0" value="submit" type="submit">
+                                <i class="fas fa-pencil-alt" aria-hidden="true"></i>&nbsp;&nbsp;reserve
                             </button>
                         </div>
                     </td>
