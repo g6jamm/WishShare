@@ -25,6 +25,10 @@ public class WishService {
     return result;
   }
 
+  public Wish getWish(int wishId){
+    return wishRepository.getWish(wishId);
+  }
+
   public boolean reserveWish(boolean isReserved, int wishId) {
     return wishRepository.reserveWish(isReserved, wishId);
   }

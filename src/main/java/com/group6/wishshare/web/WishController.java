@@ -52,13 +52,23 @@ public class WishController {
   }
 
   @PostMapping("/wishlist/{wishlist_id}/reserve/{wish_id}")
-  public String reserve(@PathVariable int wishlist_id, @PathVariable int wish_id) {
+  public String reserve(@PathVariable int wishlist_id, @PathVariable int wish_id, Model model) {
+    Wish wish = wishService.getWish(wish_id);
+    if (wish.isReserved()){
+      wishService.reserveWish(false, wish_id);
+      model.addAttribute("wish", wish);
+      return "redirect:/wishlist/" + wishlist_id;
+    }
+    else{
     wishService.reserveWish(true, wish_id);
+      model.addAttribute("wish", wish);
     return "redirect:/wishlist/" + wishlist_id;
+  }
   }
 
   @PostMapping("/wishlist/{wishlist_id}/unreserve/{wish_id}")
   public String unreserve(@PathVariable int wishlist_id, @PathVariable int wish_id) {
+
     wishService.reserveWish(false, wish_id);
     return "redirect:/wishlist/" + wishlist_id;
   }

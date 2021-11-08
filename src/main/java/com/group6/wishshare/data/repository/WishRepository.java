@@ -37,6 +37,29 @@ public class WishRepository {
     return result;
   }
 
+  public Wish getWish(int wishId) {
+    String sqlQuery = "SELECT * FROM wish WHERE wish_id = " + wishId;
+    ResultSet resultSet = resultSet(sqlQuery);
+    Wish wish = null;
+
+    try {
+      while (resultSet.next()) {
+         wish =
+            new Wish.WishBuilder()
+                .id(resultSet.getInt("wish_id"))
+                .name(resultSet.getString("name"))
+                .link(resultSet.getString("link"))
+                .price(resultSet.getString("price"))
+                .wishlistId(resultSet.getInt("wishlist_id"))
+                .reserved(resultSet.getBoolean("reserved"))
+                .build();
+      }
+    } catch (SQLException sqlException) {
+      System.out.println(sqlException.getMessage());
+    }
+    return wish;
+  }
+
   public boolean reserveWish(boolean isReserved, int wishId) {
     String sqlQuery = "UPDATE wish SET reserved = ? WHERE wish_id = ?";
 
