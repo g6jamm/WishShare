@@ -1,16 +1,15 @@
 package com.group6.wishshare.domain.service;
 
 import com.group6.wishshare.data.repository.WishListRepository;
-import com.group6.wishshare.domain.model.User;
 import com.group6.wishshare.domain.model.Wishlist;
 
 import java.util.List;
 
 public class WishListService {
 
-  public int addWishList(User user, String name) {
+  public Wishlist addWishList(int user_id, String name) {
     WishListRepository wishListRepository = new WishListRepository();
-    return wishListRepository.addWishList(name, user.getId());
+    return wishListRepository.addWishList(name, user_id);
   }
 
   public Wishlist lookupWishList(int id) {
@@ -18,9 +17,9 @@ public class WishListService {
     return wishListRepository.getWishlist(id);
   }
 
-  public List<Wishlist> lookupWishListsPrUser(User user) {
+  public List<Wishlist> lookupWishListsPrUser(int user_id) {
     WishListRepository wishListRepository = new WishListRepository();
-    return wishListRepository.getWishLists(user.getId());
+    return wishListRepository.getWishLists(user_id);
   }
 
   public boolean isListOwner(int wishlistId, int userId) {

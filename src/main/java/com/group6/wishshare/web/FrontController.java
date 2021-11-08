@@ -79,12 +79,18 @@ public class FrontController {
     throw new LoginException("The passwords did not match");
   }
 
+  @GetMapping("/logout")
+  public String logout(WebRequest webRequest) {
+    webRequest.removeAttribute("user", WebRequest.SCOPE_SESSION);
+    return "redirect:/";
+  }
+
   private boolean validatePassword(String password1, String password2) {
     return Objects.requireNonNull(password1).equals(password2);
   }
 
   private void setSessionInfo(WebRequest request, User user) {
-    request.setAttribute("user", user, WebRequest.SCOPE_SESSION);
+    request.setAttribute("user", user.getId(), WebRequest.SCOPE_SESSION);
   }
 
   @ExceptionHandler(Exception.class)

@@ -28,9 +28,9 @@
                                     </a>
                                 </li>
                                 <li th:if="${session.user}" class="nav-item">
-                                    <a class="nav-link me-2" href="#">
+                                    <a class="nav-link me-2" href="/logout">
                                         <i class="fa fa-user opacity-6 text-dark me-1"></i>
-                                        Profile
+                                        Logout
                                     </a>
                                 </li>
                                 <li th:if="!${session.user}" class="nav-item">

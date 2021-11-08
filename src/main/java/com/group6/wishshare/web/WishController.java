@@ -1,8 +1,10 @@
 package com.group6.wishshare.web;
 
+import com.group6.wishshare.data.repository.DataFacade;
 import com.group6.wishshare.data.repository.WishRepository;
-import com.group6.wishshare.domain.model.User;
 import com.group6.wishshare.domain.model.Wish;
+import com.group6.wishshare.domain.model.Wishlist;
+import com.group6.wishshare.domain.service.LoginService;
 import com.group6.wishshare.domain.service.WishListService;
 import com.group6.wishshare.domain.service.WishService;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,7 @@ public class WishController {
 
   WishService wishService = new WishService(new WishRepository());
   WishListService wishListService = new WishListService();
+  LoginService loginService = new LoginService(new DataFacade());
 
   @GetMapping("/create-wish")
   public String createWish(Model model) {
@@ -40,12 +43,12 @@ public class WishController {
 
   @GetMapping("/wishlist/{id}")
   public String wishlist(WebRequest webRequest, @PathVariable int id, Model model) {
-    List<Wish> wishes = wishService.getWishes(id); // // TODO spørg tine omkring det
-    model.addAttribute("wishes", wishes);
-    model.addAttribute("wishlist_id", id);
+    Wishlist wishlist = wishListService.lookupWishList(id); // // TODO spørg tine omkring det
+    model.addAttribute("wishes", wishlist.getWISH_LIST());
+    model.addAttribute("wishlist_id", wishlist.getId());
     if (validateUser(webRequest)
         && wishListService.isListOwner(
-            id, ((User) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION)).getId())) {
+            id, ((Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION)))) {
       return "createwish";
     }
     return "sharedwish";
@@ -92,8 +95,10 @@ public class WishController {
   }
 
   private boolean validateUser(WebRequest request) {
-    User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-
-    return null != user;
+    Integer user_id = (Integer) request.getAttribute("user", WebRequest.SCOPE_SESSION);
+    if (user_id == null) {
+      return false;
+    }
+    return loginService.userExist(user_id);
   }
 }

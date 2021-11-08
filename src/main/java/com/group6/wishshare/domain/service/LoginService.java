@@ -47,4 +47,8 @@ public class LoginService {
 
     return result;
   }
+
+  public boolean userExist(int user_id) {
+    return FACADE.userExist(user_id);
+  }
 }
