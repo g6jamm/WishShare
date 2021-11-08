@@ -8,7 +8,11 @@ import java.sql.*;
 
 public class UserRepository {
 
-  public void createUser(User user) throws LoginException {
+  /**
+   * @return Index value of the newly created user, if nothing was created returns 0.
+   * @throws LoginException
+   */
+  public int createUser(User user) throws LoginException {
     try {
       Connection connection = DbManager.getInstance().getConnection();
       String SQL =
@@ -24,7 +28,10 @@ public class UserRepository {
       ps.setString(6, String.valueOf(Date.valueOf(user.getBirthdate())));
       ps.executeUpdate();
       ResultSet ids = ps.getGeneratedKeys();
-      ids.next();
+      if (ids.next()) {
+        return ids.getInt(1);
+      }
+      return 0;
     } catch (SQLException e) {
       throw new LoginException(e.getMessage());
     }
