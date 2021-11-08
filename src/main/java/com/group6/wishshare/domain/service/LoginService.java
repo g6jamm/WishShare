@@ -21,6 +21,13 @@ public class LoginService {
     return FACADE.login(email, password);
   }
 
+
+  /**
+   *
+   * @return New User with id generated from database.
+   * @throws LoginException
+   */
+
   public User createUser(
       String firstname,
       String lastname,
@@ -39,8 +46,8 @@ public class LoginService {
             .password(password)
             .build();
 
-    FACADE.createUser(user);
+    User result = FACADE.createUser(user);
 
-    return user;
+    return result;
   }
 }
