@@ -12,11 +12,9 @@ public class DataFacade implements DataFacadeInterface {
   }
 
   /**
-   *
    * @return New User object with generated id from database.
    * @throws LoginException
    */
-
   public User createUser(User user) throws LoginException {
     int id = USER_REPOSITORY.createUser(user);
 

@@ -21,13 +21,10 @@ public class LoginService {
     return FACADE.login(email, password);
   }
 
-
   /**
-   *
    * @return New User with id generated from database.
    * @throws LoginException
    */
-
   public User createUser(
       String firstname,
       String lastname,

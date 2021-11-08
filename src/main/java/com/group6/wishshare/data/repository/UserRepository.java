@@ -8,13 +8,10 @@ import java.sql.*;
 
 public class UserRepository {
 
-
   /**
-   *
    * @return Index value of the newly created user, if nothing was created returns 0.
    * @throws LoginException
    */
-
   public int createUser(User user) throws LoginException {
     try {
       Connection connection = DbManager.getInstance().getConnection();
