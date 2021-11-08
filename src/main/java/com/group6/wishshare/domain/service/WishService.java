@@ -32,4 +32,8 @@ public class WishService {
   public boolean reserveWish(boolean isReserved, int wishId) {
     return wishRepository.reserveWish(isReserved, wishId);
   }
+
+  public void editWish(String name, String link, String price, int id){
+    wishRepository.editWish(name, link, price, id);
+  }
 }

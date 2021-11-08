@@ -77,6 +77,26 @@ public class WishRepository {
     }
   }
 
+  public boolean editWish(String name, String link, String price, int id){
+
+    String sqlQuery = "UPDATE wish SET name = ?, link = ?, price = ? WHERE wish_id = ?;";
+
+    PreparedStatement preparedStatement;
+    try{
+      preparedStatement = DbManager.getInstance().getConnection().prepareStatement(sqlQuery);
+      preparedStatement.setString(1,name);
+      preparedStatement.setString(2, link);
+      preparedStatement.setString(3, price);
+      preparedStatement.setInt(4, id);
+      preparedStatement.executeUpdate();
+      return true;
+
+    }catch (SQLException sqlException){
+      System.out.println(sqlException.getMessage());
+      return false;
+    }
+  }
+
   public boolean addWishToWishList(Wish wish) {
 
     String sqlQuery =

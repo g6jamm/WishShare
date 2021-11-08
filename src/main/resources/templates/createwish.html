@@ -19,6 +19,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="wish: ${wishes}">
+                    <form th:action="@{/wishlist/{wishlist_id}/edit/{wish_id} (wishlist_id = ${wishlist_id}, wish_id = ${wish.getID()})}" method="POST" name="wishform" role="form">
                     <td>
                         <div class="d-flex px-2 py-1">
                             <div class="d-flex flex-column justify-content-center">
@@ -44,6 +45,7 @@
                             </button>
                         </div>
                     </td>
+                    </form>
                 </tr>
                 <tr class="card">
                     <form th:action="@{/wishlist/{id}/new-wish (id = ${wishlist_id})}" method="POST" name="wishform" role="form">

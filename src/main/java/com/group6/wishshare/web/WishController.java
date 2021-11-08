@@ -73,6 +73,26 @@ public class WishController {
     return "redirect:/wishlist/" + wishlist_id;
   }
 
+
+  @PostMapping("/wishlist/{wishlist_id}/edit/{wish_id}")
+  public String editWish(@PathVariable int wish_id, @PathVariable int wishlist_id, Model model){
+    Wish wish = wishService.getWish(wish_id);
+    model.addAttribute("wishlist_id", wishlist_id);
+    model.addAttribute("wish", wish);
+    return "editwish";
+  }
+
+  @PostMapping("/wishlist/{wishlist_id}/save/{wish_id}")
+  public String saveChanges(WebRequest webRequest, @PathVariable int wishlist_id, @PathVariable int wish_id){
+    String name = webRequest.getParameter("name");
+    String link = webRequest.getParameter("link");
+    String price = webRequest.getParameter("price");
+    wishService.editWish(name, link, price, wish_id);
+    System.out.println(name + " " + link + price);
+
+    return "redirect:/wishlist/" + wishlist_id;
+  }
+
   private boolean validateUser(WebRequest request) {
     User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
 
