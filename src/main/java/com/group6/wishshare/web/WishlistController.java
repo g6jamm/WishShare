@@ -53,6 +53,16 @@ public class WishlistController {
     return "redirect:/dashboard"; // swap to wishpage maybe?
   }
 
+  @PostMapping("/delete-wishlist/{id}")
+  public String deleteWishList(WebRequest webRequest, @PathVariable int id) {
+    WishListService wishListService = new WishListService();
+    if (wishListService.isListOwner(
+        id, ((User) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION)).getId())) {
+      wishListService.deleteWishlist(id);
+    }
+    return "redirect:/dashboard";
+  }
+
   private boolean validateUser(WebRequest request) {
     User user = (User) request.getAttribute("user", WebRequest.SCOPE_SESSION);
 

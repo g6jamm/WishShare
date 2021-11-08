@@ -133,4 +133,39 @@ public class WishListRepository {
     }
     return null;
   }
+
+  /**
+   * @param id id of wishlist to be deleted
+   * @return True if succesful, false if not.
+   */
+  public boolean deleteWishlist(int id) {
+    try {
+      if (deleteWishes(id)) {
+        String stm = "DELETE FROM wishlist WHERE wishlist_id = ?";
+        PreparedStatement ps = connection.prepareStatement(stm);
+        ps.setInt(1, id);
+        ps.executeUpdate();
+        return true;
+      }
+    } catch (SQLException e) {
+      return false;
+    }
+    return false;
+  }
+
+  /**
+   * @param wishlist_id id of wishlist to be deleted
+   * @return True if succesful, false if not.
+   */
+  private boolean deleteWishes(int wishlist_id) {
+    try {
+      String stm = "DELETE FROM wish WHERE wishlist_id = ?";
+      PreparedStatement ps = connection.prepareStatement(stm);
+      ps.setInt(1, wishlist_id);
+      ps.executeUpdate();
+      return true;
+    } catch (SQLException e) {
+      return false;
+    }
+  }
 }
