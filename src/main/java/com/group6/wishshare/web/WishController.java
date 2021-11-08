@@ -54,16 +54,15 @@ public class WishController {
   @PostMapping("/wishlist/{wishlist_id}/reserve/{wish_id}")
   public String reserve(@PathVariable int wishlist_id, @PathVariable int wish_id, Model model) {
     Wish wish = wishService.getWish(wish_id);
-    if (wish.isReserved()){
+    if (wish.isReserved()) {
       wishService.reserveWish(false, wish_id);
       model.addAttribute("wish", wish);
       return "redirect:/wishlist/" + wishlist_id;
-    }
-    else{
-    wishService.reserveWish(true, wish_id);
+    } else {
+      wishService.reserveWish(true, wish_id);
       model.addAttribute("wish", wish);
-    return "redirect:/wishlist/" + wishlist_id;
-  }
+      return "redirect:/wishlist/" + wishlist_id;
+    }
   }
 
   @PostMapping("/wishlist/{wishlist_id}/unreserve/{wish_id}")
@@ -73,9 +72,8 @@ public class WishController {
     return "redirect:/wishlist/" + wishlist_id;
   }
 
-
   @PostMapping("/wishlist/{wishlist_id}/edit/{wish_id}")
-  public String editWish(@PathVariable int wish_id, @PathVariable int wishlist_id, Model model){
+  public String editWish(@PathVariable int wish_id, @PathVariable int wishlist_id, Model model) {
     Wish wish = wishService.getWish(wish_id);
     model.addAttribute("wishlist_id", wishlist_id);
     model.addAttribute("wish", wish);
@@ -83,7 +81,8 @@ public class WishController {
   }
 
   @PostMapping("/wishlist/{wishlist_id}/save/{wish_id}")
-  public String saveChanges(WebRequest webRequest, @PathVariable int wishlist_id, @PathVariable int wish_id){
+  public String saveChanges(
+      WebRequest webRequest, @PathVariable int wishlist_id, @PathVariable int wish_id) {
     String name = webRequest.getParameter("name");
     String link = webRequest.getParameter("link");
     String price = webRequest.getParameter("price");

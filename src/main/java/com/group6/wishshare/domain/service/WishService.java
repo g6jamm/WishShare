@@ -25,7 +25,7 @@ public class WishService {
     return result;
   }
 
-  public Wish getWish(int wishId){
+  public Wish getWish(int wishId) {
     return wishRepository.getWish(wishId);
   }
 
@@ -33,7 +33,7 @@ public class WishService {
     return wishRepository.reserveWish(isReserved, wishId);
   }
 
-  public void editWish(String name, String link, String price, int id){
+  public void editWish(String name, String link, String price, int id) {
     wishRepository.editWish(name, link, price, id);
   }
 }
