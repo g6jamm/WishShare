@@ -32,4 +32,9 @@ public class WishListService {
     WishListRepository wishListRepository = new WishListRepository();
     wishListRepository.updateName(wishlistId, newName);
   }
+
+  public boolean deleteWishlist(int wishlistId){
+    WishListRepository wishListRepository = new WishListRepository();
+    return wishListRepository.deleteWishlist(wishlistId);
+  }
 }

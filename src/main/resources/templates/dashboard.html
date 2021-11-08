@@ -6,6 +6,7 @@
     <title>
         Dashboard
     </title>
+    <link rel="stylesheet" th:href="@{/css/custom-dashboard.css}"/>
 </head>
 
 <body>
@@ -41,10 +42,18 @@
                             </div>
                         </td>
                         <td class="align-middle">
-                            <div class="text-end">
-                                <a class="btn bg-gradient-warning mb-0" value="edit" th:href="@{/wishlist/{id} (id = ${wishlist.getId()})}">
-                                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>&nbsp;&nbsp;Edit
-                                </a>
+                            <div class="text-end custom-button-wrap">
+                                <form method="POST" th:action="@{/delete-wishlist/{id} (id = ${wishlist.getId()})}"
+                                      name="delete" role="none">
+                                    <button class="btn bg-gradient-danger mb-0 custom-margin-right" value="delete" type="submit" >
+                                        <i class="fas fa-trash-alt" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                                <form th:action="@{/wishlist/{id} (id = ${wishlist.getId()})}" name="edit" role="none" method="get">
+                                    <button class="btn bg-gradient-warning mb-0" value="edit" type="submit">
+                                        <i class="fas fa-pencil-alt" aria-hidden="true"></i>
+                                    </button>
+                                </form>
                             </div>
                         </td>
                     </tr>
@@ -53,7 +62,7 @@
                             <td>
                                 <div class="input-group">
                                     <input type="text" name="wishlistname" class="form-control"
-                                           placeholder="Type name here...">
+                                           placeholder="Type name here..." required>
                                 </div>
                             </td>
                             <td>
