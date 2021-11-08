@@ -3,6 +3,7 @@ package com.group6.wishshare.domain.model;
 import com.group6.wishshare.domain.model.type.Gender;
 
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  * Create User object using Builder pattern.
@@ -17,6 +18,7 @@ public class User {
   private final LocalDate BIRTHDATE;
   private final Gender GENDER;
   private final String PASSWORD;
+  private final List<Wishlist> WISHLISTS;
 
   private User(UserBuilder builder) {
     this.ID = builder.id;
@@ -26,6 +28,7 @@ public class User {
     this.BIRTHDATE = builder.birthdate;
     this.GENDER = builder.gender;
     this.PASSWORD = builder.password;
+    this.WISHLISTS = builder.wishlists;
   }
 
   public int getId() {
@@ -56,6 +59,10 @@ public class User {
     return PASSWORD;
   }
 
+  public List<Wishlist> getWISHLISTS() {
+    return WISHLISTS;
+  }
+
   /**
    * Build User object.
    *
@@ -69,6 +76,7 @@ public class User {
     private LocalDate birthdate;
     private Gender gender;
     private String password;
+    private List<Wishlist> wishlists;
 
     public UserBuilder() {}
 
@@ -104,6 +112,12 @@ public class User {
 
     public UserBuilder gender(Gender gender) {
       this.gender = gender;
+
+      return this;
+    }
+
+    public UserBuilder wishlists(List<Wishlist> wishlists){
+      this.wishlists = wishlists;
 
       return this;
     }

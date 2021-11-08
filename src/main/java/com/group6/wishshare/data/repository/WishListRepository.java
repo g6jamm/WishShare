@@ -175,4 +175,29 @@ public class WishListRepository {
       return false;
     }
   }
+
+  public List<Wishlist> getWishlists(int user_id) {
+    List<Wishlist> result = new ArrayList<>();
+    try {
+
+      String sqlQuery = "SELECT * FROM wishlist WHERE user_id = " + user_id;
+      PreparedStatement ps = connection.prepareStatement(sqlQuery);
+      ResultSet resultSet = ps.executeQuery();
+
+      while (resultSet.next()) {
+        int id = resultSet.getInt(1);
+        Wishlist wishlist =
+            new Wishlist.WishListBuilder()
+                .id(id)
+                .name(resultSet.getString("name"))
+                .userid(user_id)
+                .wishList(wishRepository.getWishes(id))
+                .build();
+        result.add(wishlist);
+      }
+    } catch (SQLException sqlException) {
+      System.out.println(sqlException.getMessage());
+    }
+    return result;
+  }
 }

@@ -2,11 +2,14 @@ package com.group6.wishshare.data.repository;
 
 import com.group6.wishshare.data.Util.DbManager;
 import com.group6.wishshare.domain.model.User;
+import com.group6.wishshare.domain.model.type.Gender;
 import com.group6.wishshare.domain.service.LoginException;
 import java.sql.Date;
 import java.sql.*;
 
 public class UserRepository {
+
+  WishListRepository wishListRepository = new WishListRepository();
 
   /**
    * @return Index value of the newly created user, if nothing was created returns 0.
@@ -53,6 +56,7 @@ public class UserRepository {
             .email(email)
             .password(password)
             .id(id)
+            .wishlists(wishListRepository.getWishlists(id))
             .build(); // TODO add more?
       } else {
         throw new LoginException("Not a valid user");
@@ -77,5 +81,30 @@ public class UserRepository {
       // do something
     }
     return false;
+  }
+
+  public User getUser(int user_id) {
+    try {
+      Connection con = DbManager.getInstance().getConnection();
+      String SQL = "SELECT * FROM user WHERE user_id = ?";
+      PreparedStatement ps = con.prepareStatement(SQL);
+      ps.setInt(1, user_id);
+      ResultSet rs = ps.executeQuery();
+      if (rs.next()) {
+        return new User.UserBuilder()
+            .id(user_id)
+            .firstName(rs.getString(2))
+            .lastName(rs.getString(3))
+            .gender(Gender.valueOf(rs.getString(6)))
+            .email(rs.getString(4))
+            .password(rs.getString(7))
+            .wishlists(wishListRepository.getWishlists(user_id))
+            .birthdate(rs.getDate(5).toLocalDate())
+            .build();
+      }
+    } catch (SQLException e) {
+      // do something
+    }
+    return null;
   }
 }
