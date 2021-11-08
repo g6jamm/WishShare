@@ -88,7 +88,6 @@ public class WishController {
     String link = webRequest.getParameter("link");
     String price = webRequest.getParameter("price");
     wishService.editWish(name, link, price, wish_id);
-    System.out.println(name + " " + link + price);
 
     return "redirect:/wishlist/" + wishlist_id;
   }
