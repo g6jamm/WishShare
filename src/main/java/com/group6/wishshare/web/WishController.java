@@ -96,7 +96,7 @@ public class WishController {
 
   private boolean validateUser(WebRequest request) {
     Integer user_id = (Integer) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-    if(user_id == null){
+    if (user_id == null) {
       return false;
     }
     return loginService.userExist(user_id);

@@ -116,7 +116,7 @@ public class User {
       return this;
     }
 
-    public UserBuilder wishlists(List<Wishlist> wishlists){
+    public UserBuilder wishlists(List<Wishlist> wishlists) {
       this.wishlists = wishlists;
 
       return this;

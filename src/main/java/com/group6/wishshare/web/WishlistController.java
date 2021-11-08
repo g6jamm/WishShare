@@ -38,8 +38,10 @@ public class WishlistController {
     if (validateUser(webRequest)) {
       WishListService wishListService = new WishListService();
 
-      User user = userService.getUser((Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION));
-      Wishlist wishlist = wishListService.addWishList(user.getId(), webRequest.getParameter("wishlistname"));
+      User user =
+          userService.getUser((Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION));
+      Wishlist wishlist =
+          wishListService.addWishList(user.getId(), webRequest.getParameter("wishlistname"));
 
       if (wishlist != null) {
         return "redirect:/wishlist/" + wishlist.getId();
@@ -72,7 +74,7 @@ public class WishlistController {
 
   private boolean validateUser(WebRequest request) {
     Integer user_id = (Integer) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-    if(user_id == null){
+    if (user_id == null) {
       return false;
     }
     return loginService.userExist(user_id);

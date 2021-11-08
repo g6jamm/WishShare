@@ -36,5 +36,4 @@ public class WishListService {
     WishListRepository wishListRepository = new WishListRepository();
     return wishListRepository.deleteWishlist(wishlistId);
   }
-
 }

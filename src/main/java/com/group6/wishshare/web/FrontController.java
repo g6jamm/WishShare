@@ -80,11 +80,10 @@ public class FrontController {
   }
 
   @GetMapping("/logout")
-  public String logout(WebRequest webRequest){
+  public String logout(WebRequest webRequest) {
     webRequest.removeAttribute("user", WebRequest.SCOPE_SESSION);
     return "redirect:/";
   }
-
 
   private boolean validatePassword(String password1, String password2) {
     return Objects.requireNonNull(password1).equals(password2);
