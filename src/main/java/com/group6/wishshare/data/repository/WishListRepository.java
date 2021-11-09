@@ -117,7 +117,7 @@ public class WishListRepository {
             .id(wishlistId)
             .name(resultSet.getString(2))
             .token(resultSet.getString(3))
-            .userid(resultSet.getInt(4))
+            .user(userRepository.getUser(resultSet.getInt(4)))
             .wishList(wishRepository.getWishes(wishlistId))
             .build();
       }
@@ -127,7 +127,7 @@ public class WishListRepository {
     return null;
   }
 
-  public List<Wishlist> getWishLists(int user_id) {
+  public List<Wishlist> getWishLists(User user) {
 
     List<Wishlist> wishlists = new ArrayList<>();
 

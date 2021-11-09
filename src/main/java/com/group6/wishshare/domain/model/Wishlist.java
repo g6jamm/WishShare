@@ -7,7 +7,6 @@ public class Wishlist {
   private final String NAME;
   private final User USER;
   private final String TOKEN;
-
   private final List<Wish> WISH_LIST;
 
   public Wishlist(WishListBuilder builder) {
@@ -30,9 +29,9 @@ public class Wishlist {
     return NAME;
   }
 
-
   public User getUser() {
     return USER;
+  }
 
   public String getToken() {
     return TOKEN;

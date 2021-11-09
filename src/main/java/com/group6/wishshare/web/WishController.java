@@ -49,14 +49,14 @@ public class WishController {
     Wishlist wishlist = wishListService.lookupWishListById(id); // // TODO spørg tine omkring det
     model.addAttribute("wishes", wishlist.getWishlist());
     model.addAttribute("wishlist_id", wishlist.getId());
-    if (validateUser(webRequest)) {
+    if (isValidUser(webRequest)) {
       User user =
           userService.getUser((Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION));
       if (wishListService.isListOwner(id, user)) {
         return "createwish";
       }
+      return "dashboard";
     }
-
     return "index"; // TODO: code 404
   }
 
@@ -66,16 +66,10 @@ public class WishController {
     model.addAttribute("wishes", wishlist.getWishlist());
     model.addAttribute("wishlist_id", wishlist.getId());
 
-    if (!isValidUser(webRequest)) {
+    if (!isValidUser(webRequest)) {// Is owner not just valid user 
       return "shared-wishlist";
     }
-
     return "index"; // TODO: You are not allowed to see your own list - page ..
-  }
-
-  private boolean isOwner(WebRequest webRequest, int id) {
-    return wishListService.isListOwner(
-        id, ((Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION)));
   }
 
   @PostMapping("/wishlist/{wishlist_id}/reserve/{wish_id}")
