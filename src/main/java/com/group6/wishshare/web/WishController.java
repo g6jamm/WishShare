@@ -43,15 +43,33 @@ public class WishController {
 
   @GetMapping("/wishlist/{id}")
   public String wishlist(WebRequest webRequest, @PathVariable int id, Model model) {
-    Wishlist wishlist = wishListService.lookupWishList(id); // // TODO spørg tine omkring det
-    model.addAttribute("wishes", wishlist.getWISH_LIST());
+    Wishlist wishlist = wishListService.lookupWishListById(id); // // TODO spørg tine omkring det
+    model.addAttribute("wishes", wishlist.getWishlist());
     model.addAttribute("wishlist_id", wishlist.getId());
-    if (validateUser(webRequest)
-        && wishListService.isListOwner(
-            id, ((Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION)))) {
+
+    if (isValidUser(webRequest) && isOwner(webRequest, id)) {
       return "createwish";
     }
-    return "sharedwish";
+
+    return "index"; // TODO: code 404
+  }
+
+  @GetMapping("/shared-wishlist/{id}")
+  public String sharedWishlist(WebRequest webRequest, @PathVariable int id, Model model) {
+    Wishlist wishlist = wishListService.lookupWishListById(id);
+    model.addAttribute("wishes", wishlist.getWishlist());
+    model.addAttribute("wishlist_id", wishlist.getId());
+
+    if (!isValidUser(webRequest)) {
+      return "shared-wishlist";
+    }
+
+    return "index"; // TODO: You are not allowed to see your own list - page ..
+  }
+
+  private boolean isOwner(WebRequest webRequest, int id) {
+   return wishListService.isListOwner(
+        id, ((Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION)));
   }
 
   @PostMapping("/wishlist/{wishlist_id}/reserve/{wish_id}")
@@ -94,7 +112,7 @@ public class WishController {
     return "redirect:/wishlist/" + wishlist_id;
   }
 
-  private boolean validateUser(WebRequest request) {
+  private boolean isValidUser(WebRequest request) {
     Integer user_id = (Integer) request.getAttribute("user", WebRequest.SCOPE_SESSION);
     if (user_id == null) {
       return false;
