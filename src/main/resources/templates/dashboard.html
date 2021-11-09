@@ -16,6 +16,7 @@
         <div class="page-header min-vh-75">
             <div class="container">
                 <div class="row">
+                    TODO: remove
                     <p th:text="${session.user}" th:unless="${session == null}">[...]</p>
                     <p th:text="${user.email}" th:unless="${user == null}">[...]</p>
                 </div>
@@ -28,8 +29,9 @@
                 <table class="table align-items-center mb-0">
                     <thead>
                     <tr>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-12">Name</th>
-                        <th class="text-secondary opacity-7"></th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-5">Name</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-5">Link</th>
+                        <th class="text-secondary opacity-7 col-2"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -41,15 +43,24 @@
                                 </div>
                             </div>
                         </td>
+                        <td>
+                            <div class="d-flex px-2 py-1">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="mb-0 text-sm" th:text="${wishlist.getToken()}"></h6>
+                                </div>
+                            </div>
+                        </td>
                         <td class="align-middle">
                             <div class="text-end custom-button-wrap">
                                 <form method="POST" th:action="@{/delete-wishlist/{id} (id = ${wishlist.getId()})}"
                                       name="delete" role="none">
-                                    <button class="btn bg-gradient-danger mb-0 custom-margin-right" value="delete" type="submit" >
+                                    <button class="btn bg-gradient-danger mb-0 custom-margin-right" value="delete"
+                                            type="submit">
                                         <i class="fas fa-trash-alt" aria-hidden="true"></i>
                                     </button>
                                 </form>
-                                <form th:action="@{/wishlist/{id} (id = ${wishlist.getId()})}" name="edit" role="none" method="get">
+                                <form th:action="@{/wishlist/{id} (id = ${wishlist.getId()})}" name="edit" role="none"
+                                      method="get">
                                     <button class="btn bg-gradient-warning mb-0" value="edit" type="submit">
                                         <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                                     </button>
