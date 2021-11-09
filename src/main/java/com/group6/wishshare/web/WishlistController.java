@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.context.request.WebRequest;
 
+import java.util.List;
+
 @Controller
 public class WishlistController {
 
@@ -23,10 +25,11 @@ public class WishlistController {
   public String dashboard(WebRequest webRequest, Model model) {
     if (validateUser(webRequest)) {
       WishListService wishListService = new WishListService();
-      model.addAttribute(
-          "wishlists",
-          wishListService.lookupWishListsPrUser(
-              (Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION)));
+      User user =
+          userService.getUser((Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION));
+      List<Wishlist> wishlistList = wishListService.lookupWishListsPrUser(user);
+
+      model.addAttribute("wishlists", wishlistList);
 
       return "/dashboard";
     }
@@ -41,7 +44,7 @@ public class WishlistController {
       User user =
           userService.getUser((Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION));
       Wishlist wishlist =
-          wishListService.addWishList(user.getId(), webRequest.getParameter("wishlistname"));
+          wishListService.addWishList(user, webRequest.getParameter("wishlistname"));
 
       if (wishlist != null) {
         return "redirect:/wishlist/" + wishlist.getId();
@@ -53,11 +56,15 @@ public class WishlistController {
 
   @PostMapping("/update-wishlist/{id}")
   public String updateWishlistName(WebRequest webRequest, @PathVariable int id) {
+    WishListService wishListService = new WishListService();
     // add owner check
     if (validateUser(webRequest)) {
-      String newName = webRequest.getParameter("newName");
-      WishListService wishListService = new WishListService();
-      wishListService.updateWishListName(id, newName);
+      User user =
+          userService.getUser((Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION));
+      if (wishListService.isListOwner(id, user)) {
+        String newName = webRequest.getParameter("newName");
+        wishListService.updateWishListName(id, newName);
+      }
     }
     return "redirect:/dashboard"; // swap to wishpage maybe?
   }
@@ -65,8 +72,9 @@ public class WishlistController {
   @PostMapping("/delete-wishlist/{id}")
   public String deleteWishList(WebRequest webRequest, @PathVariable int id) {
     WishListService wishListService = new WishListService();
-    if (wishListService.isListOwner(
-        id, ((Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION)))) {
+    User user =
+        userService.getUser((Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION));
+    if (wishListService.isListOwner(id, user)) {
       wishListService.deleteWishlist(id);
     }
     return "redirect:/dashboard";

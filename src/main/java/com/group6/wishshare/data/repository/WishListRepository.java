@@ -1,6 +1,7 @@
 package com.group6.wishshare.data.repository;
 
 import com.group6.wishshare.data.Util.DbManager;
+import com.group6.wishshare.domain.model.User;
 import com.group6.wishshare.domain.model.Wish;
 import com.group6.wishshare.domain.model.Wishlist;
 
@@ -12,18 +13,19 @@ public class WishListRepository {
 
   Connection connection = DbManager.getInstance().getConnection();
   WishRepository wishRepository = new WishRepository();
+  UserRepository userRepository = new UserRepository();
 
   /**
    * Method to add a wishlist to database. @Returns if succedful return a new wishlist else null.
    *
    * @auther Andreas
    */
-  public Wishlist addWishList(String name, int userid) {
+  public Wishlist addWishList(String name, User user) {
     try {
       String stm = "INSERT INTO wishlist (name, user_id) VALUES (? , ?)";
       PreparedStatement ps = connection.prepareStatement(stm, Statement.RETURN_GENERATED_KEYS);
       ps.setString(1, name);
-      ps.setInt(2, userid);
+      ps.setInt(2, user.getId());
       ps.executeUpdate();
       ResultSet gk = ps.getGeneratedKeys();
       if (gk.next()) {
@@ -31,7 +33,7 @@ public class WishListRepository {
             .wishList(new ArrayList<Wish>())
             .name(name)
             .id(gk.getInt(1))
-            .userid(userid)
+            .user(user)
             .build();
       }
     } catch (SQLException e) {
@@ -41,7 +43,7 @@ public class WishListRepository {
   }
 
   /** @auther Jackie og Mohamad */
-  public boolean isListOwnedByUser(int wishlistId, int userId) {
+  public boolean isListOwnedByUser(int wishlistId, User user) {
     boolean result = false;
 
     String sqlQuery = "SELECT * FROM wishlist WHERE wishlist_id = ? AND user_id = ?;";
@@ -51,7 +53,7 @@ public class WishListRepository {
     try {
       preparedStatement = DbManager.getInstance().getConnection().prepareStatement(sqlQuery);
       preparedStatement.setInt(1, wishlistId);
-      preparedStatement.setInt(2, userId);
+      preparedStatement.setInt(2, user.getId());
 
       resultSet = preparedStatement.executeQuery();
       result = resultSet.next();
@@ -82,7 +84,7 @@ public class WishListRepository {
             new Wishlist.WishListBuilder()
                 .id(resultSet.getInt(1))
                 .name(resultSet.getString(2))
-                .userid(resultSet.getInt(3))
+                .user(userRepository.getUser(resultSet.getInt(3)))
                 .wishList(wishRepository.getWishes(id))
                 .build();
         return wishlist;
@@ -115,7 +117,7 @@ public class WishListRepository {
             .id(wishlistId)
             .name(resultSet.getString(2))
             .token(resultSet.getString(3))
-            .userid(resultSet.getInt(4))
+            .user(userRepository.getUser(resultSet.getInt(4)))
             .wishList(wishRepository.getWishes(wishlistId))
             .build();
       }
@@ -125,20 +127,21 @@ public class WishListRepository {
     return null;
   }
 
-  public List<Wishlist> getWishLists(int user_id) {
+  public List<Wishlist> getWishLists(User user) {
+
     List<Wishlist> wishlists = new ArrayList<>();
 
     try {
       String stm = "SELECT * FROM wishlist WHERE user_id = ?";
       PreparedStatement ps = connection.prepareStatement(stm);
-      ps.setInt(1, user_id);
+      ps.setInt(1, user.getId());
       ResultSet resultSet = ps.executeQuery();
       while (resultSet.next()) {
         wishlists.add(
             new Wishlist.WishListBuilder()
                 .id(resultSet.getInt(1))
                 .name(resultSet.getString(2))
-                .userid(resultSet.getInt(3))
+                .user(user)
                 .build());
       }
     } catch (SQLException e) {
@@ -160,7 +163,7 @@ public class WishListRepository {
             new Wishlist.WishListBuilder()
                 .id(rs.getInt(1))
                 .name(rs.getString(2))
-                .userid(rs.getInt(3))
+                .user(userRepository.getUser(rs.getInt(3)))
                 .wishList(wishRepository.getWishes(id))
                 .build();
         return wishlist;
@@ -207,24 +210,25 @@ public class WishListRepository {
     }
   }
 
-  public List<Wishlist> getWishlists(int user_id) {
+  public List<Wishlist> getWishlists(int userId) {
     List<Wishlist> result = new ArrayList<>();
     try {
-
-      String sqlQuery = "SELECT * FROM wishlist WHERE user_id = " + user_id;
+      String sqlQuery = "SELECT * FROM wishlist WHERE user_id = " + userId;
       PreparedStatement ps = connection.prepareStatement(sqlQuery);
       ResultSet resultSet = ps.executeQuery();
-
-      while (resultSet.next()) {
-        int id = resultSet.getInt(1);
-        Wishlist wishlist =
-            new Wishlist.WishListBuilder()
-                .id(id)
-                .name(resultSet.getString("name"))
-                .userid(user_id)
-                .wishList(wishRepository.getWishes(id))
-                .build();
-        result.add(wishlist);
+      if (resultSet.next()) {
+        User user = userRepository.getUser(userId);
+        while (resultSet.next()) {
+          int id = resultSet.getInt(1);
+          Wishlist wishlist =
+              new Wishlist.WishListBuilder()
+                  .id(id)
+                  .name(resultSet.getString("name"))
+                  .user(user)
+                  .wishList(wishRepository.getWishes(id))
+                  .build();
+          result.add(wishlist);
+        }
       }
     } catch (SQLException sqlException) {
       System.out.println(sqlException.getMessage());

@@ -5,14 +5,14 @@ import java.util.List;
 public class Wishlist {
   private final int ID;
   private final String NAME;
-  private final int USER_ID;
+  private final User USER;
   private final String TOKEN;
   private final List<Wish> WISH_LIST;
 
   public Wishlist(WishListBuilder builder) {
     ID = builder.id;
     NAME = builder.name;
-    USER_ID = builder.userId;
+    USER = builder.user;
     TOKEN = builder.token;
     WISH_LIST = builder.wishList;
   }
@@ -29,18 +29,18 @@ public class Wishlist {
     return NAME;
   }
 
-  public String getToken() {
-    return TOKEN;
+  public User getUser() {
+    return USER;
   }
 
-  public int getUserId() {
-    return USER_ID;
+  public String getToken() {
+    return TOKEN;
   }
 
   public static class WishListBuilder {
     private int id;
     private String name;
-    private int userId;
+    private User user;
     private String token;
     private List<Wish> wishList;
 
@@ -62,8 +62,8 @@ public class Wishlist {
       return this;
     }
 
-    public WishListBuilder userid(int userId) {
-      this.userId = userId;
+    public WishListBuilder user(User user) {
+      this.user = user;
 
       return this;
     }
@@ -77,8 +77,8 @@ public class Wishlist {
     private void reset() {
       id = 0;
       name = null;
+      user = null;
       token = null;
-      userId = 0;
     }
 
     public Wishlist build() {
