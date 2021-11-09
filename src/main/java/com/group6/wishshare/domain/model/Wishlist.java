@@ -6,16 +6,19 @@ public class Wishlist {
   private final int ID;
   private final String NAME;
   private final User USER;
+  private final String TOKEN;
+
   private final List<Wish> WISH_LIST;
 
   public Wishlist(WishListBuilder builder) {
     ID = builder.id;
     NAME = builder.name;
     USER = builder.user;
+    TOKEN = builder.token;
     WISH_LIST = builder.wishList;
   }
 
-  public List<Wish> getWISH_LIST() {
+  public List<Wish> getWishlist() {
     return WISH_LIST;
   }
 
@@ -27,14 +30,19 @@ public class Wishlist {
     return NAME;
   }
 
+
   public User getUser() {
     return USER;
+
+  public String getToken() {
+    return TOKEN;
   }
 
   public static class WishListBuilder {
     private int id;
     private String name;
     private User user;
+    private String token;
     private List<Wish> wishList;
 
     public WishListBuilder id(int id) {
@@ -61,10 +69,17 @@ public class Wishlist {
       return this;
     }
 
+    public WishListBuilder token(String token) {
+      this.token = token;
+
+      return this;
+    }
+
     private void reset() {
       id = 0;
       name = null;
       user = null;
+      token = null;
     }
 
     public Wishlist build() {

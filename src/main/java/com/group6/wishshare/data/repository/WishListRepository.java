@@ -71,7 +71,7 @@ public class WishListRepository {
    *
    * @auther Andreas
    */
-  public Wishlist getWishlist(int id) {
+  public Wishlist getWishlistById(int id) {
 
     try {
       String stm = "SELECT * FROM wishlist WHERE wishlist_id = ?";
@@ -96,7 +96,39 @@ public class WishListRepository {
     return null;
   }
 
-  public List<Wishlist> getWishLists(User user) {
+  /**
+   * Returns a wishlist by a token.
+   *
+   * @param token String
+   * @return wishlist
+   * @auther Mathias
+   */
+  public Wishlist findWishlistByToken(String token) {
+    try {
+      String query = "SELECT * FROM wishlist WHERE token = ?";
+      PreparedStatement preparedStatement = connection.prepareStatement(query);
+      preparedStatement.setString(1, token);
+      ResultSet resultSet = preparedStatement.executeQuery();
+
+      if (resultSet.next()) {
+        int wishlistId = resultSet.getInt(1);
+
+        return new Wishlist.WishListBuilder()
+            .id(wishlistId)
+            .name(resultSet.getString(2))
+            .token(resultSet.getString(3))
+            .userid(resultSet.getInt(4))
+            .wishList(wishRepository.getWishes(wishlistId))
+            .build();
+      }
+    } catch (SQLException e) {
+      // TODO
+    }
+    return null;
+  }
+
+  public List<Wishlist> getWishLists(int user_id) {
+
     List<Wishlist> wishlists = new ArrayList<>();
 
     try {
