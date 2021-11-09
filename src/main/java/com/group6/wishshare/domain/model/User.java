@@ -70,8 +70,7 @@ public class User {
     private Gender gender;
     private String password;
 
-    public UserBuilder() {
-    }
+    public UserBuilder() {}
 
     public UserBuilder id(int id) {
       this.id = id;

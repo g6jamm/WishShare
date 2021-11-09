@@ -9,18 +9,16 @@ import java.sql.*;
 
 public class UserRepository {
 
-  /**
-   * @return Index value of the newly created user, if nothing was created returns 0.
-   */
+  /** @return Index value of the newly created user, if nothing was created returns 0. */
   public int createUser(User user) throws LoginException {
     try {
       String query =
           "INSERT INTO user (email, password, first_name, last_name, gender, birthdate) VALUES "
               + "(?, ?, ?, ?, ?, ?)";
-      PreparedStatement ps = DBManager
-          .getInstance()
-          .getConnection()
-          .prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+      PreparedStatement ps =
+          DBManager.getInstance()
+              .getConnection()
+              .prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
       ps.setString(1, user.getEmail());
       ps.setString(2, user.getPassword());
@@ -45,10 +43,7 @@ public class UserRepository {
     try {
       String query = "SELECT user_id FROM user WHERE email = ? AND password = ?";
 
-      PreparedStatement ps = DBManager
-          .getInstance()
-          .getConnection()
-          .prepareStatement(query);
+      PreparedStatement ps = DBManager.getInstance().getConnection().prepareStatement(query);
 
       ps.setString(1, email);
       ps.setString(2, password);
@@ -73,10 +68,7 @@ public class UserRepository {
   public boolean userExists(int id) {
     try {
       String query = "SELECT * FROM user WHERE user_id = ?";
-      PreparedStatement ps = DBManager
-          .getInstance()
-          .getConnection()
-          .prepareStatement(query);
+      PreparedStatement ps = DBManager.getInstance().getConnection().prepareStatement(query);
 
       ps.setInt(1, id);
 
@@ -91,10 +83,7 @@ public class UserRepository {
 
     try {
       String query = "SELECT * FROM user WHERE user_id = ?";
-      PreparedStatement ps = DBManager
-          .getInstance()
-          .getConnection()
-          .prepareStatement(query);
+      PreparedStatement ps = DBManager.getInstance().getConnection().prepareStatement(query);
 
       ps.setInt(1, id);
 

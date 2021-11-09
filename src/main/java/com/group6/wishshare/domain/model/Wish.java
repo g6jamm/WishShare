@@ -1,8 +1,6 @@
 package com.group6.wishshare.domain.model;
 
-/**
- * @author Jackie, Mohamad
- */
+/** @author Jackie, Mohamad */
 public class Wish {
 
   private final int ID;
@@ -54,8 +52,7 @@ public class Wish {
     private int wishlistId;
     private boolean reserved;
 
-    public WishBuilder() {
-    }
+    public WishBuilder() {}
 
     public WishBuilder id(int id) {
       this.id = id;

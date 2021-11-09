@@ -9,9 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Jackie, Mohamad
- */
+/** @author Jackie, Mohamad */
 public class WishRepository {
 
   public List<Wish> getWishes(int id) {
@@ -19,10 +17,7 @@ public class WishRepository {
 
     try {
       String query = "SELECT * FROM wish WHERE wishlist_id = ?";
-      PreparedStatement ps = DBManager
-          .getInstance()
-          .getConnection()
-          .prepareStatement(query);
+      PreparedStatement ps = DBManager.getInstance().getConnection().prepareStatement(query);
 
       ps.setInt(1, id);
 
@@ -50,25 +45,21 @@ public class WishRepository {
   public Wish getWish(int id) {
     try {
       String query = "SELECT * FROM wish WHERE wish_id = ?";
-      PreparedStatement ps = DBManager
-          .getInstance()
-          .getConnection()
-          .prepareStatement(query);
+      PreparedStatement ps = DBManager.getInstance().getConnection().prepareStatement(query);
 
       ps.setInt(1, id);
 
       ResultSet rs = ps.executeQuery();
 
       if (rs.next()) {
-        return
-            new Wish.WishBuilder()
-                .id(rs.getInt("wish_id"))
-                .name(rs.getString("name"))
-                .link(rs.getString("link"))
-                .price(rs.getString("price"))
-                .wishlistId(rs.getInt("wishlist_id"))
-                .reserved(rs.getBoolean("reserved"))
-                .build();
+        return new Wish.WishBuilder()
+            .id(rs.getInt("wish_id"))
+            .name(rs.getString("name"))
+            .link(rs.getString("link"))
+            .price(rs.getString("price"))
+            .wishlistId(rs.getInt("wishlist_id"))
+            .reserved(rs.getBoolean("reserved"))
+            .build();
       }
     } catch (SQLException sqlException) {
       System.out.println(sqlException.getMessage()); // TODO
@@ -81,10 +72,7 @@ public class WishRepository {
     try {
       String query = "UPDATE wish SET reserved = ? WHERE wish_id = ?";
 
-      PreparedStatement ps = DBManager
-          .getInstance()
-          .getConnection()
-          .prepareStatement(query);
+      PreparedStatement ps = DBManager.getInstance().getConnection().prepareStatement(query);
 
       ps.setBoolean(1, isReserved);
       ps.setInt(2, id);
@@ -98,10 +86,8 @@ public class WishRepository {
     try {
       String query = "UPDATE wish SET name = ?, link = ?, price = ? WHERE wish_id = ?";
 
-      PreparedStatement preparedStatement = DBManager
-          .getInstance()
-          .getConnection()
-          .prepareStatement(query);
+      PreparedStatement preparedStatement =
+          DBManager.getInstance().getConnection().prepareStatement(query);
       preparedStatement.setString(1, name);
       preparedStatement.setString(2, link);
       preparedStatement.setString(3, price);
@@ -115,12 +101,10 @@ public class WishRepository {
 
   public void addWishToWishList(Wish wish) {
     try {
-      String query = "INSERT INTO wish(name, link, price, wishlist_id, reserved) VALUES (?, ?, ?, ?, ?)";
+      String query =
+          "INSERT INTO wish(name, link, price, wishlist_id, reserved) VALUES (?, ?, ?, ?, ?)";
 
-      PreparedStatement ps = DBManager
-          .getInstance()
-          .getConnection()
-          .prepareStatement(query);
+      PreparedStatement ps = DBManager.getInstance().getConnection().prepareStatement(query);
       ps.setString(1, wish.getName());
       ps.setString(2, wish.getLink());
       ps.setString(3, wish.getPrice());

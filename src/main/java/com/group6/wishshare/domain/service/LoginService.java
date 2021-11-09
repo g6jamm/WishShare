@@ -22,9 +22,7 @@ public class LoginService {
     return FACADE.login(email, password);
   }
 
-  /**
-   * @return New User with id generated from database.
-   */
+  /** @return New User with id generated from database. */
   public User createUser(
       String firstname,
       String lastname,

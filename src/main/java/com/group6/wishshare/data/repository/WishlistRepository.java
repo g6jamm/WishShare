@@ -46,16 +46,12 @@ public class WishlistRepository {
     return null;
   }
 
-  /**
-   * @auther Jackie og Mohamad
-   */
+  /** @auther Jackie og Mohamad */
   public boolean isWishlistOwnedByUser(int id, User user) {
     try {
       String query = "SELECT * FROM wishlist WHERE wishlist_id = ? AND user_id = ?;";
-      PreparedStatement preparedStatement = DBManager
-          .getInstance()
-          .getConnection()
-          .prepareStatement(query);
+      PreparedStatement preparedStatement =
+          DBManager.getInstance().getConnection().prepareStatement(query);
       preparedStatement.setInt(1, id);
       preparedStatement.setInt(2, user.getId());
 
@@ -174,9 +170,7 @@ public class WishlistRepository {
     return null;
   }
 
-  /**
-   * @param id id of wishlist to be deleted
-   */
+  /** @param id id of wishlist to be deleted */
   public void deleteWishlist(int id) {
     try {
       if (deleteWishes(id)) {

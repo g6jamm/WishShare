@@ -44,7 +44,8 @@ public class WishlistController {
       WishlistService wishListService = new WishlistService();
 
       User user = userService.getUser(userSession);
-      Wishlist wishlist = wishListService.addWishList(user, webRequest.getParameter("wishlistname"));
+      Wishlist wishlist =
+          wishListService.addWishList(user, webRequest.getParameter("wishlistname"));
 
       if (null != wishlist) {
         return "redirect:/wishlist/" + wishlist.getId();
