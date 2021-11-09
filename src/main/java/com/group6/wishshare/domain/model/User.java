@@ -3,7 +3,6 @@ package com.group6.wishshare.domain.model;
 import com.group6.wishshare.domain.model.type.Gender;
 
 import java.time.LocalDate;
-import java.util.List;
 
 /**
  * Create User object using Builder pattern.
@@ -56,7 +55,6 @@ public class User {
   public String getPassword() {
     return PASSWORD;
   }
-
 
   /**
    * Build User object.

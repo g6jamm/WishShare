@@ -10,7 +10,7 @@ public class WishListService {
 
   public Wishlist addWishList(User user, String name) {
     WishListRepository wishListRepository = new WishListRepository();
-    //telemetry goes here
+    // telemetry goes here
     // How other gender makes new wishlists
     return wishListRepository.addWishList(name, user);
   }

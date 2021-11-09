@@ -105,13 +105,13 @@ public class WishListRepository {
       ps.setInt(1, user.getId());
       ResultSet resultSet = ps.executeQuery();
       while (resultSet.next()) {
-          wishlists.add(
-              new Wishlist.WishListBuilder()
-                  .id(resultSet.getInt(1))
-                  .name(resultSet.getString(2))
-                  .user(user)
-                  .build());
-        }
+        wishlists.add(
+            new Wishlist.WishListBuilder()
+                .id(resultSet.getInt(1))
+                .name(resultSet.getString(2))
+                .user(user)
+                .build());
+      }
     } catch (SQLException e) {
       // do something
     }

@@ -59,7 +59,8 @@ public class WishlistController {
     WishListService wishListService = new WishListService();
     // add owner check
     if (validateUser(webRequest)) {
-      User user = userService.getUser((Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION));
+      User user =
+          userService.getUser((Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION));
       if (wishListService.isListOwner(id, user)) {
         String newName = webRequest.getParameter("newName");
         wishListService.updateWishListName(id, newName);
@@ -71,8 +72,9 @@ public class WishlistController {
   @PostMapping("/delete-wishlist/{id}")
   public String deleteWishList(WebRequest webRequest, @PathVariable int id) {
     WishListService wishListService = new WishListService();
-    User user = userService.getUser((Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION));
-    if (wishListService.isListOwner(id, user)){
+    User user =
+        userService.getUser((Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION));
+    if (wishListService.isListOwner(id, user)) {
       wishListService.deleteWishlist(id);
     }
     return "redirect:/dashboard";
