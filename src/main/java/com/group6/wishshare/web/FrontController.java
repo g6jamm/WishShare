@@ -6,6 +6,7 @@ import com.group6.wishshare.domain.model.type.Gender;
 import com.group6.wishshare.domain.service.LoginException;
 import com.group6.wishshare.domain.service.LoginService;
 import com.group6.wishshare.domain.service.UserService;
+import org.apache.juli.logging.Log;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -43,15 +44,18 @@ public class FrontController {
   }
 
   @PostMapping("/login")
-  public String loginUser(WebRequest request) throws LoginException {
+  public String loginUser(WebRequest request, Model model) {
     String email = request.getParameter("email");
     String pwd = request.getParameter("password");
 
-    User user = loginController.login(email, pwd);
-    setSessionInfo(request, user);
-
-    return "redirect:/dashboard";
-
+    try{
+      User user = loginController.login(email, pwd);
+      setSessionInfo(request, user);
+      return "redirect:/dashboard";
+    } catch (LoginException e) {
+      model.addAttribute("loginFail", "Wrong email or password");
+      return "login";
+    }
   }
 
   @PostMapping("/signup")
