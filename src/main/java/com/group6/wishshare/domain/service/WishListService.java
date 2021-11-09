@@ -1,15 +1,18 @@
 package com.group6.wishshare.domain.service;
 
 import com.group6.wishshare.data.repository.WishListRepository;
+import com.group6.wishshare.domain.model.User;
 import com.group6.wishshare.domain.model.Wishlist;
 
 import java.util.List;
 
 public class WishListService {
 
-  public Wishlist addWishList(int user_id, String name) {
+  public Wishlist addWishList(User user, String name) {
     WishListRepository wishListRepository = new WishListRepository();
-    return wishListRepository.addWishList(name, user_id);
+    //telemetry goes here
+    // How other gender makes new wishlists
+    return wishListRepository.addWishList(name, user);
   }
 
   public Wishlist lookupWishList(int id) {

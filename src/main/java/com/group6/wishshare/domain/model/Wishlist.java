@@ -5,13 +5,13 @@ import java.util.List;
 public class Wishlist {
   private final int ID;
   private final String NAME;
-  private final int USER_ID;
+  private final User USER;
   private final List<Wish> WISH_LIST;
 
   public Wishlist(WishListBuilder builder) {
     ID = builder.id;
     NAME = builder.name;
-    USER_ID = builder.userId;
+    USER = builder.user;
     WISH_LIST = builder.wishList;
   }
 
@@ -27,14 +27,14 @@ public class Wishlist {
     return NAME;
   }
 
-  public int getUserId() {
-    return USER_ID;
+  public User getUser() {
+    return USER;
   }
 
   public static class WishListBuilder {
     private int id;
     private String name;
-    private int userId;
+    private User user;
     private List<Wish> wishList;
 
     public WishListBuilder id(int id) {
@@ -55,8 +55,8 @@ public class Wishlist {
       return this;
     }
 
-    public WishListBuilder userid(int userId) {
-      this.userId = userId;
+    public WishListBuilder user(User user) {
+      this.user = user;
 
       return this;
     }
@@ -64,7 +64,7 @@ public class Wishlist {
     private void reset() {
       id = 0;
       name = null;
-      userId = 0;
+      user = null;
     }
 
     public Wishlist build() {
