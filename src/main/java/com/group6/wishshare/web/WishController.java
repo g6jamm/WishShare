@@ -68,7 +68,7 @@ public class WishController {
   }
 
   private boolean isOwner(WebRequest webRequest, int id) {
-   return wishListService.isListOwner(
+    return wishListService.isListOwner(
         id, ((Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION)));
   }
 

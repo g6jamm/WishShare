@@ -40,9 +40,7 @@ public class WishListRepository {
     return null;
   }
 
-  /**
-   * @auther Jackie og Mohamad
-   */
+  /** @auther Jackie og Mohamad */
   public boolean isListOwnedByUser(int wishlistId, int userId) {
     boolean result = false;
 
@@ -126,7 +124,6 @@ public class WishListRepository {
     }
     return null;
   }
-
 
   public List<Wishlist> getWishLists(int user_id) {
     List<Wishlist> wishlists = new ArrayList<>();
