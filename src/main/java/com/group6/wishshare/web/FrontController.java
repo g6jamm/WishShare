@@ -95,7 +95,7 @@ public class FrontController {
     return "redirect:/";
   }
 
-  private boolean validatePassword(String password1, String password2) { //TODO skal den være her?
+  private boolean validatePassword(String password1, String password2) { // TODO skal den være her?
     return Objects.requireNonNull(password1).equals(password2);
   }
 

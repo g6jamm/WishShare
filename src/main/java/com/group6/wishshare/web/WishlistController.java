@@ -23,7 +23,8 @@ public class WishlistController {
 
   @GetMapping("/dashboard")
   public String dashboard(WebRequest webRequest, Model model) {
-    if (userService.isValidUser((Integer) webRequest.getAttribute("user", webRequest.SCOPE_SESSION))) {
+    if (userService.isValidUser(
+        (Integer) webRequest.getAttribute("user", webRequest.SCOPE_SESSION))) {
       WishListService wishListService = new WishListService();
       User user =
           userService.getUser((Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION));
@@ -38,7 +39,8 @@ public class WishlistController {
 
   @PostMapping("/create-new-wish-list")
   public String createNewWishList(WebRequest webRequest) {
-    if (userService.isValidUser((Integer) webRequest.getAttribute("user", webRequest.SCOPE_SESSION))) {
+    if (userService.isValidUser(
+        (Integer) webRequest.getAttribute("user", webRequest.SCOPE_SESSION))) {
       WishListService wishListService = new WishListService();
 
       User user =
@@ -58,7 +60,8 @@ public class WishlistController {
   public String updateWishlistName(WebRequest webRequest, @PathVariable int id) {
     WishListService wishListService = new WishListService();
     // add owner check
-    if (userService.isValidUser((Integer) webRequest.getAttribute("user", webRequest.SCOPE_SESSION))) {
+    if (userService.isValidUser(
+        (Integer) webRequest.getAttribute("user", webRequest.SCOPE_SESSION))) {
       User user =
           userService.getUser((Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION));
       if (wishListService.isListOwner(id, user)) {
