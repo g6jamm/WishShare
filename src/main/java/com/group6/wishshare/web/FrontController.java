@@ -67,7 +67,6 @@ public class FrontController {
     String gender = request.getParameter("gender");
     String password1 = request.getParameter("password1");
     String password2 = request.getParameter("password2");
-    // User user = null; //TODO REMOVE NULL
 
     try { // check password match
       if (validatePassword(password1, password2)) {

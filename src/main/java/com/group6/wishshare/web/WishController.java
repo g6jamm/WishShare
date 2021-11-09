@@ -112,11 +112,4 @@ public class WishController {
     return "redirect:/wishlist/" + wishlist_id;
   }
 
-//  private boolean isValidUser(WebRequest request) { //TODO SELT
-//    Integer user_id = (Integer) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-//    if (user_id == null) {
-//      return false;
-//    }
-//    return loginService.userExist(user_id);
-//  }
 }
