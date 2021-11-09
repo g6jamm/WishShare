@@ -6,7 +6,6 @@ import com.group6.wishshare.domain.model.type.Gender;
 import com.group6.wishshare.domain.service.LoginException;
 import com.group6.wishshare.domain.service.LoginService;
 import com.group6.wishshare.domain.service.UserService;
-import org.apache.juli.logging.Log;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -48,7 +47,7 @@ public class FrontController {
     String email = request.getParameter("email");
     String pwd = request.getParameter("password");
 
-    try{
+    try {
       User user = loginController.login(email, pwd);
       setSessionInfo(request, user);
       return "redirect:/dashboard";
@@ -59,7 +58,7 @@ public class FrontController {
   }
 
   @PostMapping("/signup")
-  public String createUser(WebRequest request) throws LoginException {
+  public String createUser(WebRequest request, Model model) {
     // Retrieve values from HTML form via WebRequest
     String firstname = request.getParameter("firstname");
     String lastname = request.getParameter("lastname");
@@ -68,22 +67,27 @@ public class FrontController {
     String gender = request.getParameter("gender");
     String password1 = request.getParameter("password1");
     String password2 = request.getParameter("password2");
+    // User user = null; //TODO REMOVE NULL
 
-    if (validatePassword(password1, password2)) {
-      User user =
-          loginController.createUser(
-              firstname,
-              lastname,
-              LocalDate.parse(Objects.requireNonNull(birthdate)),
-              Gender.valueOf(gender),
-              email,
-              password1);
-      setSessionInfo(request, user);
-
-      return "redirect:/dashboard";
+    try { // check password match
+      if (validatePassword(password1, password2)) {
+        User user =
+            loginController.createUser(
+                firstname,
+                lastname,
+                LocalDate.parse(Objects.requireNonNull(birthdate)),
+                Gender.valueOf(gender),
+                email,
+                password1);
+        setSessionInfo(request, user);
+        return "redirect:/dashboard";
+      }
+      model.addAttribute("signupFail", "The passwords did not match");
+      return "signup";
+    } catch (LoginException e) {
+      model.addAttribute("signupFail", "User already exist");
+      return "signup";
     }
-
-    throw new LoginException("The passwords did not match");
   }
 
   @GetMapping("/logout")
@@ -92,7 +96,7 @@ public class FrontController {
     return "redirect:/";
   }
 
-  private boolean validatePassword(String password1, String password2) {
+  private boolean validatePassword(String password1, String password2) { //TODO skal den være her?
     return Objects.requireNonNull(password1).equals(password2);
   }
 
