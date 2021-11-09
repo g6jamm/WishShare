@@ -7,7 +7,6 @@ import com.group6.wishshare.domain.model.Wishlist;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class WishListRepository {
 
