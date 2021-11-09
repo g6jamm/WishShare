@@ -18,10 +18,10 @@ public class DbManager {
    * @auther Mathias
    */
   private DbManager() {
-      Properties properties = DBSelector.selectConnection();
-      url = properties.getProperty("url");
-      user = properties.getProperty("user");
-      password = properties.getProperty("password");
+    Properties properties = DBSelector.selectConnection();
+    url = properties.getProperty("url");
+    user = properties.getProperty("user");
+    password = properties.getProperty("password");
     try {
       assert url != null;
       this.connection = DriverManager.getConnection(url, user, password);
