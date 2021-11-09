@@ -5,6 +5,7 @@ import com.group6.wishshare.domain.model.User;
 import com.group6.wishshare.domain.model.type.Gender;
 import com.group6.wishshare.domain.service.LoginException;
 import com.group6.wishshare.domain.service.LoginService;
+import com.group6.wishshare.domain.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,6 +19,7 @@ import java.util.Objects;
 @Controller
 public class FrontController {
   private final LoginService loginController = new LoginService(new DataFacade());
+  private final UserService userService = new UserService();
 
   @GetMapping("/")
   public String getIndex() {
@@ -49,6 +51,7 @@ public class FrontController {
     setSessionInfo(request, user);
 
     return "redirect:/dashboard";
+
   }
 
   @PostMapping("/signup")
