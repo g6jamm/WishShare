@@ -66,7 +66,7 @@ public class WishController {
     model.addAttribute("wishes", wishlist.getWishlist());
     model.addAttribute("wishlist_id", wishlist.getId());
 
-    if (!isValidUser(webRequest)) {// Is owner not just valid user 
+    if (!isValidUser(webRequest)) { // Is owner not just valid user
       return "shared-wishlist";
     }
     return "index"; // TODO: You are not allowed to see your own list - page ..
