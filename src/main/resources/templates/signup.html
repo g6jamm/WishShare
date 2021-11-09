@@ -27,31 +27,31 @@
                                     <div class="mb-3">
                                         <input aria-describedby="firstname-addon" aria-label="Firstname"
                                                class="form-control" name="firstname"
-                                               placeholder="Firstname" type="text">
+                                               placeholder="Firstname" type="text" required>
                                     </div>
                                     <label>Lastname</label>
                                     <div class="mb-3">
                                         <input aria-describedby="lastname-addon" aria-label="Lastname"
                                                class="form-control" name="lastname"
-                                               placeholder="Lastname" type="text">
+                                               placeholder="Lastname" type="text" required>
                                     </div>
                                     <label>Email</label>
                                     <div class="mb-3">
                                         <input aria-describedby="email-addon" aria-label="Email" class="form-control"
                                                name="email"
                                                placeholder="Email"
-                                               type="email">
+                                               type="email" required>
                                     </div>
                                     <label>Birthdate</label>
                                     <div class="mb-3">
                                         <input aria-describedby="birthdate-addon" aria-label="Birthdate"
                                                class="form-control" name="birthdate"
-                                               placeholder="Birthdate" type="date">
+                                               placeholder="Birthdate" type="date" required>
                                     </div>
                                     <label>Gender</label>
                                     <div class="mb-3">
                                         <select aria-describedby="gender-addon" aria-label="Gender" class="form-control"
-                                                name="gender">
+                                                name="gender" required>
                                             <option value="OTHER">other</option>
                                             <option value="MALE">Male</option>
                                             <option value="FEMALE">Female</option>
@@ -62,19 +62,25 @@
                                         <input aria-describedby="password-addon" aria-label="Password"
                                                class="form-control"
                                                name="password1"
-                                               placeholder="Password" type="password">
+                                               placeholder="Password"
+                                               type="password"
+                                               required>
                                     </div>
                                     <label>Confirm password</label>
                                     <div class="mb-3">
                                         <input aria-describedby="password-addon" aria-label="Password"
                                                class="form-control"
                                                name="password2"
-                                               placeholder="Password" type="password">
+                                               placeholder="Password"
+                                               type="password"
+                                               required>
                                     </div>
                                     <div class="text-center">
-                                        <button class="btn bg-gradient-info w-100 mt-4 mb-0" type="submit"
-                                                value="Submit">Sign in
-                                        </button>
+                                        <p class="mb-0" th:text="${signupFail}"></p>
+                                    </div>
+                                    <div class="text-center">
+                                        <input class="btn bg-gradient-info w-100 mt-4 mb-0" type="submit"
+                                                value="Create">
                                     </div>
                                 </form>
                             </div>
