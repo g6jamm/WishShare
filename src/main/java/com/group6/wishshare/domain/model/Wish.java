@@ -1,6 +1,8 @@
 package com.group6.wishshare.domain.model;
 
-/** @author Jackie, Mohamad */
+/**
+ * @author Jackie, Mohamad
+ */
 public class Wish {
 
   private final int ID;
@@ -43,7 +45,7 @@ public class Wish {
     return RESERVED;
   }
 
-  public static class WishBuilder {
+  public static class WishBuilder implements BuilderInterface {
 
     private int id;
     private String name;
@@ -52,7 +54,8 @@ public class Wish {
     private int wishlistId;
     private boolean reserved;
 
-    public WishBuilder() {}
+    public WishBuilder() {
+    }
 
     public WishBuilder id(int id) {
       this.id = id;
@@ -84,8 +87,19 @@ public class Wish {
       return this;
     }
 
+    private void reset() {
+      id = 0;
+      name = null;
+      link = null;
+      price = null;
+      wishlistId = 0;
+      reserved = false;
+    }
+
     public Wish build() {
-      return new Wish(this);
+      Wish result = new Wish(this);
+      reset();
+      return result;
     }
   }
 }

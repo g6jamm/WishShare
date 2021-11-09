@@ -1,27 +1,25 @@
-package com.group6.wishshare.data.Util;
+package com.group6.wishshare.data.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class DbManager {
-  private static DbManager instance;
+public class DBManager {
+
+  private static DBManager instance;
   private Connection connection;
-  private String url;
-  private String user;
-  private String password;
 
   /**
    * Create a connection to the database using properties defined in application.properties.
    *
    * @auther Mathias
    */
-  private DbManager() {
+  private DBManager() {
     Properties properties = DBSelector.selectConnection();
-    url = properties.getProperty("url");
-    user = properties.getProperty("user");
-    password = properties.getProperty("password");
+    String url = properties.getProperty("url");
+    String user = properties.getProperty("user");
+    String password = properties.getProperty("password");
     try {
       assert url != null;
       this.connection = DriverManager.getConnection(url, user, password);
@@ -35,13 +33,13 @@ public class DbManager {
    *
    * @auther Mathias
    */
-  public static DbManager getInstance() {
+  public static DBManager getInstance() {
     if (null == instance) {
-      instance = new DbManager();
+      instance = new DBManager();
     } else {
       try {
         if (instance.getConnection().isClosed()) {
-          instance = new DbManager();
+          instance = new DBManager();
         }
       } catch (SQLException e) {
         e.printStackTrace();

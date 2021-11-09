@@ -1,24 +1,33 @@
 package com.group6.wishshare.data.repository;
 
-import com.group6.wishshare.data.Util.DbManager;
+import com.group6.wishshare.data.util.DBManager;
 import com.group6.wishshare.domain.model.Wish;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/** @author Jackie, Mohamad */
+/**
+ * @author Jackie, Mohamad
+ */
 public class WishRepository {
 
-  public List<Wish> getWishes(int wishlistId) {
+  public List<Wish> getWishes(int id) {
     List<Wish> result = new ArrayList<>();
-    String sqlQuery = "SELECT * FROM wish WHERE wishlist_id = " + wishlistId;
-    ResultSet resultSet = resultSet(sqlQuery);
 
     try {
+      String query = "SELECT * FROM wish WHERE wishlist_id = ?";
+      PreparedStatement ps = DBManager
+          .getInstance()
+          .getConnection()
+          .prepareStatement(query);
+
+      ps.setInt(1, id);
+
+      ResultSet resultSet = ps.executeQuery();
+
       while (resultSet.next()) {
         Wish wish =
             new Wish.WishBuilder()
@@ -31,109 +40,96 @@ public class WishRepository {
                 .build();
         result.add(wish);
       }
-    } catch (SQLException sqlException) {
-      System.out.println(sqlException.getMessage());
+    } catch (SQLException e) {
+      e.printStackTrace();
     }
+
     return result;
   }
 
-  public Wish getWish(int wishId) {
-    String sqlQuery = "SELECT * FROM wish WHERE wish_id = " + wishId;
-    ResultSet resultSet = resultSet(sqlQuery);
-    Wish wish = null;
-
+  public Wish getWish(int id) {
     try {
-      while (resultSet.next()) {
-        wish =
+      String query = "SELECT * FROM wish WHERE wish_id = ?";
+      PreparedStatement ps = DBManager
+          .getInstance()
+          .getConnection()
+          .prepareStatement(query);
+
+      ps.setInt(1, id);
+
+      ResultSet rs = ps.executeQuery();
+
+      if (rs.next()) {
+        return
             new Wish.WishBuilder()
-                .id(resultSet.getInt("wish_id"))
-                .name(resultSet.getString("name"))
-                .link(resultSet.getString("link"))
-                .price(resultSet.getString("price"))
-                .wishlistId(resultSet.getInt("wishlist_id"))
-                .reserved(resultSet.getBoolean("reserved"))
+                .id(rs.getInt("wish_id"))
+                .name(rs.getString("name"))
+                .link(rs.getString("link"))
+                .price(rs.getString("price"))
+                .wishlistId(rs.getInt("wishlist_id"))
+                .reserved(rs.getBoolean("reserved"))
                 .build();
       }
     } catch (SQLException sqlException) {
-      System.out.println(sqlException.getMessage());
+      System.out.println(sqlException.getMessage()); // TODO
     }
-    return wish;
+
+    return null;
   }
 
-  public boolean reserveWish(boolean isReserved, int wishId) {
-    String sqlQuery = "UPDATE wish SET reserved = ? WHERE wish_id = ?";
-
-    PreparedStatement preparedStatement;
+  public void isReservedWish(boolean isReserved, int id) {
     try {
-      preparedStatement = DbManager.getInstance().getConnection().prepareStatement(sqlQuery);
-      preparedStatement.setBoolean(1, isReserved);
-      preparedStatement.setInt(2, wishId);
+      String query = "UPDATE wish SET reserved = ? WHERE wish_id = ?";
 
-      return preparedStatement.execute();
+      PreparedStatement ps = DBManager
+          .getInstance()
+          .getConnection()
+          .prepareStatement(query);
 
+      ps.setBoolean(1, isReserved);
+      ps.setInt(2, id);
+      ps.execute();
     } catch (SQLException e) {
-      System.out.println(e.getMessage());
-      return false;
+      System.out.println(e.getMessage()); // TODO
     }
   }
 
-  public boolean editWish(String name, String link, String price, int id) {
-
-    String sqlQuery = "UPDATE wish SET name = ?, link = ?, price = ? WHERE wish_id = ?;";
-
-    PreparedStatement preparedStatement;
+  public void editWish(String name, String link, String price, int id) {
     try {
-      preparedStatement = DbManager.getInstance().getConnection().prepareStatement(sqlQuery);
+      String query = "UPDATE wish SET name = ?, link = ?, price = ? WHERE wish_id = ?";
+
+      PreparedStatement preparedStatement = DBManager
+          .getInstance()
+          .getConnection()
+          .prepareStatement(query);
       preparedStatement.setString(1, name);
       preparedStatement.setString(2, link);
       preparedStatement.setString(3, price);
       preparedStatement.setInt(4, id);
       preparedStatement.executeUpdate();
-      return true;
 
     } catch (SQLException sqlException) {
-      System.out.println(sqlException.getMessage());
-      return false;
+      System.out.println(sqlException.getMessage()); // TODO
     }
   }
 
-  public boolean addWishToWishList(Wish wish) {
-
-    String sqlQuery =
-        "INSERT INTO wish(name, link, price, wishlist_id, reserved) VALUES(?,?,?,?,?)";
-
-    PreparedStatement preparedStatement;
-
+  public void addWishToWishList(Wish wish) {
     try {
-      preparedStatement = DbManager.getInstance().getConnection().prepareStatement(sqlQuery);
-      preparedStatement.setString(1, wish.getName());
-      preparedStatement.setString(2, wish.getLink());
-      preparedStatement.setString(3, wish.getPrice());
-      preparedStatement.setInt(4, wish.getWishListId());
-      preparedStatement.setBoolean(5, wish.isReserved());
+      String query = "INSERT INTO wish(name, link, price, wishlist_id, reserved) VALUES (?, ?, ?, ?, ?)";
 
-      boolean result = preparedStatement.execute();
-      return result;
+      PreparedStatement ps = DBManager
+          .getInstance()
+          .getConnection()
+          .prepareStatement(query);
+      ps.setString(1, wish.getName());
+      ps.setString(2, wish.getLink());
+      ps.setString(3, wish.getPrice());
+      ps.setInt(4, wish.getWishListId());
+      ps.setBoolean(5, wish.isReserved());
 
+      ps.execute();
     } catch (SQLException sqlException) {
-      System.out.println(sqlException.getMessage());
-      return false;
+      System.out.println(sqlException.getMessage()); // TODO
     }
-  }
-
-  public ResultSet resultSet(String sql) {
-
-    Connection connection = DbManager.getInstance().getConnection();
-    String sqlStatement = sql;
-    PreparedStatement preparedStatement;
-    ResultSet resultSet = null;
-
-    try {
-      preparedStatement = connection.prepareStatement(sqlStatement);
-      resultSet = preparedStatement.executeQuery();
-    } catch (SQLException sqlException) {
-      System.out.println(sqlException.getMessage());
-    }
-    return resultSet;
   }
 }

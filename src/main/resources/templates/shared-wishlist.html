@@ -19,8 +19,9 @@
                 </thead>
                 <tbody>
                 <tr th:each="wish: ${wishes}">
-                    <form th:action="@{/shared-wishlist/{token}/reserve/{wish_id} (token = ${token}, wish_id = ${wish.getID()})}"
-                          method="POST" name="reserveform" role="form">
+                    <form method="POST"
+                          name="reserveform" role="form"
+                          th:action="@{/shared-wishlist/{token}/reserve/{wish_id} (token = ${token}, wish_id = ${wish.getID()})}">
                         <td>
                             <div class="d-flex px-2 py-1">
                                 <div class="d-flex flex-column justify-content-center">
@@ -41,13 +42,13 @@
 
                         <td class="align-middle">
                             <div class="text-end">
-                                <button th:if="${wish.isReserved()}" class="btn bg-gradient-secondary mb-0"
-                                        value="submit" type="submit">
-                                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>&nbsp;&nbsp;unreserve
+                                <button class="btn bg-gradient-secondary mb-0" th:if="${wish.isReserved()}"
+                                        type="submit" value="submit">
+                                    <i aria-hidden="true" class="fas fa-pencil-alt"></i>&nbsp;&nbsp;unreserve
                                 </button>
-                                <button th:unless="${wish.isReserved()}" class="btn bg-gradient-info mb-0"
-                                        value="submit" type="submit">
-                                    <i class="fas fa-pencil-alt" aria-hidden="true"></i>&nbsp;&nbsp;reserve
+                                <button class="btn bg-gradient-info mb-0" th:unless="${wish.isReserved()}"
+                                        type="submit" value="submit">
+                                    <i aria-hidden="true" class="fas fa-pencil-alt"></i>&nbsp;&nbsp;reserve
                                 </button>
                             </div>
                         </td>
@@ -58,7 +59,6 @@
         </div>
     </div>
 </section>
-
 
 <div th:replace="fragments/footer"></div>
 </body>

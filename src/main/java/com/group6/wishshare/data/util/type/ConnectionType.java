@@ -1,4 +1,4 @@
-package com.group6.wishshare.data.Util;
+package com.group6.wishshare.data.util.type;
 
 public enum ConnectionType {
   HEROKU,

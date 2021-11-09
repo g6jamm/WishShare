@@ -10,7 +10,7 @@
 
 <body class="">
 <div th:replace="fragments/navbar"></div>
-<main class="main-content  mt-0">
+<main class="main-content mt-0">
     <section>
         <div class="page-header min-vh-75">
             <div class="container">
@@ -28,8 +28,8 @@
                                         <input aria-describedby="email-addon" aria-label="Email" class="form-control"
                                                name="email"
                                                placeholder="Email"
-                                               type="email"
-                                               required>
+                                               required
+                                               type="email">
                                     </div>
                                     <label>Password</label>
                                     <div class="mb-3">
@@ -37,8 +37,8 @@
                                                class="form-control"
                                                name="password"
                                                placeholder="Password"
-                                               type="password"
-                                               required>
+                                               required
+                                               type="password">
                                     </div>
                                     <div class="form-check form-switch">
                                         <input checked="" class="form-check-input" id="rememberMe" type="checkbox">
@@ -49,14 +49,14 @@
                                     </div>
                                     <div class="text-center">
                                         <input class="btn bg-gradient-info w-100 mt-4 mb-0" type="submit"
-                                                value="Sign in">
+                                               value="Sign in">
                                     </div>
                                 </form>
                             </div>
                             <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                 <p class="mb-4 text-sm mx-auto">
                                     Don't have an account?
-                                    <a class="text-info text-gradient font-weight-bold" href="javascript:">Sign up</a>
+                                    <a class="text-info text-gradient font-weight-bold" href="/signup">Sign up</a>
                                 </p>
                             </div>
                         </div>
@@ -64,6 +64,12 @@
                     <div class="col-md-6">
                         <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
                             <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
-                                 th:style="'background-image: url(/img/curved-images/curved6.jpg)'"></div>
+                                 th:style="'background-image: url(/img/curved-images/curved6.jpg)'">
+                            </div>
                         </div>
-      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

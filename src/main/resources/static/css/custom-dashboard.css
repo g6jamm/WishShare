@@ -1,8 +1,8 @@
-.custom-button-wrap{
+.custom-button-wrap {
     display: flex;
     justify-content: end;
 }
 
-.custom-margin-right{
+.custom-margin-right {
     margin-right: 0.25em;
 }

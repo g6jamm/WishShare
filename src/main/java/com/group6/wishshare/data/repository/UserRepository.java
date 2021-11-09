@@ -1,25 +1,26 @@
 package com.group6.wishshare.data.repository;
 
-import com.group6.wishshare.data.Util.DbManager;
+import com.group6.wishshare.data.util.DBManager;
 import com.group6.wishshare.domain.model.User;
 import com.group6.wishshare.domain.model.type.Gender;
 import com.group6.wishshare.domain.service.LoginException;
-import java.sql.Date;
+
 import java.sql.*;
 
 public class UserRepository {
 
   /**
    * @return Index value of the newly created user, if nothing was created returns 0.
-   * @throws LoginException
    */
   public int createUser(User user) throws LoginException {
     try {
-      Connection connection = DbManager.getInstance().getConnection();
-      String SQL =
+      String query =
           "INSERT INTO user (email, password, first_name, last_name, gender, birthdate) VALUES "
               + "(?, ?, ?, ?, ?, ?)";
-      PreparedStatement ps = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+      PreparedStatement ps = DBManager
+          .getInstance()
+          .getConnection()
+          .prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
       ps.setString(1, user.getEmail());
       ps.setString(2, user.getPassword());
@@ -28,10 +29,12 @@ public class UserRepository {
       ps.setString(5, user.getGender().name());
       ps.setString(6, String.valueOf(Date.valueOf(user.getBirthdate())));
       ps.executeUpdate();
-      ResultSet ids = ps.getGeneratedKeys();
-      if (ids.next()) {
-        return ids.getInt(1);
+
+      ResultSet rs = ps.getGeneratedKeys();
+      if (rs.next()) {
+        return rs.getInt("user_id");
       }
+
       return 0;
     } catch (SQLException e) {
       throw new LoginException(e.getMessage());
@@ -40,16 +43,20 @@ public class UserRepository {
 
   public User login(String email, String password) throws LoginException {
     try {
-      Connection con = DbManager.getInstance().getConnection();
-      String SQL = "SELECT user_id FROM user WHERE email=? AND password=?";
-      PreparedStatement ps = con.prepareStatement(SQL);
+      String query = "SELECT user_id FROM user WHERE email = ? AND password = ?";
+
+      PreparedStatement ps = DBManager
+          .getInstance()
+          .getConnection()
+          .prepareStatement(query);
+
       ps.setString(1, email);
       ps.setString(2, password);
 
       ResultSet rs = ps.executeQuery();
+
       if (rs.next()) {
         int id = rs.getInt("user_id");
-
         return new User.UserBuilder()
             .email(email)
             .password(password)
@@ -63,44 +70,50 @@ public class UserRepository {
     }
   }
 
-  public boolean userExist(int userId) {
+  public boolean userExists(int id) {
     try {
-      Connection con = DbManager.getInstance().getConnection();
-      String SQL = "SELECT * FROM user WHERE user_id = ?";
-      PreparedStatement ps = con.prepareStatement(SQL);
-      ps.setInt(1, userId);
-      ResultSet rs = ps.executeQuery();
-      if (rs.next()) {
-        return true;
-      }
-      return false;
+      String query = "SELECT * FROM user WHERE user_id = ?";
+      PreparedStatement ps = DBManager
+          .getInstance()
+          .getConnection()
+          .prepareStatement(query);
+
+      ps.setInt(1, id);
+
+      return ps.executeQuery().next();
     } catch (SQLException e) {
       // do something
     }
     return false;
   }
 
-  public User getUser(int user_id) {
+  public User getUser(int id) {
+
     try {
-      Connection con = DbManager.getInstance().getConnection();
-      String SQL = "SELECT * FROM user WHERE user_id = ?";
-      PreparedStatement ps = con.prepareStatement(SQL);
-      ps.setInt(1, user_id);
+      String query = "SELECT * FROM user WHERE user_id = ?";
+      PreparedStatement ps = DBManager
+          .getInstance()
+          .getConnection()
+          .prepareStatement(query);
+
+      ps.setInt(1, id);
+
       ResultSet rs = ps.executeQuery();
       if (rs.next()) {
         return new User.UserBuilder()
-            .id(user_id)
-            .firstName(rs.getString(2))
-            .lastName(rs.getString(3))
-            .gender(Gender.valueOf(rs.getString(6)))
-            .email(rs.getString(4))
-            .password(rs.getString(7))
-            .birthdate(rs.getDate(5).toLocalDate())
+            .id(id)
+            .firstName(rs.getString("first_name"))
+            .lastName(rs.getString("last_name"))
+            .gender(Gender.valueOf(rs.getString("gender")))
+            .email(rs.getString("email"))
+            .password(rs.getString("password"))
+            .birthdate(rs.getDate("birthdate").toLocalDate())
             .build();
       }
     } catch (SQLException e) {
       // do something
     }
+
     return null;
   }
 }

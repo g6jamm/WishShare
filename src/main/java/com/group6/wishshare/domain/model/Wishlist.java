@@ -37,7 +37,7 @@ public class Wishlist {
     return TOKEN;
   }
 
-  public static class WishListBuilder {
+  public static class WishListBuilder implements BuilderInterface {
     private int id;
     private String name;
     private User user;
@@ -46,37 +46,33 @@ public class Wishlist {
 
     public WishListBuilder id(int id) {
       this.id = id;
-
       return this;
     }
 
     public WishListBuilder name(String name) {
       this.name = name;
-
       return this;
     }
 
     public WishListBuilder wishList(List<Wish> wishList) {
       this.wishList = wishList;
-
       return this;
     }
 
     public WishListBuilder user(User user) {
       this.user = user;
-
       return this;
     }
 
     public WishListBuilder token(String token) {
       this.token = token;
-
       return this;
     }
 
     private void reset() {
       id = 0;
       name = null;
+      wishList = null;
       user = null;
       token = null;
     }
