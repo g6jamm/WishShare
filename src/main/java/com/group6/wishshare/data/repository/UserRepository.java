@@ -63,12 +63,12 @@ public class UserRepository {
     }
   }
 
-  public boolean userExist(int user_id) {
+  public boolean userExist(int userId) {
     try {
       Connection con = DbManager.getInstance().getConnection();
       String SQL = "SELECT * FROM user WHERE user_id = ?";
       PreparedStatement ps = con.prepareStatement(SQL);
-      ps.setInt(1, user_id);
+      ps.setInt(1, userId);
       ResultSet rs = ps.executeQuery();
       if (rs.next()) {
         return true;

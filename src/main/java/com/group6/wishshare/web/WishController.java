@@ -49,7 +49,8 @@ public class WishController {
     Wishlist wishlist = wishListService.lookupWishListById(id); // // TODO spørg tine omkring det
     model.addAttribute("wishes", wishlist.getWishlist());
     model.addAttribute("wishlist_id", wishlist.getId());
-    if (isValidUser(webRequest)) {
+    if (userService.isValidUser(
+        (Integer) webRequest.getAttribute("user", webRequest.SCOPE_SESSION))) {
       User user =
           userService.getUser((Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION));
       if (wishListService.isListOwner(id, user)) {
@@ -66,7 +67,10 @@ public class WishController {
     model.addAttribute("wishes", wishlist.getWishlist());
     model.addAttribute("wishlist_id", wishlist.getId());
 
-    if (!isValidUser(webRequest)) { // Is owner not just valid user
+    if (!userService.isValidUser(
+        (Integer)
+            webRequest.getAttribute(
+                "user", webRequest.SCOPE_SESSION))) { // Is owner not just valid user
       return "shared-wishlist";
     }
     return "index"; // TODO: You are not allowed to see your own list - page ..
@@ -110,13 +114,5 @@ public class WishController {
     wishService.editWish(name, link, price, wish_id);
 
     return "redirect:/wishlist/" + wishlist_id;
-  }
-
-  private boolean isValidUser(WebRequest request) {
-    Integer user_id = (Integer) request.getAttribute("user", WebRequest.SCOPE_SESSION);
-    if (user_id == null) {
-      return false;
-    }
-    return loginService.userExist(user_id);
   }
 }
