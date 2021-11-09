@@ -20,6 +20,7 @@ CREATE TABLE IF NOT EXISTS wishlist
 (
     wishlist_id INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name        VARCHAR(255) NOT NULL,
+    # token       VARCHAR(100) NOT NULL,
     user_id     INT          NOT NULL,
     FOREIGN KEY (user_id)
         REFERENCES user (user_id)
@@ -36,3 +37,14 @@ CREATE TABLE IF NOT EXISTS wish
     FOREIGN KEY (wishlist_id)
         REFERENCES wishlist (wishlist_id)
 );
+
+-- Generate test data
+INSERT INTO user (user_id, first_name, last_name, email, birthdate, gender, password)
+VALUES (1, 'demo', 'demo', 'demo@demo.com', '2021-11-08', 'MALE', 'demo');
+
+#INSERT INTO wishlist (wishlist_id, name, token, user_id)
+#VALUES (1, 'Test list', 'token', 1);
+
+#INSERT INTO wish (wish_id, name, link, price, wishlist_id, reserved)
+#VALUES (1, 'Pixie hat', 'https://demo.com', '50 kr.', 1, 0);
+
