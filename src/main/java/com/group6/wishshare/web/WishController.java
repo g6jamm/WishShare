@@ -104,9 +104,9 @@ public class WishController {
   @PostMapping("/wishlist/{wishlist_id}/save/{wish_id}")
   public String saveChanges(
       WebRequest webRequest, @PathVariable int wishlist_id, @PathVariable int wish_id) {
-    String name = webRequest.getParameter("name");
-    String link = webRequest.getParameter("link");
-    String price = webRequest.getParameter("price");
+    String name = webRequest.getParameter("name" + wish_id);
+    String link = webRequest.getParameter("link" + wish_id);
+    String price = webRequest.getParameter("price" + wish_id);
     wishService.editWish(name, link, price, wish_id);
 
     return "redirect:/wishlist/" + wishlist_id;
