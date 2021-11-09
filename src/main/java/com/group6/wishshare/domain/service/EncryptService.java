@@ -14,11 +14,9 @@ public class EncryptService {
     }
   }
 
-  private static byte[] getSHA512(String input) throws NoSuchAlgorithmException
-  {
+  private static byte[] getSHA512(String input) throws NoSuchAlgorithmException {
     MessageDigest md = MessageDigest.getInstance("SHA-512");
 
     return md.digest(input.getBytes(StandardCharsets.UTF_8));
   }
-
 }
