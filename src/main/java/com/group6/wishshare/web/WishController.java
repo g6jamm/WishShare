@@ -67,18 +67,18 @@ public class WishController {
     model.addAttribute("wishes", wishlist.getWishlist());
     model.addAttribute("wishlist_id", wishlist.getId());
 
-     if (!userService.isValidUser(
+    if (!userService.isValidUser(
         (Integer)
             webRequest.getAttribute(
                 "user", webRequest.SCOPE_SESSION))) { // Is owner not just valid user
-      
+
       User user =
           userService.getUser((Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION));
 
       if (wishListService.isListOwner(wishlist.getId(), user)) { // TODO: move to method
         return "index"; // TODO: You are not allowed to see your own list - page ..
       }
-     }
+    }
 
     return "shared-wishlist";
   }
