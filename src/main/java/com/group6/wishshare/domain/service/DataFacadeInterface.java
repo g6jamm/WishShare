@@ -7,5 +7,5 @@ public interface DataFacadeInterface {
 
   User createUser(User user) throws LoginException;
 
-  boolean userExist(int user_id);
+  boolean userExist(int userId);
 }

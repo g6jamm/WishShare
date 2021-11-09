@@ -28,23 +28,28 @@
                                         <input aria-describedby="email-addon" aria-label="Email" class="form-control"
                                                name="email"
                                                placeholder="Email"
-                                               type="email">
+                                               type="email"
+                                               required>
                                     </div>
                                     <label>Password</label>
                                     <div class="mb-3">
                                         <input aria-describedby="password-addon" aria-label="Password"
                                                class="form-control"
                                                name="password"
-                                               placeholder="Password" type="password">
+                                               placeholder="Password"
+                                               type="password"
+                                               required>
                                     </div>
                                     <div class="form-check form-switch">
                                         <input checked="" class="form-check-input" id="rememberMe" type="checkbox">
                                         <label class="form-check-label" for="rememberMe">Remember me</label>
                                     </div>
                                     <div class="text-center">
-                                        <button class="btn bg-gradient-info w-100 mt-4 mb-0" type="submit"
-                                                value="Submit">Sign in
-                                        </button>
+                                        <p class="mb-0" th:text="${loginFail}"></p>
+                                    </div>
+                                    <div class="text-center">
+                                        <input class="btn bg-gradient-info w-100 mt-4 mb-0" type="submit"
+                                                value="Sign in">
                                     </div>
                                 </form>
                             </div>
@@ -61,14 +66,4 @@
                             <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
                                  th:style="'background-image: url(/img/curved-images/curved6.jpg)'"></div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</main>
-
-<div th:replace="fragments/footer"></div>
-</body>
-
-</html>
+      

@@ -48,7 +48,13 @@ cat >> ./src/main/resources/application.properties <<EOL
 user=<username>
 password=<password>
 url=jdbc:mysql://localhost:3306/wishshare
+connection=LOCAL
 EOL
+```
+Connection options:
+```
+connection=LOCAL
+connection=HEROKU
 ```
 
 ### Step 4 - build:

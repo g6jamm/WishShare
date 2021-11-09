@@ -30,7 +30,7 @@ public class DataFacade implements DataFacadeInterface {
   }
 
   @Override
-  public boolean userExist(int user_id) {
-    return USER_REPOSITORY.userExist(user_id);
+  public boolean userExist(int userId) {
+    return USER_REPOSITORY.userExist(userId);
   }
 }
