@@ -20,14 +20,14 @@ public class WishListService {
     return wishListRepository.getWishlist(id);
   }
 
-  public List<Wishlist> lookupWishListsPrUser(int user_id) {
+  public List<Wishlist> lookupWishListsPrUser(User user) {
     WishListRepository wishListRepository = new WishListRepository();
-    return wishListRepository.getWishLists(user_id);
+    return wishListRepository.getWishLists(user);
   }
 
-  public boolean isListOwner(int wishlistId, int userId) {
+  public boolean isListOwner(int wishlistId, User user) {
     WishListRepository wishListRepository = new WishListRepository();
-    return wishListRepository.isListOwnedByUser(wishlistId, userId);
+    return wishListRepository.isListOwnedByUser(wishlistId, user);
   }
 
   public void updateWishListName(int wishlistId, String newName) {
