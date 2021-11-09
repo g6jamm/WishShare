@@ -20,10 +20,9 @@ public class WishListRepository {
    *
    * @auther Andreas
    */
-  public Wishlist addWishList(String name, User user) {
+  public Wishlist addWishList(String name, User user, String token) {
     try {
       String query = "INSERT INTO wishlist (name, token, user_id) VALUES (?, ?, ?)";
-      String token = (getRandomString());
 
       PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
       ps.setString(1, name);
@@ -46,20 +45,6 @@ public class WishListRepository {
       System.out.println("WishlistRepository: " + e.getMessage());
     }
     return null;
-  }
-
-  public String getRandomString() {
-    int leftLimit = 48; // numeral '0'
-    int rightLimit = 122; // letter 'z'
-    int targetStringLength = 10;
-    Random random = new Random();
-
-    return random
-        .ints(leftLimit, rightLimit + 1)
-        .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
-        .limit(targetStringLength)
-        .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-        .toString();
   }
 
   /** @auther Jackie og Mohamad */
