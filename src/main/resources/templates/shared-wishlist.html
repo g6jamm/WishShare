@@ -19,7 +19,7 @@
                 </thead>
                 <tbody>
                 <tr th:each="wish: ${wishes}">
-                    <form th:action="@{/shared-wishlist/{wishlist_id}/reserve/{wish_id} (wishlist_id = ${wishlist_id}, wish_id = ${wish.getID()})}"
+                    <form th:action="@{/shared-wishlist/{token}/reserve/{wish_id} (token = ${token}, wish_id = ${wish.getID()})}"
                           method="POST" name="reserveform" role="form">
                         <td>
                             <div class="d-flex px-2 py-1">
@@ -41,11 +41,11 @@
 
                         <td class="align-middle">
                             <div class="text-end">
-                                <button th:if="${wish.isReserved() == true}" class="btn bg-gradient-secondary mb-0"
+                                <button th:if="${wish.isReserved()}" class="btn bg-gradient-secondary mb-0"
                                         value="submit" type="submit">
                                     <i class="fas fa-pencil-alt" aria-hidden="true"></i>&nbsp;&nbsp;unreserve
                                 </button>
-                                <button th:unless="${wish.isReserved() == true}" class="btn bg-gradient-info mb-0"
+                                <button th:unless="${wish.isReserved()}" class="btn bg-gradient-info mb-0"
                                         value="submit" type="submit">
                                     <i class="fas fa-pencil-alt" aria-hidden="true"></i>&nbsp;&nbsp;reserve
                                 </button>

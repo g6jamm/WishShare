@@ -2,12 +2,12 @@ package com.group6.wishshare.data.repository;
 
 import com.group6.wishshare.data.Util.DbManager;
 import com.group6.wishshare.domain.model.User;
-import com.group6.wishshare.domain.model.Wish;
 import com.group6.wishshare.domain.model.Wishlist;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class WishListRepository {
 
@@ -22,27 +22,48 @@ public class WishListRepository {
    */
   public Wishlist addWishList(String name, User user) {
     try {
-      String stm = "INSERT INTO wishlist (name, user_id) VALUES (? , ?)";
-      PreparedStatement ps = connection.prepareStatement(stm, Statement.RETURN_GENERATED_KEYS);
+      String query = "INSERT INTO wishlist (name, token, user_id) VALUES (?, ?, ?)";
+      String token = (getRandomString());
+
+      PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
       ps.setString(1, name);
-      ps.setInt(2, user.getId());
+      ps.setString(2, token);
+      ps.setInt(3, user.getId());
       ps.executeUpdate();
+
       ResultSet gk = ps.getGeneratedKeys();
+
       if (gk.next()) {
         return new Wishlist.WishListBuilder()
-            .wishList(new ArrayList<Wish>())
+            .wishList(new ArrayList<>())
             .name(name)
             .id(gk.getInt(1))
+            .token(token)
             .user(user)
             .build();
       }
     } catch (SQLException e) {
-      System.out.println(e.getMessage());
+      System.out.println("WishlistRepository: " + e.getMessage());
     }
     return null;
   }
 
-  /** @auther Jackie og Mohamad */
+  public String getRandomString() {
+    int leftLimit = 48; // numeral '0'
+    int rightLimit = 122; // letter 'z'
+    int targetStringLength = 10;
+    Random random = new Random();
+
+    return random.ints(leftLimit, rightLimit + 1)
+        .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+        .limit(targetStringLength)
+        .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+        .toString();
+  }
+
+  /**
+   * @auther Jackie og Mohamad
+   */
   public boolean isListOwnedByUser(int wishlistId, User user) {
     boolean result = false;
 
@@ -82,9 +103,9 @@ public class WishListRepository {
       if (resultSet.next()) {
         wishlist =
             new Wishlist.WishListBuilder()
-                .id(resultSet.getInt(1))
+                .id(resultSet.getInt(1)) // TODO: swap column index to column name
                 .name(resultSet.getString(2))
-                .user(userRepository.getUser(resultSet.getInt(3)))
+                .user(userRepository.getUser(resultSet.getInt(4)))
                 .wishList(wishRepository.getWishes(id))
                 .build();
         return wishlist;
@@ -141,6 +162,7 @@ public class WishListRepository {
             new Wishlist.WishListBuilder()
                 .id(resultSet.getInt(1))
                 .name(resultSet.getString(2))
+                .token(resultSet.getString(3))
                 .user(user)
                 .build());
       }

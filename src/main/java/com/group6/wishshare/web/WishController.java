@@ -60,37 +60,41 @@ public class WishController {
     return "index"; // TODO: code 404
   }
 
-  @GetMapping("/shared-wishlist/{id}")
-  public String sharedWishlist(WebRequest webRequest, @PathVariable int id, Model model) {
-    Wishlist wishlist = wishListService.lookupWishListById(id);
+  @GetMapping("/shared-wishlist/{token}")
+  public String sharedWishlist(WebRequest webRequest, @PathVariable String token, Model model) {
+    Wishlist wishlist = wishListService.findWishListByToken(token);
     model.addAttribute("wishes", wishlist.getWishlist());
     model.addAttribute("wishlist_id", wishlist.getId());
 
-    if (!isValidUser(webRequest)) { // Is owner not just valid user
-      return "shared-wishlist";
+    if (isValidUser(webRequest)) {
+      User user =
+          userService.getUser((Integer) webRequest.getAttribute("user", WebRequest.SCOPE_SESSION));
+
+      if (wishListService.isListOwner(wishlist.getId(), user)) { // TODO: move to method
+        return "index"; // TODO: You are not allowed to see your own list - page ..
+      }
     }
-    return "index"; // TODO: You are not allowed to see your own list - page ..
+
+    return "shared-wishlist";
   }
 
-  @PostMapping("/wishlist/{wishlist_id}/reserve/{wish_id}")
-  public String reserve(@PathVariable int wishlist_id, @PathVariable int wish_id, Model model) {
+  @PostMapping("/shared-wishlist/{token}/reserve/{wish_id}")
+  public String reserve(@PathVariable String token, @PathVariable int wish_id, Model model) {
     Wish wish = wishService.getWish(wish_id);
     if (wish.isReserved()) {
       wishService.reserveWish(false, wish_id);
-      model.addAttribute("wish", wish);
-      return "redirect:/wishlist/" + wishlist_id;
     } else {
       wishService.reserveWish(true, wish_id);
-      model.addAttribute("wish", wish);
-      return "redirect:/wishlist/" + wishlist_id;
     }
+    model.addAttribute("wish", wish);
+    return "redirect:/shared-wishlist/" + token;
   }
 
-  @PostMapping("/wishlist/{wishlist_id}/unreserve/{wish_id}")
-  public String unreserve(@PathVariable int wishlist_id, @PathVariable int wish_id) {
+  @PostMapping("/shared-wishlist/{token}/unreserve/{wish_id}")
+  public String unreserve(@PathVariable String token, @PathVariable int wish_id) {
 
     wishService.reserveWish(false, wish_id);
-    return "redirect:/wishlist/" + wishlist_id;
+    return "redirect:/shared-wishlist/" + token;
   }
 
   @PostMapping("/wishlist/{wishlist_id}/edit/{wish_id}")

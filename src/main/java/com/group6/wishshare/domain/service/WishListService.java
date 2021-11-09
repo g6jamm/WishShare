@@ -20,9 +20,9 @@ public class WishListService {
     return wishListRepository.getWishlistById(id);
   }
 
-  public Wishlist lookupWishListByToken(int id) {
+  public Wishlist findWishListByToken(String token) {
     WishListRepository wishListRepository = new WishListRepository();
-    return wishListRepository.getWishlistById(id);
+    return wishListRepository.findWishlistByToken(token);
   }
 
   public List<Wishlist> lookupWishListsPrUser(User user) {
