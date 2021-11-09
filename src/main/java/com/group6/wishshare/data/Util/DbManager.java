@@ -1,9 +1,5 @@
 package com.group6.wishshare.data.Util;
 
-import org.springframework.core.io.ClassPathResource;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -22,15 +18,10 @@ public class DbManager {
    * @auther Mathias
    */
   private DbManager() {
-    try (InputStream input = new ClassPathResource("application.properties").getInputStream()) {
-      Properties properties = new Properties();
-      properties.load(input);
+      Properties properties = DBSelector.selectConnection();
       url = properties.getProperty("url");
       user = properties.getProperty("user");
       password = properties.getProperty("password");
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
     try {
       assert url != null;
       this.connection = DriverManager.getConnection(url, user, password);
