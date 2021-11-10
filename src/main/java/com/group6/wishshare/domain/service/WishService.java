@@ -1,7 +1,6 @@
 package com.group6.wishshare.domain.service;
 
 import com.group6.wishshare.data.repository.WishRepository;
-import com.group6.wishshare.data.repository.WishRepositoryImpl;
 import com.group6.wishshare.domain.model.Wish;
 
 import java.util.List;

@@ -1,8 +1,6 @@
 package com.group6.wishshare.domain.service;
 
-import com.group6.wishshare.data.repository.WishRepository;
 import com.group6.wishshare.data.repository.WishlistRepository;
-import com.group6.wishshare.data.repository.WishlistRepositoryImpl;
 import com.group6.wishshare.domain.model.User;
 import com.group6.wishshare.domain.model.Wishlist;
 
@@ -31,15 +29,15 @@ public class WishlistService {
   }
 
   public Wishlist addWishList(User user, String name) {
-    return  wishlistRepository.addWishlist(name, user, getRandomString());
+    return wishlistRepository.addWishlist(name, user, getRandomString());
   }
 
   public Wishlist getWishlistById(int id) {
-    return  wishlistRepository.findWishlistById(id);
+    return wishlistRepository.findWishlistById(id);
   }
 
   public Wishlist findWishListByToken(String token) {
-    return  wishlistRepository.findWishlistByToken(token);
+    return wishlistRepository.findWishlistByToken(token);
   }
 
   public List<Wishlist> getWishlists(User user) {
@@ -51,10 +49,10 @@ public class WishlistService {
   }
 
   public void updateWishlistName(int id, String newName) {
-     wishlistRepository.updateName(id, newName);
+    wishlistRepository.updateName(id, newName);
   }
 
   public void deleteWishlist(int id) {
-     wishlistRepository.deleteWishlist(id);
+    wishlistRepository.deleteWishlist(id);
   }
 }

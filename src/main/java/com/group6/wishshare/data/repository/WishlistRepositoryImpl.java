@@ -8,7 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WishlistRepositoryImpl implements WishlistRepository{
+public class WishlistRepositoryImpl implements WishlistRepository {
 
   Connection connection = DBManager.getInstance().getConnection();
   WishRepositoryImpl wishRepositoryImpl = new WishRepositoryImpl();

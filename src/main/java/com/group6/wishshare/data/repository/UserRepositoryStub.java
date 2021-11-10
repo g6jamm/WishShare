@@ -5,7 +5,6 @@ import com.group6.wishshare.domain.service.LoginException;
 
 public class UserRepositoryStub implements UserRepository {
 
-
   @Override
   public User login(String email, String password) throws LoginException {
     return null;

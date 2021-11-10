@@ -14,5 +14,4 @@ public interface UserRepository {
   int getNewUserId(User user) throws LoginException;
 
   User getUser(int id);
-
 }

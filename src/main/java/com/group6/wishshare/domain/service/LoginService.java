@@ -15,7 +15,6 @@ public class LoginService {
 
   private final UserRepository USER_REPOSITORY;
 
-
   public LoginService(UserRepository userRepository) {
     this.USER_REPOSITORY = userRepository;
   }

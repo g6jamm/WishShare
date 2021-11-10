@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** @author Jackie, Mohamad */
-public class WishRepositoryImpl implements WishRepository{
+public class WishRepositoryImpl implements WishRepository {
 
   @Override
   public List<Wish> getWishes(int id) {

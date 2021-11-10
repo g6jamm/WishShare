@@ -1,8 +1,6 @@
 package com.group6.wishshare.domain.service;
 
 import com.group6.wishshare.data.repository.UserRepository;
-import com.group6.wishshare.data.repository.UserRepositoryStub;
-import com.group6.wishshare.data.repository.UserRepositoryImpl;
 import com.group6.wishshare.domain.model.User;
 
 public class UserService {
@@ -14,7 +12,7 @@ public class UserService {
   }
 
   public User getUser(Object id) {
-    return  userRepository.getUser((Integer) id);
+    return userRepository.getUser((Integer) id);
   }
 
   public boolean isValidUser(Object id) {

@@ -4,7 +4,7 @@ import com.group6.wishshare.domain.model.Wish;
 
 import java.util.List;
 
-public class WishRepositoryStub implements WishRepository{
+public class WishRepositoryStub implements WishRepository {
   @Override
   public List<Wish> getWishes(int id) {
     return null;
@@ -16,17 +16,11 @@ public class WishRepositoryStub implements WishRepository{
   }
 
   @Override
-  public void isReservedWish(boolean isReserved, int id) {
-
-  }
+  public void isReservedWish(boolean isReserved, int id) {}
 
   @Override
-  public void editWish(String name, String link, String price, int id) {
-
-  }
+  public void editWish(String name, String link, String price, int id) {}
 
   @Override
-  public void addWishToWishList(Wish wish) {
-
-  }
+  public void addWishToWishList(Wish wish) {}
 }

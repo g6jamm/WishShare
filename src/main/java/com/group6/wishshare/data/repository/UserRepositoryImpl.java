@@ -7,7 +7,7 @@ import com.group6.wishshare.domain.service.LoginException;
 
 import java.sql.*;
 
-public class UserRepositoryImpl implements UserRepository{
+public class UserRepositoryImpl implements UserRepository {
 
   /** @return New User object with generated id from database. */
   @Override

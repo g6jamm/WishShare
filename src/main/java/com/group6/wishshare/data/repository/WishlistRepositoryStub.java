@@ -5,7 +5,7 @@ import com.group6.wishshare.domain.model.Wishlist;
 
 import java.util.List;
 
-public class WishlistRepositoryStub implements WishlistRepository{
+public class WishlistRepositoryStub implements WishlistRepository {
   @Override
   public Wishlist addWishlist(String name, User user, String token) {
     return null;
@@ -37,9 +37,7 @@ public class WishlistRepositoryStub implements WishlistRepository{
   }
 
   @Override
-  public void deleteWishlist(int id) {
-
-  }
+  public void deleteWishlist(int id) {}
 
   @Override
   public boolean deleteWishes(int id) {
