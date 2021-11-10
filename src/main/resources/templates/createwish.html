@@ -7,8 +7,52 @@
 </head>
 <body>
 <div th:replace="fragments/navbar"></div>
-
 <section>
+    <div class="page-header min-vh-75">
+        <div class="container">
+            <div style="height: 6em">
+                <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
+                     th:style="'background-image: url(/img/curved-images/curved0.jpg)'">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="card-header pb-0">
+        <table class="table align-items-center mb-0">
+            <thead>
+            <tr>
+                <th class="col-8"></th>
+                <th class="col-4"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <form name="editname" method="post" th:action="@{/update-wishlist/{wishlist_id} (wishlist_id = ${wishlist_id})}">
+                <td>
+                    <div class="input-group">
+                        <input class="form-control" name="newName" th:value="${wishlist.getName()}"
+                               type="text">
+                    </div>
+                    <div>
+                        <div class="text-center">
+                            <p class="mb-0" th:text="${Saved}"></p>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="text-end">
+                        <button class="btn bg-gradient-warning mb-0" value="edit" type="submit">
+                            <i aria-hidden="true" class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Save Name
+                        </button>
+                    </div>
+                </td>
+                </form>
+            </tr>
+            </tbody>
+        </table>
+    </div>
     <div class="card-body px-0 pt-0 pb-2">
         <div class="table-responsive p-0">
             <table class="table align-items-center mb-0">
@@ -19,7 +63,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="wish: ${wishes}">
+                <tr th:each="wish: ${wishlist.getWishlist()}">
                     <td>
                         <div class="d-flex px-2 py-1">
                             <div class="d-flex flex-column justify-content-center">

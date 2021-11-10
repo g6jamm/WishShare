@@ -17,7 +17,7 @@ public interface WishlistRepository {
 
   List<Wishlist> getWishlists(User user);
 
-  Wishlist updateName(int id, String name);
+  void updateName(int id, String name);
 
   void deleteWishlist(int id);
 

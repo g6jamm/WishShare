@@ -32,9 +32,7 @@ public class WishlistRepositoryStub implements WishlistRepository {
   }
 
   @Override
-  public Wishlist updateName(int id, String name) {
-    return null;
-  }
+  public void updateName(int id, String name) {}
 
   @Override
   public void deleteWishlist(int id) {}

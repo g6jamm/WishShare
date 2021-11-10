@@ -151,29 +151,18 @@ public class WishlistRepositoryImpl implements WishlistRepository {
   }
 
   @Override
-  public Wishlist updateName(int id, String name) {
+  public void updateName(int id, String name) {
     try {
       String query = "UPDATE wishlist SET name = ? WHERE wishlist_id = ?";
       PreparedStatement ps = connection.prepareStatement(query);
       ps.setString(1, name);
       ps.setInt(2, id);
-      ResultSet rs = ps.executeQuery();
-
-      if (rs.next()) {
-        return new Wishlist.WishListBuilder()
-            .id(rs.getInt("wishlist_id"))
-            .name(rs.getString("name"))
-            .token(rs.getString("token"))
-            .user(userRepositoryImpl.getUser(rs.getInt("user_id")))
-            .wishList(wishRepositoryImpl.getWishes(id))
-            .build();
-      }
+      ps.executeUpdate();
 
     } catch (SQLException e) {
       // TODO
+      System.out.println(e.getMessage());
     }
-
-    return null;
   }
 
   /** @param id id of wishlist to be deleted */
