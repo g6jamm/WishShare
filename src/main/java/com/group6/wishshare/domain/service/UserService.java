@@ -6,6 +6,8 @@ import com.group6.wishshare.domain.model.User;
 
 public class UserService {
 
+
+
   public User getUser(Object id) {
     return new UserRepositoryImpl().getUser((Integer) id);
   }

@@ -59,7 +59,7 @@ public class LoginController {
     String gender = webRequest.getParameter("gender");
     String password1 = webRequest.getParameter("password1");
     String password2 = webRequest.getParameter("password2");
-$
+
     try {
       if (validatePassword(password1, password2)) {
         User user =
