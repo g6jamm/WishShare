@@ -10,4 +10,9 @@ public interface UserRepository {
   User createUser(User user) throws LoginException;
 
   boolean userExists(int id);
+
+  int getNewUserId(User user) throws LoginException;
+
+  User getUser(int id);
+
 }

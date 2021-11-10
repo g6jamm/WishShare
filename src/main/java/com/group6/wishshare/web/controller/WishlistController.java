@@ -1,5 +1,6 @@
 package com.group6.wishshare.web.controller;
 
+import com.group6.wishshare.data.repository.UserRepositoryImpl;
 import com.group6.wishshare.data.repository.WishlistRepositoryImpl;
 import com.group6.wishshare.domain.model.User;
 import com.group6.wishshare.domain.model.Wishlist;
@@ -18,7 +19,7 @@ import java.util.List;
 @Controller
 public class WishlistController {
 
-  UserService userService = new UserService();
+  UserService userService = new UserService(new UserRepositoryImpl());
   WishlistService wishlistService = new WishlistService(new WishlistRepositoryImpl());
 
   @GetMapping("/dashboard")

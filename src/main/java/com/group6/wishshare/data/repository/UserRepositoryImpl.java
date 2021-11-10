@@ -7,10 +7,27 @@ import com.group6.wishshare.domain.service.LoginException;
 
 import java.sql.*;
 
-public class UserRepositoryImpl {
+public class UserRepositoryImpl implements UserRepository{
+
+  /** @return New User object with generated id from database. */
+  @Override
+  public User createUser(User user) throws LoginException {
+    int id = getNewUserId(user);
+
+    return new User.UserBuilder()
+        .id(id)
+        .email(user.getEmail())
+        .password(user.getPassword())
+        .birthdate(user.getBirthdate())
+        .firstName(user.getFirstName())
+        .lastName(user.getLastName())
+        .gender(user.getGender())
+        .build();
+  }
 
   /** @return Index value of the newly created user, if nothing was created returns 0. */
-  public int createUser(User user) throws LoginException {
+  @Override
+  public int getNewUserId(User user) throws LoginException {
     try {
       String query =
           "INSERT INTO user (email, password, first_name, last_name, gender, birthdate) VALUES "
@@ -39,6 +56,7 @@ public class UserRepositoryImpl {
     }
   }
 
+  @Override
   public User login(String email, String password) throws LoginException {
     try {
       String query = "SELECT user_id FROM user WHERE email = ? AND password = ?";
@@ -65,6 +83,7 @@ public class UserRepositoryImpl {
     }
   }
 
+  @Override
   public boolean userExists(int id) {
     try {
       String query = "SELECT * FROM user WHERE user_id = ?";
@@ -79,6 +98,7 @@ public class UserRepositoryImpl {
     return false;
   }
 
+  @Override
   public User getUser(int id) {
 
     try {
