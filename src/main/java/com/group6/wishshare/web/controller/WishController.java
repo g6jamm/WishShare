@@ -1,7 +1,6 @@
 package com.group6.wishshare.web.controller;
 
 import com.group6.wishshare.data.repository.WishRepository;
-import com.group6.wishshare.domain.model.User;
 import com.group6.wishshare.domain.model.Wish;
 import com.group6.wishshare.domain.model.Wishlist;
 import com.group6.wishshare.domain.service.UserService;
