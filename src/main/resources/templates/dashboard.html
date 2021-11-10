@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html class="html-form" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="fragments/head"></div>
+    <title>
+        Dashboard
+    </title>
+    <link rel="stylesheet" th:href="@{/css/custom-dashboard.css}"/>
+</head>
+
+<body>
+<div th:replace="fragments/navbar"></div>
+<main class="main-content  mt-0">
+    <section>
+        <div class="page-header min-vh-75">
+            <div class="container">
+                <div style="height: 6em">
+                    <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
+                         th:style="'background-image: url(/img/curved-images/curved0.jpg)'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="card-body px-0 pt-0 pb-2">
+            <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                    <thead>
+                    <tr>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-7">Name</th>
+                        <th class="text-secondary opacity-7 col-5"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="wishlist: ${wishlists}">
+                        <td>
+                            <div class="d-flex px-2 py-1">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="mb-0 text-sm" th:text="${wishlist.getName()}"></h6>
+                                </div>
+                            </div>
+                        </td>
+
+                        <td class="align-middle">
+                            <div class="text-end custom-button-wrap">
+                                <button class="btn bg-gradient-success mb-0 custom-margin-right"
+                                        th:onclick="'alert(\'' + @{{baseUrl}shared-wishlist/{token} (baseUrl = ${@environment.getProperty('baseUrl')}, token = ${wishlist.getToken()})} + '\')'">
+                                    <i aria-hidden="true" class="fas fa-link"></i>
+                                </button>
+                                <form method="POST" name="delete"
+                                      role="none" th:action="@{/delete-wishlist/{id} (id = ${wishlist.getId()})}">
+                                    <button class="btn bg-gradient-danger mb-0 custom-margin-right" type="submit"
+                                            value="delete">
+                                        <i aria-hidden="true" class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                                <form method="get" name="edit" role="none"
+                                      th:action="@{/wishlist/{id} (id = ${wishlist.getId()})}">
+                                    <button class="btn bg-gradient-warning mb-0" type="submit" value="edit">
+                                        <i aria-hidden="true" class="fas fa-pencil-alt"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <form action="/create-new-wish-list" method="POST" name="newWishList" role="form">
+                            <td>
+                                <div class="input-group">
+                                    <input class="form-control" name="wishlistname" placeholder="Type name here..."
+                                           required type="text">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-end">
+                                    <button class="btn bg-gradient-primary mb-0" type="submit" value="submit">
+                                        <i aria-hidden="true" class="fas fa-plus"></i>&nbsp;&nbsp;Add WishList
+                                    </button>
+                                </div>
+                            </td>
+                        </form>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div th:replace="fragments/footer"></div>
+</body>
+</html>

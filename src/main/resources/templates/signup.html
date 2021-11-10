@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html class="html-form" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:replace="fragments/head"></div>
+    <title>
+        Signup
+    </title>
+</head>
+
+<body>
+<div th:replace="fragments/navbar"></div>
+<main class="main-content mt-0">
+    <section>
+        <div class="page-header min-vh-75">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
+                        <div class="card card-plain mt-8">
+                            <div class="card-header pb-0 text-left bg-transparent">
+                                <h3 class="font-weight-bolder text-info text-gradient">Welcome!</h3>
+                                <p class="mb-0">Create an account for free.</p>
+                            </div>
+                            <div class="card-body">
+                                <form action="/signup" method="POST" name="signup" role="form">
+                                    <label>Firstname</label>
+                                    <div class="mb-3">
+                                        <input aria-describedby="firstname-addon" aria-label="Firstname"
+                                               class="form-control" name="firstname"
+                                               placeholder="Firstname" required type="text">
+                                    </div>
+                                    <label>Lastname</label>
+                                    <div class="mb-3">
+                                        <input aria-describedby="lastname-addon" aria-label="Lastname"
+                                               class="form-control" name="lastname"
+                                               placeholder="Lastname" required type="text">
+                                    </div>
+                                    <label>Email</label>
+                                    <div class="mb-3">
+                                        <input aria-describedby="email-addon" aria-label="Email" class="form-control"
+                                               name="email"
+                                               placeholder="Email"
+                                               required type="email">
+                                    </div>
+                                    <label>Birthdate</label>
+                                    <div class="mb-3">
+                                        <input aria-describedby="birthdate-addon" aria-label="Birthdate"
+                                               class="form-control" name="birthdate"
+                                               placeholder="Birthdate" required type="date">
+                                    </div>
+                                    <label>Gender</label>
+                                    <div class="mb-3">
+                                        <select aria-describedby="gender-addon" aria-label="Gender" class="form-control"
+                                                name="gender" required>
+                                            <option value="OTHER">other</option>
+                                            <option value="MALE">Male</option>
+                                            <option value="FEMALE">Female</option>
+                                        </select>
+                                    </div>
+                                    <label>Password</label>
+                                    <div class="mb-3">
+                                        <input aria-describedby="password-addon" aria-label="Password"
+                                               class="form-control"
+                                               name="password1"
+                                               placeholder="Password"
+                                               required
+                                               type="password">
+                                    </div>
+                                    <label>Confirm password</label>
+                                    <div class="mb-3">
+                                        <input aria-describedby="password-addon" aria-label="Password"
+                                               class="form-control"
+                                               name="password2"
+                                               placeholder="Password"
+                                               required
+                                               type="password">
+                                    </div>
+                                    <div class="text-center">
+                                        <p class="mb-0" th:text="${signupFail}"></p>
+                                    </div>
+                                    <div class="text-center">
+                                        <input class="btn bg-gradient-info w-100 mt-4 mb-0" type="submit"
+                                               value="Create">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="card-footer text-center pt-0 px-lg-2 px-1">
+                                <p class="mb-4 text-sm mx-auto">
+                                    Already have an account?
+                                    <a class="text-info text-gradient font-weight-bold" href="/login">Login</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="oblique position-absolute top-0 h-100 d-md-block d-none me-n8">
+                            <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
+                                 th:style="'background-image: url(/img/curved-images/curved6.jpg)'"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div th:replace="fragments/footer"></div>
+</body>
+
+</html>
