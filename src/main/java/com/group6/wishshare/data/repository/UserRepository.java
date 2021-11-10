@@ -30,7 +30,7 @@ public class UserRepository {
 
       ResultSet rs = ps.getGeneratedKeys();
       if (rs.next()) {
-        return rs.getInt("user_id");
+        return rs.getInt(1);
       }
 
       return 0;
