@@ -27,26 +27,26 @@
                                     <div class="mb-3">
                                         <input aria-describedby="firstname-addon" aria-label="Firstname"
                                                class="form-control" name="firstname"
-                                               placeholder="Firstname" type="text" required>
+                                               placeholder="Firstname" required type="text">
                                     </div>
                                     <label>Lastname</label>
                                     <div class="mb-3">
                                         <input aria-describedby="lastname-addon" aria-label="Lastname"
                                                class="form-control" name="lastname"
-                                               placeholder="Lastname" type="text" required>
+                                               placeholder="Lastname" required type="text">
                                     </div>
                                     <label>Email</label>
                                     <div class="mb-3">
                                         <input aria-describedby="email-addon" aria-label="Email" class="form-control"
                                                name="email"
                                                placeholder="Email"
-                                               type="email" required>
+                                               required type="email">
                                     </div>
                                     <label>Birthdate</label>
                                     <div class="mb-3">
                                         <input aria-describedby="birthdate-addon" aria-label="Birthdate"
                                                class="form-control" name="birthdate"
-                                               placeholder="Birthdate" type="date" required>
+                                               placeholder="Birthdate" required type="date">
                                     </div>
                                     <label>Gender</label>
                                     <div class="mb-3">
@@ -63,8 +63,8 @@
                                                class="form-control"
                                                name="password1"
                                                placeholder="Password"
-                                               type="password"
-                                               required>
+                                               required
+                                               type="password">
                                     </div>
                                     <label>Confirm password</label>
                                     <div class="mb-3">
@@ -72,22 +72,22 @@
                                                class="form-control"
                                                name="password2"
                                                placeholder="Password"
-                                               type="password"
-                                               required>
+                                               required
+                                               type="password">
                                     </div>
                                     <div class="text-center">
                                         <p class="mb-0" th:text="${signupFail}"></p>
                                     </div>
                                     <div class="text-center">
                                         <input class="btn bg-gradient-info w-100 mt-4 mb-0" type="submit"
-                                                value="Create">
+                                               value="Create">
                                     </div>
                                 </form>
                             </div>
                             <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                 <p class="mb-4 text-sm mx-auto">
                                     Already have an account?
-                                    <a class="text-info text-gradient font-weight-bold" href="#">Login</a>
+                                    <a class="text-info text-gradient font-weight-bold" href="/login">Login</a>
                                 </p>
                             </div>
                         </div>

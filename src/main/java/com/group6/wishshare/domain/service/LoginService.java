@@ -11,6 +11,7 @@ import java.time.LocalDate;
  * @auther Mathias
  */
 public class LoginService {
+
   private final DataFacadeInterface FACADE;
 
   public LoginService(DataFacadeInterface facade) {
@@ -21,10 +22,7 @@ public class LoginService {
     return FACADE.login(email, password);
   }
 
-  /**
-   * @return New User with id generated from database.
-   * @throws LoginException
-   */
+  /** @return New User with id generated from database. */
   public User createUser(
       String firstname,
       String lastname,
@@ -43,12 +41,10 @@ public class LoginService {
             .password(password)
             .build();
 
-    User result = FACADE.createUser(user);
-
-    return result;
+    return FACADE.createUser(user);
   }
 
-  public boolean userExist(int userId) {
-    return FACADE.userExist(userId);
+  public boolean userExist(int id) {
+    return FACADE.userExists(id);
   }
 }

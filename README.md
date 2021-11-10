@@ -51,7 +51,9 @@ url=jdbc:mysql://localhost:3306/wishshare
 connection=LOCAL
 EOL
 ```
+
 Connection options:
+
 ```
 connection=LOCAL
 connection=HEROKU

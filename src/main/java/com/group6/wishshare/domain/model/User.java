@@ -61,7 +61,7 @@ public class User {
    *
    * @auther Mathias
    */
-  public static class UserBuilder {
+  public static class UserBuilder implements BuilderInterface {
     private int id;
     private String firstName;
     private String lastName;
@@ -74,49 +74,53 @@ public class User {
 
     public UserBuilder id(int id) {
       this.id = id;
-
       return this;
     }
 
     public UserBuilder firstName(String firstName) {
       this.firstName = firstName;
-
       return this;
     }
 
     public UserBuilder lastName(String lastName) {
       this.lastName = lastName;
-
       return this;
     }
 
     public UserBuilder email(String email) {
       this.email = email;
-
       return this;
     }
 
     public UserBuilder birthdate(LocalDate birthdate) {
       this.birthdate = birthdate;
-
       return this;
     }
 
     public UserBuilder gender(Gender gender) {
       this.gender = gender;
-
       return this;
     }
 
     public UserBuilder password(String password) {
       this.password = password;
-
       return this;
     }
 
+    private void reset() {
+      id = 0;
+      firstName = null;
+      lastName = null;
+      email = null;
+      birthdate = LocalDate.parse("2021-01-01");
+      gender = Gender.OTHER;
+      password = null;
+    }
+
     public User build() {
-      // Todo add reset? Add interface for reset and build.
-      return new User(this);
+      User result = new User(this);
+      reset();
+      return result;
     }
   }
 }

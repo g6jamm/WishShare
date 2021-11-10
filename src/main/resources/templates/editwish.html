@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
+
 <head>
-    <di th:replace="fragments/head"></di>
+    <div th:replace="fragments/head"></div>
     <title>Wish</title>
 </head>
 <body>
@@ -19,29 +20,27 @@
                 </thead>
                 <tbody>
                 <tr class="card">
-                    <form th:action="@{/wishlist/{wishlist_id}/save/{wish_id} (wishlist_id = ${wishlist_id}, wish_id = ${wish.getID()})}" method="POST" name="wishform" role="form">
+                    <form method="POST"
+                          name="wishform" role="form"
+                          th:action="@{/wishlist/{wishlist_id}/save/{wish_id} (wishlist_id = ${wishlist_id}, wish_id = ${wish.getID()})}">
                         <td>
                             <div class="input-group">
-                                <input type="text" name="name" class="form-control form-controle-wish"
-                                       th:value="${wish.name}" >
+                                <input class="form-control form-controle-wish" name="name" th:value="${wish.name}"
+                                       type="text">
                             </div>
-
                             <div class="input-group input-group-wish">
-                                <input type="text" name="link" class="form-control"
-                                       th:value="${wish.link}">
+                                <input class="form-control" name="link" th:value="${wish.link}"
+                                       type="text">
                             </div>
-
                             <div class="input-group">
-                                <input type="text" name="price" class="form-control"
-                                       th:value="${wish.price}">
+                                <input class="form-control" name="price" th:value="${wish.price}"
+                                       type="text">
                             </div>
-
                         </td>
-
                         <td>
                             <div class="text-end">
                                 <button class="btn bg-gradient-primary mb-0" type="submit" value="submit">
-                                    <i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Save
+                                    <i aria-hidden="true" class="fas fa-plus"></i>&nbsp;&nbsp;Save
                                 </button>
                             </div>
                         </td>
@@ -52,7 +51,6 @@
         </div>
     </div>
 </section>
-
 
 <div th:replace="fragments/footer"></div>
 </body>

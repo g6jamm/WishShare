@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
+
 <head>
-    <di th:replace="fragments/head"></di>
+    <div th:replace="fragments/head"></div>
     <title>Wish</title>
 </head>
 <body>
@@ -19,58 +20,57 @@
                 </thead>
                 <tbody>
                 <tr th:each="wish: ${wishes}">
-                    <form th:action="@{/wishlist/{wishlist_id}/edit/{wish_id} (wishlist_id = ${wishlist_id}, wish_id = ${wish.getID()})}" method="POST" name="wishform" role="form">
-                    <td>
-                        <div class="d-flex px-2 py-1">
-                            <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm" th:text="${wish.name}"></h6>
+                    <form method="POST"
+                          name="wishform" role="form"
+                          th:action="@{/wishlist/{wishlist_id}/edit/{wish_id} (wishlist_id = ${wishlist_id}, wish_id = ${wish.getID()})}">
+                        <td>
+                            <div class="d-flex px-2 py-1">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="mb-0 text-sm" th:text="${wish.name}"></h6>
+                                </div>
                             </div>
-                        </div>
-                        <div class="d-flex px-2 py-1">
-                            <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm" th:text="${wish.link}"></h6>
+                            <div class="d-flex px-2 py-1">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="mb-0 text-sm" th:text="${wish.link}"></h6>
+                                </div>
                             </div>
-                        </div>
-                        <div class="d-flex px-2 py-1">
-                            <div class="d-flex flex-column justify-content-center">
-                                <h6 class="mb-0 text-sm" th:text="${wish.price}"></h6>
+                            <div class="d-flex px-2 py-1">
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h6 class="mb-0 text-sm" th:text="${wish.price}"></h6>
+                                </div>
                             </div>
-                        </div>
-                    </td>
-
-                    <td class="align-middle">
-                        <div class="text-end">
-                            <button class="btn bg-gradient-warning mb-0" value="edit">
-                                <i class="fas fa-pencil-alt" aria-hidden="true"></i>&nbsp;&nbsp;Edit
-                            </button>
-                        </div>
-                    </td>
+                        </td>
+                        <td class="align-middle">
+                            <div class="text-end">
+                                <button class="btn bg-gradient-warning mb-0" value="edit">
+                                    <i aria-hidden="true" class="fas fa-pencil-alt"></i>&nbsp;&nbsp;Edit
+                                </button>
+                            </div>
+                        </td>
                     </form>
                 </tr>
                 <tr class="card">
-                    <form th:action="@{/wishlist/{id}/new-wish (id = ${wishlist_id})}" method="POST" name="wishform" role="form">
+                    <form method="POST" name="wishform" role="form"
+                          th:action="@{/wishlist/{id}/new-wish (id = ${wishlist_id})}">
                         <td>
                             <div class="input-group">
-                                <input type="text" name="wish" class="form-control form-controle-wish"
-                                       placeholder="type your wish here..." required>
+                                <input class="form-control form-controle-wish" name="wish"
+                                       placeholder="type your wish here..."
+                                       required type="text">
                             </div>
-
                             <div class="input-group input-group-wish">
-                                <input type="text" name="link" class="form-control"
-                                       placeholder="input your link to wish here...">
+                                <input class="form-control" name="link" placeholder="input your link to wish here..."
+                                       type="text">
                             </div>
-
                             <div class="input-group">
-                                <input type="text" name="price" class="form-control"
-                                       placeholder="type your price here...">
+                                <input class="form-control" name="price" placeholder="type your price here..."
+                                       type="text">
                             </div>
-
                         </td>
-
                         <td>
                             <div class="text-end">
                                 <button class="btn bg-gradient-primary mb-0" type="submit" value="submit">
-                                    <i class="fas fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Add Wish
+                                    <i aria-hidden="true" class="fas fa-plus"></i>&nbsp;&nbsp;Add Wish
                                 </button>
                             </div>
                         </td>
@@ -81,7 +81,6 @@
         </div>
     </div>
 </section>
-
 
 <div th:replace="fragments/footer"></div>
 </body>

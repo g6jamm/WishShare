@@ -5,16 +5,14 @@ import com.group6.wishshare.data.repository.UserRepository;
 import com.group6.wishshare.domain.model.User;
 
 public class UserService {
-  private final UserRepository userRepository = new UserRepository();
-  private final LoginService loginService = new LoginService(new DataFacade());
 
-  public User getUser(int userId) {
-    return userRepository.getUser(userId);
+  public User getUser(Object id) {
+    return new UserRepository().getUser((Integer) id);
   }
 
-  public boolean isValidUser(Integer userId) {
-    if (userId != null) {
-      return loginService.userExist(userId);
+  public boolean isValidUser(Object id) {
+    if (null != id) {
+      return new LoginService(new DataFacade()).userExist((Integer) id);
     }
     return false;
   }

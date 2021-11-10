@@ -13,24 +13,22 @@ public class WishService {
     this.wishRepository = wishRepository;
   }
 
-  public void createWish(String name, String link, String price, int wishlistId) {
-    Wish wish =
-        new Wish.WishBuilder().name(name).link(link).price(price).wishlistId(wishlistId).build();
+  public void createWish(String name, String link, String price, int id) {
+    Wish wish = new Wish.WishBuilder().name(name).link(link).price(price).wishlistId(id).build();
 
     wishRepository.addWishToWishList(wish);
   }
 
-  public List<Wish> getWishes(int wishlistId) {
-    List<Wish> result = wishRepository.getWishes(wishlistId);
-    return result;
+  public List<Wish> getWishes(int id) {
+    return wishRepository.getWishes(id);
   }
 
-  public Wish getWish(int wishId) {
-    return wishRepository.getWish(wishId);
+  public Wish getWish(int id) {
+    return wishRepository.getWish(id);
   }
 
-  public boolean reserveWish(boolean isReserved, int wishId) {
-    return wishRepository.reserveWish(isReserved, wishId);
+  public void reserveWish(boolean isReserved, int id) {
+    wishRepository.isReservedWish(isReserved, id);
   }
 
   public void editWish(String name, String link, String price, int id) {
