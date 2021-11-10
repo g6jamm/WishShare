@@ -17,5 +17,4 @@ public interface WishRepository {
   void addWishToWishList(Wish wish);
 
   boolean deleteWish(int id);
-
 }

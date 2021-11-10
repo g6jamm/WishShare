@@ -28,5 +28,4 @@ public class WishRepositoryStub implements WishRepository {
   public boolean deleteWish(int id) {
     return false;
   }
-
 }
