@@ -1,6 +1,7 @@
 package com.group6.wishshare.web.controller;
 
 import com.group6.wishshare.data.repository.WishRepository;
+import com.group6.wishshare.domain.model.User;
 import com.group6.wishshare.domain.model.Wish;
 import com.group6.wishshare.domain.model.Wishlist;
 import com.group6.wishshare.domain.service.UserService;
@@ -86,6 +87,15 @@ public class WishController {
     wishService.reserveWish(false, id);
 
     return "redirect:/shared-wishlist/" + token;
+  }
+
+  @PostMapping("/wishlist/{wishlistId}/delete/{wishId}")
+  public String deleteWish(@PathVariable int wishlistId, @PathVariable int wishId, Model model) {
+    Wish wish = wishService.getWish(wishId);
+    model.addAttribute("wishlist_id", wishlistId);
+    model.addAttribute("wish", wish);
+    wishService.deleteWish(wishId);
+    return "redirect:/wishlist/" + wishlistId;
   }
 
   @PostMapping("/wishlist/{wishlistId}/edit/{wishId}")

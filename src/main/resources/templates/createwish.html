@@ -20,40 +20,41 @@
                 </thead>
                 <tbody>
                 <tr th:each="wish: ${wishes}">
-                    <form method="POST"
-                          name="wishform" role="form"
-                          th:action="@{/wishlist/{wishlist_id}/edit/{wish_id} (wishlist_id = ${wishlist_id}, wish_id = ${wish.getID()})}">
-                        <td>
-                            <div class="d-flex px-2 py-1">
-                                <div class="d-flex flex-column justify-content-center">
-                                    <h6 class="mb-0 text-sm" th:text="${wish.name}"></h6>
-                                </div>
+                    <td>
+                        <div class="d-flex px-2 py-1">
+                            <div class="d-flex flex-column justify-content-center">
+                                <h6 class="mb-0 text-sm" th:text="${wish.name}"></h6>
                             </div>
-                            <div class="d-flex px-2 py-1">
-                                <div class="d-flex flex-column justify-content-center">
-                                    <h6 class="mb-0 text-sm" th:text="${wish.link}"></h6>
-                                </div>
+                        </div>
+                        <div class="d-flex px-2 py-1">
+                            <div class="d-flex flex-column justify-content-center">
+                                <h6 class="mb-0 text-sm" th:text="${wish.link}"></h6>
                             </div>
-                            <div class="d-flex px-2 py-1">
-                                <div class="d-flex flex-column justify-content-center">
-                                    <h6 class="mb-0 text-sm" th:text="${wish.price}"></h6>
-                                </div>
+                        </div>
+                        <div class="d-flex px-2 py-1">
+                            <div class="d-flex flex-column justify-content-center">
+                                <h6 class="mb-0 text-sm" th:text="${wish.price}"></h6>
                             </div>
-                        </td>
-                        <td class="align-middle">
-                            <div class="text-end">
-                                <form method="POST" name="delete" >
-                                    <button class="btn bg-gradient-danger mb-0 custom-margin-right" type="submit"
-                                            value="delete">
-                                        <i aria-hidden="true" class="fas fa-trash-alt"></i>
-                                    </button>
-                                </form>
+                        </div>
+                    </td>
+                    <td class="align-middle">
+                        <div class="text-end">
+                            <form method="POST" name="delete" role="form"
+                                  th:action="@{/wishlist/{wishlist_id}/delete/{wish_id} (wishlist_id = ${wishlist_id}, wish_id = ${wish.getID()})}">
+                                <button class="btn bg-gradient-danger mb-0 custom-margin-right" type="submit"
+                                        value="delete">
+                                    <i aria-hidden="true" class="fas fa-trash-alt"></i>
+                                </button>
+                            </form>
+                            <form method="POST"
+                                  name="wishform" role="form"
+                                  th:action="@{/wishlist/{wishlist_id}/edit/{wish_id} (wishlist_id = ${wishlist_id}, wish_id = ${wish.getID()})}">
                                 <button class="btn bg-gradient-warning mb-0" value="edit">
                                     <i aria-hidden="true" class="fas fa-pencil-alt"></i>
                                 </button>
-                            </div>
-                        </td>
-                    </form>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
                 <tr class="card">
                     <form method="POST" name="wishform" role="form"
