@@ -1,5 +1,6 @@
 package com.group6.wishshare.domain.service;
 
+import com.group6.wishshare.data.repository.UserRepository;
 import com.group6.wishshare.domain.model.User;
 import com.group6.wishshare.domain.model.type.Gender;
 
@@ -12,14 +13,14 @@ import java.time.LocalDate;
  */
 public class LoginService {
 
-  private final DataFacadeInterface FACADE;
+  private final UserRepository USER_REPOSITORY;
 
-  public LoginService(DataFacadeInterface facade) {
-    this.FACADE = facade;
+  public LoginService(UserRepository userRepository) {
+    this.USER_REPOSITORY = userRepository;
   }
 
   public User login(String email, String password) throws LoginException {
-    return FACADE.login(email, password);
+    return USER_REPOSITORY.login(email, password);
   }
 
   /** @return New User with id generated from database. */
@@ -41,10 +42,10 @@ public class LoginService {
             .password(password)
             .build();
 
-    return FACADE.createUser(user);
+    return USER_REPOSITORY.createUser(user);
   }
 
   public boolean userExist(int id) {
-    return FACADE.userExists(id);
+    return USER_REPOSITORY.userExists(id);
   }
 }

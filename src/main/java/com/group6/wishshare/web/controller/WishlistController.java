@@ -1,5 +1,7 @@
 package com.group6.wishshare.web.controller;
 
+import com.group6.wishshare.data.repository.UserRepositoryImpl;
+import com.group6.wishshare.data.repository.WishlistRepositoryImpl;
 import com.group6.wishshare.domain.model.User;
 import com.group6.wishshare.domain.model.Wishlist;
 import com.group6.wishshare.domain.service.UserService;
@@ -17,16 +19,16 @@ import java.util.List;
 @Controller
 public class WishlistController {
 
-  UserService userService = new UserService();
+  UserService userService = new UserService(new UserRepositoryImpl());
+  WishlistService wishlistService = new WishlistService(new WishlistRepositoryImpl());
 
   @GetMapping("/dashboard")
   public String dashboard(WebRequest webRequest, Model model) {
     Object userSession = new SessionObject(webRequest).getUser();
 
     if (userService.isValidUser(userSession)) {
-      WishlistService wishListService = new WishlistService();
       User user = userService.getUser(userSession);
-      List<Wishlist> wishlistList = wishListService.getWishlists(user);
+      List<Wishlist> wishlistList = wishlistService.getWishlists(user);
 
       model.addAttribute("wishlists", wishlistList);
 
@@ -41,11 +43,10 @@ public class WishlistController {
     Object userSession = new SessionObject(webRequest).getUser();
 
     if (userService.isValidUser(userSession)) {
-      WishlistService wishListService = new WishlistService();
 
       User user = userService.getUser(userSession);
       Wishlist wishlist =
-          wishListService.addWishList(user, webRequest.getParameter("wishlistname"));
+          wishlistService.addWishList(user, webRequest.getParameter("wishlistname"));
 
       if (null != wishlist) {
         return "redirect:/wishlist/" + wishlist.getId();
@@ -58,7 +59,6 @@ public class WishlistController {
 
   @PostMapping("/update-wishlist/{id}")
   public String updateWishlistName(WebRequest webRequest, @PathVariable int id) {
-    WishlistService wishlistService = new WishlistService();
     Object userSession = new SessionObject(webRequest).getUser();
 
     if (userService.isValidUser(userSession)) {
@@ -74,11 +74,10 @@ public class WishlistController {
 
   @PostMapping("/delete-wishlist/{id}")
   public String deleteWishList(WebRequest webRequest, @PathVariable int id) {
-    WishlistService wishListService = new WishlistService();
     Object userSession = new SessionObject(webRequest).getUser();
     User user = userService.getUser(userSession);
-    if (wishListService.isOwner(id, user)) {
-      wishListService.deleteWishlist(id);
+    if (wishlistService.isOwner(id, user)) {
+      wishlistService.deleteWishlist(id);
     }
 
     return "redirect:/dashboard";
