@@ -123,7 +123,7 @@ public class WishController {
   @PostMapping("/update-wishlist/{id}")
   public String updateWishlistName(WebRequest webRequest, @PathVariable int id, Model model) {
     Object userSession = new SessionObject(webRequest).getUser();
-    model.addAttribute("Saved","Name has been updated");
+    model.addAttribute("Saved", "Name has been updated");
 
     if (userService.isValidUser(userSession)) {
       User user = userService.getUser(userSession);
@@ -132,6 +132,6 @@ public class WishController {
         wishListService.updateWishlistName(id, newName);
       }
     }
-    return wishlist(webRequest,id,model);
+    return wishlist(webRequest, id, model);
   }
 }

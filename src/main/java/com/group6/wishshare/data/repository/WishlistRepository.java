@@ -22,6 +22,4 @@ public interface WishlistRepository {
   void deleteWishlist(int id);
 
   boolean deleteWishes(int id);
-
 }
-
