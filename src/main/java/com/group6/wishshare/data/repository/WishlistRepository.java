@@ -35,7 +35,7 @@ public class WishlistRepository {
         return new Wishlist.WishListBuilder()
             .wishList(new ArrayList<>())
             .name(name)
-            .id(gk.getInt("wishlist_id"))
+            .id(gk.getInt(1))
             .token(token)
             .user(user)
             .build();
