@@ -49,7 +49,7 @@ public class WishlistRepository {
   /** @auther Jackie og Mohamad */
   public boolean isWishlistOwnedByUser(int id, User user) {
     try {
-      String query = "SELECT * FROM wishlist WHERE wishlist_id = ? AND user_id = ?;";
+      String query = "SELECT * FROM wishlist WHERE wishlist_id = ? AND user_id = ?";
       PreparedStatement preparedStatement =
           DBManager.getInstance().getConnection().prepareStatement(query);
       preparedStatement.setInt(1, id);
