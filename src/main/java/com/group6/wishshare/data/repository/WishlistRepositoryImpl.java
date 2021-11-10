@@ -154,7 +154,7 @@ public class WishlistRepositoryImpl implements WishlistRepository {
   public void updateName(int id, String name) {
     try {
       String query = "UPDATE wishlist SET name = ? WHERE wishlist_id = ?";
-      PreparedStatement ps = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+      PreparedStatement ps = connection.prepareStatement(query);
       ps.setString(1, name);
       ps.setInt(2, id);
       ps.executeUpdate();
