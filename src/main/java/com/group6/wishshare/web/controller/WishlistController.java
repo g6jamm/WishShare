@@ -32,7 +32,7 @@ public class WishlistController {
 
       model.addAttribute("wishlists", wishlistList);
 
-      return "/dashboard";
+      return "dashboard";
     }
 
     return "redirect:/login";
