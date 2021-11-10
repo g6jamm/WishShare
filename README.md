@@ -49,6 +49,7 @@ user=<username>
 password=<password>
 url=jdbc:mysql://localhost:3306/wishshare
 connection=LOCAL
+baseUrl=https://localhost:8080/
 EOL
 ```
 
