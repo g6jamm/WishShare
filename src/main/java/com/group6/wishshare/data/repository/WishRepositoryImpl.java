@@ -121,4 +121,18 @@ public class WishRepositoryImpl implements WishRepository {
       System.out.println(sqlException.getMessage()); // TODO
     }
   }
+
+  @Override
+  public boolean deleteWish(int id) {
+    String query = "DELETE FROM wish WHERE wish_id = ?";
+
+    try {
+      PreparedStatement ps = DBManager.getInstance().getConnection().prepareStatement(query);
+      ps.setInt(1, id);
+      ps.executeUpdate();
+      return true;
+    } catch (SQLException e) { // TODO
+      return false;
+    }
+  }
 }

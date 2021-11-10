@@ -15,4 +15,6 @@ public interface WishRepository {
   void editWish(String name, String link, String price, int id);
 
   void addWishToWishList(Wish wish);
+
+  boolean deleteWish(int id);
 }

@@ -34,4 +34,8 @@ public class WishService {
   public void editWish(String name, String link, String price, int id) {
     wishRepository.editWish(name, link, price, id);
   }
+
+  public void deleteWish(int id) {
+    wishRepository.deleteWish(id);
+  }
 }

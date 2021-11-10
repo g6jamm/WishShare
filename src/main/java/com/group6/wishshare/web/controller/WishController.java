@@ -91,6 +91,15 @@ public class WishController {
     return "redirect:/shared-wishlist/" + token;
   }
 
+  @PostMapping("/wishlist/{wishlistId}/delete/{wishId}")
+  public String deleteWish(@PathVariable int wishlistId, @PathVariable int wishId, Model model) {
+    Wish wish = wishService.getWish(wishId);
+    model.addAttribute("wishlist_id", wishlistId);
+    model.addAttribute("wish", wish);
+    wishService.deleteWish(wishId);
+    return "redirect:/wishlist/" + wishlistId;
+  }
+
   @PostMapping("/wishlist/{wishlistId}/edit/{wishId}")
   public String editWish(@PathVariable int wishId, @PathVariable int wishlistId, Model model) {
     Wish wish = wishService.getWish(wishId);
