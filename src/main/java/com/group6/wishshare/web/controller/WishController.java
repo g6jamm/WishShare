@@ -3,6 +3,7 @@ package com.group6.wishshare.web.controller;
 import com.group6.wishshare.data.repository.UserRepositoryImpl;
 import com.group6.wishshare.data.repository.WishRepositoryImpl;
 import com.group6.wishshare.data.repository.WishlistRepositoryImpl;
+import com.group6.wishshare.domain.model.User;
 import com.group6.wishshare.domain.model.Wish;
 import com.group6.wishshare.domain.model.Wishlist;
 import com.group6.wishshare.domain.service.UserService;
@@ -108,5 +109,20 @@ public class WishController {
     wishService.editWish(name, link, price, wishId);
 
     return "redirect:/wishlist/" + wishlistId;
+  }
+
+  @PostMapping("/update-wishlist/{id}")
+  public String updateWishlistName(WebRequest webRequest, @PathVariable int id, Model model) {
+    Object userSession = new SessionObject(webRequest).getUser();
+    model.addAttribute("Saved","Name has been updated");
+
+    if (userService.isValidUser(userSession)) {
+      User user = userService.getUser(userSession);
+      if (wishListService.isOwner(id, user)) {
+        String newName = webRequest.getParameter("newName");
+        wishListService.updateWishlistName(id, newName);
+      }
+    }
+    return wishlist(webRequest,id,model);
   }
 }

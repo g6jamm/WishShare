@@ -57,21 +57,6 @@ public class WishlistController {
     return "redirect:/login";
   }
 
-  @PostMapping("/update-wishlist/{id}")
-  public String updateWishlistName(WebRequest webRequest, @PathVariable int id) {
-    Object userSession = new SessionObject(webRequest).getUser();
-
-    if (userService.isValidUser(userSession)) {
-      User user = userService.getUser(userSession);
-      if (wishlistService.isOwner(id, user)) {
-        String newName = webRequest.getParameter("newName");
-        wishlistService.updateWishlistName(id, newName);
-      }
-    }
-
-    return "redirect:/dashboard"; // TODO swap to wishpage maybe?
-  }
-
   @PostMapping("/delete-wishlist/{id}")
   public String deleteWishList(WebRequest webRequest, @PathVariable int id) {
     Object userSession = new SessionObject(webRequest).getUser();
