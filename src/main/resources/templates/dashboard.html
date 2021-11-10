@@ -29,9 +29,8 @@
                 <table class="table align-items-center mb-0">
                     <thead>
                     <tr>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-5">Name</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-5">Link</th>
-                        <th class="text-secondary opacity-7 col-2"></th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 col-7">Name</th>
+                        <th class="text-secondary opacity-7 col-5"></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -43,20 +42,13 @@
                                 </div>
                             </div>
                         </td>
-                        <td>
-                            <div class="d-flex px-2 py-1">
-                                <div class="d-flex flex-column justify-content-center">
-                                    <a class="mb-0 text-sm"
-                                       th:href="@{~/shared-wishlist/{token} (token = ${wishlist.getToken()})}"
-                                       th:text="@{{baseUrl}shared-wishlist/{token} (baseUrl = ${@environment.getProperty('baseUrl')}, token = ${wishlist.getToken()})}"
-                                    </a>
-                                </div>
-                            </div>
-                        </td>
-
 
                         <td class="align-middle">
                             <div class="text-end custom-button-wrap">
+                                <button class="btn bg-gradient-success mb-0 custom-margin-right"
+                                        th:onclick="'alert(\'' + @{{baseUrl}shared-wishlist/{token} (baseUrl = ${@environment.getProperty('baseUrl')}, token = ${wishlist.getToken()})} + '\')'">
+                                    <i aria-hidden="true" class="fas fa-link"></i>
+                                </button>
                                 <form method="POST" name="delete"
                                       role="none" th:action="@{/delete-wishlist/{id} (id = ${wishlist.getId()})}">
                                     <button class="btn bg-gradient-danger mb-0 custom-margin-right" type="submit"
