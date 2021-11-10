@@ -9,6 +9,12 @@ import java.util.Random;
 
 public class WishlistService {
 
+  WishlistRepository wishlistRepository;
+
+  public WishlistService(WishlistRepository wishlistRepository) {
+    this.wishlistRepository = wishlistRepository;
+  }
+
   private String getRandomString() {
     int leftLimit = 48; // numeral '0'
     int rightLimit = 122; // letter 'z'
@@ -23,30 +29,30 @@ public class WishlistService {
   }
 
   public Wishlist addWishList(User user, String name) {
-    return new WishlistRepository().addWishlist(name, user, getRandomString());
+    return wishlistRepository.addWishlist(name, user, getRandomString());
   }
 
   public Wishlist getWishlistById(int id) {
-    return new WishlistRepository().findWishlistById(id);
+    return wishlistRepository.findWishlistById(id);
   }
 
   public Wishlist findWishListByToken(String token) {
-    return new WishlistRepository().findWishlistByToken(token);
+    return wishlistRepository.findWishlistByToken(token);
   }
 
   public List<Wishlist> getWishlists(User user) {
-    return new WishlistRepository().getWishlists(user);
+    return wishlistRepository.getWishlists(user);
   }
 
   public boolean isOwner(int id, User user) {
-    return new WishlistRepository().isWishlistOwnedByUser(id, user);
+    return wishlistRepository.isWishlistOwnedByUser(id, user);
   }
 
   public void updateWishlistName(int id, String newName) {
-    new WishlistRepository().updateName(id, newName);
+    wishlistRepository.updateName(id, newName);
   }
 
   public void deleteWishlist(int id) {
-    new WishlistRepository().deleteWishlist(id);
+    wishlistRepository.deleteWishlist(id);
   }
 }

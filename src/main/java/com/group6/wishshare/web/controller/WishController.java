@@ -1,6 +1,8 @@
 package com.group6.wishshare.web.controller;
 
-import com.group6.wishshare.data.repository.WishRepository;
+import com.group6.wishshare.data.repository.UserRepositoryImpl;
+import com.group6.wishshare.data.repository.WishRepositoryImpl;
+import com.group6.wishshare.data.repository.WishlistRepositoryImpl;
 import com.group6.wishshare.domain.model.Wish;
 import com.group6.wishshare.domain.model.Wishlist;
 import com.group6.wishshare.domain.service.UserService;
@@ -17,9 +19,9 @@ import org.springframework.web.context.request.WebRequest;
 @Controller
 public class WishController {
 
-  WishService wishService = new WishService(new WishRepository());
-  WishlistService wishListService = new WishlistService();
-  UserService userService = new UserService();
+  WishService wishService = new WishService(new WishRepositoryImpl());
+  WishlistService wishListService = new WishlistService(new WishlistRepositoryImpl());
+  UserService userService = new UserService(new UserRepositoryImpl());
 
   @GetMapping("/create-wish")
   public String createWish(Model model) {
