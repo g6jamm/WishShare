@@ -43,7 +43,7 @@ public class LoginController {
 
       User user = LOGIN_CONTROLLER.login(email, password);
       new SessionObject(webRequest).setUser(user);
-      return "redirect:/dashboard";
+      return "redirect:dashboard";
     } catch (LoginException e) {
       model.addAttribute("loginFail", "Wrong email or password"); // TODO
       return "login";
@@ -71,7 +71,7 @@ public class LoginController {
                 email,
                 password1);
         new SessionObject(webRequest).setUser(user);
-        return "redirect:/dashboard";
+        return "redirect:dashboard";
       }
       model.addAttribute("signupFail", "The passwords did not match"); // TODO
       return "signup";
@@ -84,7 +84,7 @@ public class LoginController {
   @GetMapping("/logout")
   public String logout(WebRequest webRequest) {
     new SessionObject(webRequest).removeUser();
-    return "redirect:/";
+    return "redirect:";
   }
 
   private boolean validatePassword(String password1, String password2) { // TODO move
