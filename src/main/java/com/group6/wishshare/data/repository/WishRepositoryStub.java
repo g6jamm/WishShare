@@ -23,4 +23,9 @@ public class WishRepositoryStub implements WishRepository {
 
   @Override
   public void addWishToWishList(Wish wish) {}
+
+  @Override
+  public boolean deleteWish(int id) {
+    return false;
+  }
 }
