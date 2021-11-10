@@ -1,6 +1,6 @@
 package com.group6.wishshare.web.controller;
 
-import com.group6.wishshare.data.repository.DataFacade;
+import com.group6.wishshare.data.repository.UserRepositoryImpl;
 import com.group6.wishshare.domain.model.User;
 import com.group6.wishshare.domain.model.type.Gender;
 import com.group6.wishshare.domain.service.LoginException;
@@ -18,7 +18,7 @@ import java.util.Objects;
 
 @Controller
 public class LoginController {
-  private final LoginService LOGIN_CONTROLLER = new LoginService(new DataFacade());
+  private final LoginService LOGIN_CONTROLLER = new LoginService(new UserRepositoryImpl());
 
   @GetMapping("/")
   public String getIndex() {
