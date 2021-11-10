@@ -11,8 +11,8 @@ import java.util.List;
 public class WishlistRepository {
 
   Connection connection = DBManager.getInstance().getConnection();
-  WishRepository wishRepository = new WishRepository();
-  UserRepository userRepository = new UserRepository();
+  WishRepositoryImpl wishRepositoryImpl = new WishRepositoryImpl();
+  UserRepositoryImpl userRepositoryImpl = new UserRepositoryImpl();
 
   /**
    * Method to add a wishlist to database. @Returns if successful return a new wishlist else null.
@@ -80,8 +80,8 @@ public class WishlistRepository {
         return new Wishlist.WishListBuilder()
             .id(rs.getInt("wishlist_id"))
             .name(rs.getString("name"))
-            .user(userRepository.getUser(rs.getInt("user_id")))
-            .wishList(wishRepository.getWishes(id))
+            .user(userRepositoryImpl.getUser(rs.getInt("user_id")))
+            .wishList(wishRepositoryImpl.getWishes(id))
             .build();
       }
     } catch (SQLException e) {
@@ -112,8 +112,8 @@ public class WishlistRepository {
             .id(wishlistId)
             .name(resultSet.getString("name"))
             .token(resultSet.getString("token"))
-            .user(userRepository.getUser(resultSet.getInt("user_id")))
-            .wishList(wishRepository.getWishes(wishlistId))
+            .user(userRepositoryImpl.getUser(resultSet.getInt("user_id")))
+            .wishList(wishRepositoryImpl.getWishes(wishlistId))
             .build();
       }
     } catch (SQLException e) {
@@ -158,8 +158,8 @@ public class WishlistRepository {
             .id(rs.getInt("wishlist_id"))
             .name(rs.getString("name"))
             .token(rs.getString("token"))
-            .user(userRepository.getUser(rs.getInt("user_id")))
-            .wishList(wishRepository.getWishes(id))
+            .user(userRepositoryImpl.getUser(rs.getInt("user_id")))
+            .wishList(wishRepositoryImpl.getWishes(id))
             .build();
       }
 

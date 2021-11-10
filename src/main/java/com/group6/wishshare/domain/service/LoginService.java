@@ -1,5 +1,6 @@
 package com.group6.wishshare.domain.service;
 
+import com.group6.wishshare.data.repository.UserRepository;
 import com.group6.wishshare.domain.model.User;
 import com.group6.wishshare.domain.model.type.Gender;
 
@@ -12,9 +13,9 @@ import java.time.LocalDate;
  */
 public class LoginService {
 
-  private final DataFacadeInterface FACADE;
+  private final UserRepository FACADE;
 
-  public LoginService(DataFacadeInterface facade) {
+  public LoginService(UserRepository facade) {
     this.FACADE = facade;
   }
 

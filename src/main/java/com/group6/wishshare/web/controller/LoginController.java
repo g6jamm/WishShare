@@ -1,6 +1,6 @@
 package com.group6.wishshare.web.controller;
 
-import com.group6.wishshare.data.repository.DataFacade;
+import com.group6.wishshare.data.repository.UserRepositoryStub;
 import com.group6.wishshare.domain.model.User;
 import com.group6.wishshare.domain.model.type.Gender;
 import com.group6.wishshare.domain.service.LoginException;
@@ -18,7 +18,7 @@ import java.util.Objects;
 
 @Controller
 public class LoginController {
-  private final LoginService LOGIN_CONTROLLER = new LoginService(new DataFacade());
+  private final LoginService LOGIN_CONTROLLER = new LoginService(new UserRepositoryStub());
 
   @GetMapping("/")
   public String getIndex() {
@@ -59,7 +59,7 @@ public class LoginController {
     String gender = webRequest.getParameter("gender");
     String password1 = webRequest.getParameter("password1");
     String password2 = webRequest.getParameter("password2");
-
+$
     try {
       if (validatePassword(password1, password2)) {
         User user =
