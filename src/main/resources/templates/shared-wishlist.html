@@ -6,8 +6,34 @@
 </head>
 <body>
 <div th:replace="fragments/navbar"></div>
-
 <section>
+    <div class="page-header min-vh-75">
+        <div class="container">
+            <div style="height: 6em">
+                <div class="oblique-image bg-cover position-absolute fixed-top ms-auto h-100 z-index-0 ms-n6"
+                     th:style="'background-image: url(/img/curved-images/curved0.jpg)'">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="card-header pb-0">
+        <table>
+            <thead>
+            <tr>
+                <th class="col-8"></th>
+                <th class="col-4"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${wishlist.getName()}"></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
     <div class="card-body px-0 pt-0 pb-2">
         <div class="table-responsive p-0">
             <table class="table align-items-center mb-0">
@@ -18,7 +44,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="wish: ${wishes}">
+                <tr th:each="wish: ${wishlist.getWishlist()}">
                     <form method="POST"
                           name="reserveform" role="form"
                           th:action="@{/shared-wishlist/{token}/reserve/{wish_id} (token = ${token}, wish_id = ${wish.getID()})}">

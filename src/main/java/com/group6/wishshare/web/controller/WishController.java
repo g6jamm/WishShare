@@ -42,7 +42,7 @@ public class WishController {
   @GetMapping("/wishlist/{id}")
   public String wishlist(WebRequest webRequest, @PathVariable int id, Model model) {
     Wishlist wishlist = wishListService.getWishlistById(id);
-    model.addAttribute("wishes", wishlist.getWishlist());
+    model.addAttribute("wishlist", wishlist);
     model.addAttribute("wishlist_id", wishlist.getId());
 
     Object userSession = new SessionObject(webRequest).getUser();
@@ -59,7 +59,7 @@ public class WishController {
   @GetMapping("/shared-wishlist/{token}")
   public String sharedWishlist(WebRequest webRequest, @PathVariable String token, Model model) {
     Wishlist wishlist = wishListService.findWishListByToken(token);
-    model.addAttribute("wishes", wishlist.getWishlist());
+    model.addAttribute("wishlist", wishlist);
     model.addAttribute("wishlist_id", wishlist.getId());
 
     Object userSession = new SessionObject(webRequest).getUser();
