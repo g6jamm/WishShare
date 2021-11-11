@@ -17,7 +17,7 @@ public class WishRepositoryStub implements WishRepository {
   }
 
   @Override
-  public void isReservedWish(boolean isReserved, int id) {}
+  public void reserveWish(boolean isReserved, int id) {}
 
   @Override
   public void editWish(String name, String link, String price, int id) {}

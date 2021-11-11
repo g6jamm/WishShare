@@ -72,7 +72,7 @@ public class WishRepositoryImpl implements WishRepository {
   }
 
   @Override
-  public void isReservedWish(boolean isReserved, int id) {
+  public void reserveWish(boolean isReserved, int id) {
     try {
       String query = "UPDATE wish SET reserved = ? WHERE wish_id = ?";
 

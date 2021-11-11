@@ -28,7 +28,7 @@ public class WishService {
   }
 
   public void reserveWish(boolean isReserved, int id) {
-    WISH_REPOSITORY.isReservedWish(isReserved, id);
+    WISH_REPOSITORY.reserveWish(isReserved, id);
   }
 
   public void editWish(String name, String link, String price, int id) {
