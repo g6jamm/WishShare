@@ -21,7 +21,8 @@ import org.springframework.web.context.request.WebRequest;
 public class WishlistController {
 
   private final WishService WISH_SERVICE = new WishService(new WishRepositoryImpl());
-  private final WishlistService WISHLIST_SERVICE = new WishlistService(new WishlistRepositoryImpl());
+  private final WishlistService WISHLIST_SERVICE =
+      new WishlistService(new WishlistRepositoryImpl());
   private final UserService USER_SERVICE = new UserService(new UserRepositoryImpl());
 
   @GetMapping("/create-wish")

@@ -20,7 +20,8 @@ import java.util.List;
 public class DashboardController {
 
   private final UserService USER_SERVICE = new UserService(new UserRepositoryImpl());
-  private final WishlistService WISHLIST_SERVICE = new WishlistService(new WishlistRepositoryImpl());
+  private final WishlistService WISHLIST_SERVICE =
+      new WishlistService(new WishlistRepositoryImpl());
 
   @GetMapping("/dashboard")
   public String dashboard(WebRequest webRequest, Model model) {
