@@ -1,9 +1,10 @@
-package com.group6.wishshare.data.repository;
+package com.group6.wishshare.data.repository.mysql;
 
+import com.group6.wishshare.data.repository.UserRepository;
 import com.group6.wishshare.data.util.DBManager;
 import com.group6.wishshare.domain.model.User;
 import com.group6.wishshare.domain.model.type.Gender;
-import com.group6.wishshare.domain.service.LoginException;
+import com.group6.wishshare.domain.exception.LoginException;
 
 import java.sql.*;
 

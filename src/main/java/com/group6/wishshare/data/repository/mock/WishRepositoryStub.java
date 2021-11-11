@@ -1,5 +1,6 @@
-package com.group6.wishshare.data.repository;
+package com.group6.wishshare.data.repository.mock;
 
+import com.group6.wishshare.data.repository.WishRepository;
 import com.group6.wishshare.domain.model.Wish;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class WishRepositoryStub implements WishRepository {
   }
 
   @Override
-  public void isReservedWish(boolean isReserved, int id) {}
+  public void reserveWish(boolean isReserved, int id) {}
 
   @Override
   public void editWish(String name, String link, String price, int id) {}

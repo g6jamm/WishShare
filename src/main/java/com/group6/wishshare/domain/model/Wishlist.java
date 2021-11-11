@@ -37,7 +37,7 @@ public class Wishlist {
     return TOKEN;
   }
 
-  public static class WishListBuilder implements BuilderInterface {
+  public static class WishListBuilder implements Builder {
     private int id;
     private String name;
     private User user;
