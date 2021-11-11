@@ -19,7 +19,6 @@ import java.util.Objects;
 @Controller
 public class LoginController {
 
-
   private final UserService USER_SERVICE = new UserService(new UserRepositoryImpl());
 
   @GetMapping("/")

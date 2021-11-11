@@ -52,9 +52,7 @@ public class UserService {
     return USER_REPOSITORY.login(email, password);
   }
 
-
   public boolean userExist(int id) {
     return USER_REPOSITORY.userExists(id);
   }
-
 }
