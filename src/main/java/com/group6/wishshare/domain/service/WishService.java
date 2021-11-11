@@ -7,35 +7,35 @@ import java.util.List;
 
 public class WishService {
 
-  WishRepository wishRepository;
+  private final WishRepository WISH_REPOSITORY;
 
-  public WishService(WishRepository wishRepository) {
-    this.wishRepository = wishRepository;
+  public WishService(WishRepository WISH_REPOSITORY) {
+    this.WISH_REPOSITORY = WISH_REPOSITORY;
   }
 
   public void createWish(String name, String link, String price, int id) {
     Wish wish = new Wish.WishBuilder().name(name).link(link).price(price).wishlistId(id).build();
 
-    wishRepository.addWishToWishList(wish);
+    WISH_REPOSITORY.addWishToWishList(wish);
   }
 
   public List<Wish> getWishes(int id) {
-    return wishRepository.getWishes(id);
+    return WISH_REPOSITORY.getWishes(id);
   }
 
   public Wish getWish(int id) {
-    return wishRepository.getWish(id);
+    return WISH_REPOSITORY.getWish(id);
   }
 
   public void reserveWish(boolean isReserved, int id) {
-    wishRepository.isReservedWish(isReserved, id);
+    WISH_REPOSITORY.isReservedWish(isReserved, id);
   }
 
   public void editWish(String name, String link, String price, int id) {
-    wishRepository.editWish(name, link, price, id);
+    WISH_REPOSITORY.editWish(name, link, price, id);
   }
 
   public void deleteWish(int id) {
-    wishRepository.deleteWish(id);
+    WISH_REPOSITORY.deleteWish(id);
   }
 }
