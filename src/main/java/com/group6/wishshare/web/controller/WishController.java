@@ -1,8 +1,8 @@
 package com.group6.wishshare.web.controller;
 
-import com.group6.wishshare.data.repository.UserRepositoryImpl;
-import com.group6.wishshare.data.repository.WishRepositoryImpl;
-import com.group6.wishshare.data.repository.WishlistRepositoryImpl;
+import com.group6.wishshare.data.repository.mysql.UserRepositoryImpl;
+import com.group6.wishshare.data.repository.mysql.WishRepositoryImpl;
+import com.group6.wishshare.data.repository.mysql.WishlistRepositoryImpl;
 import com.group6.wishshare.domain.model.User;
 import com.group6.wishshare.domain.model.Wish;
 import com.group6.wishshare.domain.model.Wishlist;

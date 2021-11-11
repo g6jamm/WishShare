@@ -1,5 +1,6 @@
-package com.group6.wishshare.data.repository;
+package com.group6.wishshare.data.repository.mock;
 
+import com.group6.wishshare.data.repository.WishRepository;
 import com.group6.wishshare.domain.model.Wish;
 
 import java.util.List;

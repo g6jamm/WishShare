@@ -1,5 +1,6 @@
-package com.group6.wishshare.data.repository;
+package com.group6.wishshare.data.repository.mysql;
 
+import com.group6.wishshare.data.repository.WishRepository;
 import com.group6.wishshare.data.util.DBManager;
 import com.group6.wishshare.domain.model.Wish;
 

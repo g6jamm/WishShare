@@ -1,5 +1,6 @@
-package com.group6.wishshare.data.repository;
+package com.group6.wishshare.data.repository.mock;
 
+import com.group6.wishshare.data.repository.UserRepository;
 import com.group6.wishshare.domain.model.User;
 import com.group6.wishshare.domain.service.LoginException;
 
