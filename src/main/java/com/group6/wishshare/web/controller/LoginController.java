@@ -26,11 +26,6 @@ public class LoginController {
     return "index";
   }
 
-  @GetMapping("/login")
-  public String getLogin() {
-    return "index";
-  }
-
   @GetMapping("/signup")
   public String getSignup() {
     return "signup";
