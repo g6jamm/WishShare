@@ -21,7 +21,6 @@ public class DBManager {
     String user = properties.getProperty("user");
     String password = properties.getProperty("password");
     try {
-      assert url != null;
       this.connection = DriverManager.getConnection(url, user, password);
     } catch (SQLException e) {
       e.printStackTrace();
