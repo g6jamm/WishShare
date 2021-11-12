@@ -32,7 +32,7 @@ on [creating a pull request](https://help.github.com/en/github/collaborating-wit
 ### Step 1 - download project:
 
 ```
-git clone git@github.com:MathiasReker/WishShare.git && cd WishShare
+git clone git@github.com:g6jamm/WishShare.git && cd WishShare
 ```
 
 ### Step 2 - install database:
@@ -49,7 +49,7 @@ user=<username>
 password=<password>
 url=jdbc:mysql://localhost:3306/wishshare
 connection=LOCAL
-baseUrl=https://localhost:8080/
+baseUrl=http://localhost:8080/
 EOL
 ```
 
