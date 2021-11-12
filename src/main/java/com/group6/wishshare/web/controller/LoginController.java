@@ -1,10 +1,10 @@
 package com.group6.wishshare.web.controller;
 
-import com.group6.wishshare.data.repository.UserRepositoryImpl;
+import com.group6.wishshare.data.repository.mysql.UserRepositoryImpl;
 import com.group6.wishshare.domain.model.User;
 import com.group6.wishshare.domain.model.type.Gender;
-import com.group6.wishshare.domain.service.LoginException;
-import com.group6.wishshare.domain.service.LoginService;
+import com.group6.wishshare.domain.exception.LoginException;
+import com.group6.wishshare.domain.service.UserService;
 import com.group6.wishshare.web.util.SessionObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,16 +18,12 @@ import java.util.Objects;
 
 @Controller
 public class LoginController {
-  private final LoginService LOGIN_CONTROLLER = new LoginService(new UserRepositoryImpl());
+
+  private final UserService USER_SERVICE = new UserService(new UserRepositoryImpl());
 
   @GetMapping("/")
   public String getIndex() {
     return "index";
-  }
-
-  @GetMapping("/login")
-  public String getLogin() {
-    return "login";
   }
 
   @GetMapping("/signup")
@@ -41,12 +37,12 @@ public class LoginController {
       String email = webRequest.getParameter("email");
       String password = webRequest.getParameter("password");
 
-      User user = LOGIN_CONTROLLER.login(email, password);
+      User user = USER_SERVICE.login(email, password);
       new SessionObject(webRequest).setUser(user);
-      return "redirect:dashboard";
+      return "redirect:/dashboard";
     } catch (LoginException e) {
       model.addAttribute("loginFail", "Wrong email or password"); // TODO
-      return "login";
+      return "index";
     }
   }
 
@@ -63,7 +59,7 @@ public class LoginController {
     try {
       if (validatePassword(password1, password2)) {
         User user =
-            LOGIN_CONTROLLER.createUser(
+            USER_SERVICE.createUser(
                 firstname,
                 lastname,
                 LocalDate.parse(Objects.requireNonNull(birthdate)),
@@ -71,7 +67,7 @@ public class LoginController {
                 email,
                 password1);
         new SessionObject(webRequest).setUser(user);
-        return "redirect:dashboard";
+        return "redirect:/dashboard";
       }
       model.addAttribute("signupFail", "The passwords did not match"); // TODO
       return "signup";
@@ -84,7 +80,7 @@ public class LoginController {
   @GetMapping("/logout")
   public String logout(WebRequest webRequest) {
     new SessionObject(webRequest).removeUser();
-    return "redirect:";
+    return "redirect:/";
   }
 
   private boolean validatePassword(String password1, String password2) { // TODO move

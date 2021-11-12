@@ -1,4 +1,4 @@
-package com.group6.wishshare.domain.service;
+package com.group6.wishshare.domain.exception;
 
 public class LoginException extends Exception {
 

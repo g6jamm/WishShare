@@ -43,7 +43,7 @@ public class Wish {
     return RESERVED;
   }
 
-  public static class WishBuilder implements BuilderInterface {
+  public static class WishBuilder implements Builder {
 
     private int id;
     private String name;

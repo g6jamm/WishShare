@@ -61,7 +61,7 @@ public class User {
    *
    * @auther Mathias
    */
-  public static class UserBuilder implements BuilderInterface {
+  public static class UserBuilder implements Builder {
     private int id;
     private String firstName;
     private String lastName;

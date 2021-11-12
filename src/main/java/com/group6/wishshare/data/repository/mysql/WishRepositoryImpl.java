@@ -1,5 +1,6 @@
-package com.group6.wishshare.data.repository;
+package com.group6.wishshare.data.repository.mysql;
 
+import com.group6.wishshare.data.repository.WishRepository;
 import com.group6.wishshare.data.util.DBManager;
 import com.group6.wishshare.domain.model.Wish;
 
@@ -71,7 +72,7 @@ public class WishRepositoryImpl implements WishRepository {
   }
 
   @Override
-  public void isReservedWish(boolean isReserved, int id) {
+  public void reserveWish(boolean isReserved, int id) {
     try {
       String query = "UPDATE wish SET reserved = ? WHERE wish_id = ?";
 

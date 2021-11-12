@@ -1,6 +1,6 @@
 package com.group6.wishshare.domain.model;
 
-interface BuilderInterface {
+interface Builder {
 
   Object build();
 }

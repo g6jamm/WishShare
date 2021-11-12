@@ -10,7 +10,7 @@ public interface WishRepository {
 
   Wish getWish(int id);
 
-  void isReservedWish(boolean isReserved, int id);
+  void reserveWish(boolean isReserved, int id);
 
   void editWish(String name, String link, String price, int id);
 
