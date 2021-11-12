@@ -62,7 +62,7 @@ public class WishlistController {
     Object userSession = new SessionObject(webRequest).getUser();
     if (USER_SERVICE.isValidUser(userSession)) {
       if (WISHLIST_SERVICE.isOwner(wishlist.getId(), USER_SERVICE.getUser(userSession))) {
-        return "index"; // TODO: You are not allowed to see your own list - page ..
+        return "redirect:/wishlist/" + wishlist.getId();
       }
     }
 
