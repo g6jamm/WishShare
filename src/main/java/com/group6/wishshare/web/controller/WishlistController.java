@@ -25,7 +25,6 @@ public class WishlistController {
       new WishlistService(new WishlistRepositoryImpl());
   private final UserService USER_SERVICE = new UserService(new UserRepositoryImpl());
 
-
   @PostMapping("/wishlist/{id}/new-wish")
   public String newWish(WebRequest webRequest, @PathVariable int id) {
     String name = webRequest.getParameter("wish");
