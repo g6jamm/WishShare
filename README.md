@@ -11,7 +11,7 @@ wishShare makes it easy for you to save and share all your wishes with friends a
 
 ## Using
 
-To use wishShare, follow this link: `<comming soon>`
+To use wishShare, follow this link: https://wishshare2.herokuapp.com
 
 ## Contributing to wishShare
 
