@@ -72,6 +72,7 @@ public class LoginController {
       model.addAttribute("signupFail", "The passwords did not match"); // TODO
       return "signup";
     } catch (LoginException e) {
+      int test;
       model.addAttribute("signupFail", "User already exist"); // TODO
       return "signup";
     }
